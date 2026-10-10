@@ -1827,13 +1827,225 @@ body::before {
 /* 0px-650px = mobile layout                                                  */
 /* Rules below are ordered as late responsive overrides.                     */
 /* ========================================================================== */
-/* 1401px+: tiger-eye UM trunk element. */
-/* 1401px+: desktop tiger-eye trunk centering; overlaps the earlier 1401px+ rule intentionally. */
-@media (min-width: 1401px) {
+
+/* 1700px+ landscape: full-size connectors, five-column BM grid, BM branches, BM cards, and UM panels. */
+@media (min-width: 1700px) and (orientation: landscape) {
+  /* Connector geometry: keep the AM trunk, BM bus, BM drops, and UM drops aligned. */
+  .org-chart {
+    --bm-gap: clamp(14px, 1.8vw, 24px);
+  }
+  .horizontal-connector {
+    left: calc((100% - (4 * var(--bm-gap))) / 10);
+    right: calc((100% - (4 * var(--bm-gap))) / 10);
+    top: 0;
+  }
+  .main-connector {
+    height: 90px;
+    top: -90px;
+    z-index: 1;
+  }
+  .bm-branch::before,
+  .team-details > .um-card::before {
+    height: 30px;
+    width: 2px;
+    z-index: 1;
+  }
+  /* Connector elements: enable the AM trunk, BM bus, BM drops, and UM drops. */
+  .horizontal-connector,
+  .main-connector,
+  .bm-branch::before,
+  .team-details::before,
+  .team-details::after,
+  .team-details > .um-card::before {
+    display: block;
+  }
+  /* BM grid element: restore five equal desktop columns. */
+  .bm-grid {
+    display: grid;
+    gap: var(--bm-gap);
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+    padding-top: 30px;
+  }
+  /* BM branch elements: restore normal desktop flow and ordering. */
+  .bm-grid > .bm-branch {
+    display: block;
+    grid-column: auto;
+    grid-row: auto;
+    margin: 0;
+    order: initial;
+    width: auto;
+  }
+  /* BM card elements: restore the fixed desktop card height and spacing. */
+  .bm-grid > .bm-branch > .bm-card {
+    height: 400px;
+    min-height: 0;
+    padding: 22px 14px 48px;
+  }
+  /* UM detail elements: position expanded UM panels beneath each BM card. */
+  .team-expander[open] .team-details,
+  .team-expander[open] .team-details:has(> .um-card + .um-card),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    align-items: start;
+    display: grid;
+    left: 50%;
+    padding-top: 30px;
+    position: absolute;
+    top: calc(100% + 30px);
+    transform: translateX(-50%);
+  }
+  /* UM column elements: size expanded panels according to their card count. */
+  .team-expander[open] .team-details:has(> .um-card + .um-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(calc(200% + var(--um-gap)), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(calc(300% + (2 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: min(calc(400% + (3 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: min(calc(500% + (4 * var(--um-gap))), calc(100vw - 36px));
+  }
+  /* UM card elements: keep expanded cards visible outside their BM container. */
+  .team-expander[open] .team-details > .um-card {
+    overflow: visible;
+  }
+}
+
+/* 1401px-1699px landscape: compact desktop chart, scaled connectors, cards, and UM panels. */
+@media (min-width: 1401px) and (max-width: 1699px) and (orientation: landscape) {
+  .org-chart {
+    --bm-gap: clamp(14px, 1.8vw, 24px);
+  }
+  .horizontal-connector,
+  .main-connector,
+  .bm-branch::before,
+  .team-details::before,
+  .team-details::after,
+  .team-details > .um-card::before {
+    display: block;
+  }
+  .horizontal-connector {
+    height: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(
+      calc(100% - 36px - (4 * var(--bm-gap))),
+      calc(995px - (4 * var(--bm-gap)))
+    );
+    top: 0;
+  }
+  .main-connector {
+    height: 90px;
+    top: -90px;
+    width: 2px;
+  }
+  .bm-branch::before,
+  .team-details > .um-card::before {
+    height: 30px;
+    width: 2px;
+  }
+  .bm-grid {
+    display: grid;
+    gap: clamp(14px, 1.8vw, 24px);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin-inline: auto;
+    max-width: 1100px;
+    padding-top: 30px;
+    width: min(calc(100% - 36px), 1100px);
+  }
+  .bm-grid > .bm-branch {
+    display: block;
+    grid-column: auto;
+    grid-row: auto;
+    margin: 0;
+    order: initial;
+    width: auto;
+  }
+  .bm-grid > .bm-branch > .bm-card {
+    height: clamp(250px, 23.55vw, 400px);
+    min-height: 0;
+    padding: clamp(12px, 1.3vw, 22px) clamp(8px, 0.85vw, 14px)
+      clamp(22px, 2.8vw, 48px);
+  }
+  .bm-grid > .bm-branch > .bm-card .avatar {
+    height: clamp(76px, 7vw, 108px);
+    width: clamp(76px, 7vw, 108px);
+  }
+  .bm-grid > .bm-branch > .bm-card .bm-name {
+    font-size: clamp(16px, 1.25vw, 20px);
+    min-height: clamp(34px, 2.8vw, 40px);
+  }
+  .bm-grid > .bm-branch > .bm-card .bm-manager-name {
+    font-size: clamp(14px, 1vw, 25px);
+  }
+  .team-expander[open] .team-details,
+  .team-expander[open] .team-details:has(> .um-card + .um-card),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    align-items: start;
+    display: grid;
+    left: 50%;
+    padding-top: 30px;
+    position: absolute;
+    top: calc(100% + 30px);
+    transform: translateX(-50%);
+  }
+  .team-expander[open] .team-details:has(> .um-card + .um-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(calc(200% + var(--um-gap)), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(calc(300% + (2 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: min(calc(400% + (3 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: min(calc(500% + (4 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details > .um-card {
+    box-sizing: border-box;
+    justify-self: stretch;
+    min-width: 0;
+    overflow: visible;
+    padding: clamp(16px, 1.5vw, 22px) clamp(10px, 1.1vw, 14px)
+      clamp(14px, 1.3vw, 18px);
+    width: 100%;
+  }
+  .team-expander[open] .team-details > .um-card .avatar,
+  .team-expander[open] .team-details > .um-card .um-avatar {
+    height: clamp(76px, 7vw, 108px);
+    width: clamp(76px, 7vw, 108px);
+  }
+  .team-expander[open] .team-details > .um-card .bm-name {
+    font-size: clamp(13px, 1.18vw, 20px);
+    min-height: clamp(30px, 2.7vw, 46px);
+  }
+  .team-expander[open] .tiger-eye-team-details {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    width: min(calc(500% + (4 * var(--um-gap))), calc(100vw - 36px)) !important;
+  }
+  .team-expander[open] .tiger-eye-team-details > .um-card {
+    grid-column: auto !important;
+    grid-row: 1 !important;
+  }
   .team-expander[open] .tiger-eye-team-details::after {
     left: 50%;
   }
 }
+
 /* All widths: hide the mobile-only UM heading element by default. */
 .mobile-um-title {
   display: none !important;
@@ -2032,232 +2244,6 @@ body::before {
   .team-expander[open] .team-details > .um-card .bm-name {
     font-size: clamp(15px, 1.6vw, 20px);
     min-height: clamp(36px, 3.6vw, 46px);
-  }
-}
-/* 1700px+ landscape: full-size connectors, five-column BM grid, BM branches, BM cards, and UM panels. */
-/* 1700px+ landscape: single authoritative desktop connector, BM grid, and UM panel rules. */
-@media (min-width: 1700px) and (orientation: landscape) {
-  /* Connector geometry: keep the AM trunk, BM bus, BM drops, and UM drops aligned. */
-  .org-chart {
-    --bm-gap: clamp(14px, 1.8vw, 24px);
-  }
-  .horizontal-connector {
-    left: calc((100% - (4 * var(--bm-gap))) / 10);
-    right: calc((100% - (4 * var(--bm-gap))) / 10);
-    top: 0;
-  }
-  .main-connector {
-    height: 90px;
-    top: -90px;
-    z-index: 1;
-  }
-  .bm-branch::before,
-  .team-details > .um-card::before {
-    height: 30px;
-    width: 2px;
-    z-index: 1;
-  }
-  /* Connector elements: enable the AM trunk, BM bus, BM drops, and UM drops. */
-  .horizontal-connector,
-  .main-connector,
-  .bm-branch::before,
-  .team-details::before,
-  .team-details::after,
-  .team-details > .um-card::before {
-    display: block;
-  }
-  /* BM grid element: restore five equal desktop columns. */
-  .bm-grid {
-    display: grid;
-    gap: var(--bm-gap);
-    grid-template-columns: repeat(5, minmax(150px, 1fr));
-    padding-top: 30px;
-  }
-  /* BM branch elements: restore normal desktop flow and ordering. */
-  .bm-grid > .bm-branch {
-    display: block;
-    grid-column: auto;
-    grid-row: auto;
-    margin: 0;
-    order: initial;
-    width: auto;
-  }
-  /* BM card elements: restore the fixed desktop card height and spacing. */
-  .bm-grid > .bm-branch > .bm-card {
-    height: 400px;
-    min-height: 0;
-    padding: 22px 14px 48px;
-  }
-  /* UM detail elements: position expanded UM panels beneath each BM card. */
-  .team-expander[open] .team-details,
-  .team-expander[open] .team-details:has(> .um-card + .um-card),
-  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)),
-  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)),
-  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
-    align-items: start;
-    display: grid;
-    left: 50%;
-    padding-top: 30px;
-    position: absolute;
-    top: calc(100% + 30px);
-    transform: translateX(-50%);
-  }
-  /* UM column elements: size expanded panels according to their card count. */
-  .team-expander[open] .team-details:has(> .um-card + .um-card) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: min(calc(200% + var(--um-gap)), calc(100vw - 36px));
-  }
-  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: min(calc(300% + (2 * var(--um-gap))), calc(100vw - 36px));
-  }
-  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    width: min(calc(400% + (3 * var(--um-gap))), calc(100vw - 36px));
-  }
-  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    width: min(calc(500% + (4 * var(--um-gap))), calc(100vw - 36px));
-  }
-  /* UM card elements: keep expanded cards visible outside their BM container. */
-  .team-expander[open] .team-details > .um-card {
-    overflow: visible;
-  }
-}
-/* 651px-1699px landscape: compact connectors, five-column BM grid, BM cards, avatars, names, and UM panels. */
-/* 651px-1699px landscape: final compact connector, BM grid, BM card, and UM panel rules. */
-@media (min-width: 651px) and (max-width: 1699px) and (orientation: landscape) {
-  .org-chart {
-    --bm-gap: clamp(14px, 1.8vw, 24px);
-  }
-  .horizontal-connector,
-  .main-connector,
-  .bm-branch::before,
-  .team-details::before,
-  .team-details::after,
-  .team-details > .um-card::before {
-    display: block;
-  }
-  .horizontal-connector {
-    height: 2px;
-    left: calc((100% - 4 * var(--bm-gap)) / 10);
-    right: calc((100% - 4 * var(--bm-gap)) / 10);
-    top: 0;
-    transform: none;
-    width: auto;
-  }
-  .main-connector {
-    height: 90px;
-    top: -90px;
-    width: 2px;
-  }
-  .bm-branch::before,
-  .team-details > .um-card::before {
-    height: 30px;
-    width: 2px;
-  }
-  .mobile-chart-title,
-  .mobile-um-title {
-    display: none !important;
-  }
-  .bm-grid {
-    display: grid;
-    gap: clamp(14px, 1.8vw, 24px);
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    margin-inline: auto;
-    max-width: 1100px;
-    padding-top: 30px;
-    width: min(calc(100% - 36px), 1100px);
-  }
-  .bm-grid > .bm-branch {
-    display: block;
-    grid-column: auto;
-    grid-row: auto;
-    margin: 0;
-    order: initial;
-    width: auto;
-  }
-  .bm-grid > .bm-branch > .bm-card {
-    height: clamp(250px, 23.55vw, 400px);
-    min-height: 0;
-    padding: clamp(12px, 1.3vw, 22px) clamp(8px, 0.85vw, 14px)
-      clamp(22px, 2.8vw, 48px);
-  }
-  .bm-grid > .bm-branch > .bm-card .avatar,
-  .team-expander[open] .team-details > .um-card .avatar,
-  .team-expander[open] .team-details > .um-card .um-avatar {
-    height: clamp(76px, 7vw, 108px);
-    width: clamp(76px, 7vw, 108px);
-  }
-  .bm-grid > .bm-branch > .bm-card .bm-name {
-    font-size: clamp(10px, 0.82vw, 15px);
-    min-height: clamp(26px, 2.1vw, 36px);
-  }
-  .team-expander[open] .team-details > .um-card .bm-name {
-    font-size: clamp(13px, 1.18vw, 20px);
-    min-height: clamp(30px, 2.7vw, 46px);
-  }
-  .mobile-chart-title,
-  .mobile-um-title {
-    color: var(--gold-light);
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: 400;
-    line-height: 1.2;
-    text-align: center;
-  }
-  .mobile-chart-title {
-    font-size: clamp(24px, 2.4vw, 34px);
-    margin: 0 auto 28px;
-  }
-  .mobile-um-title {
-    font-size: clamp(18px, 1.8vw, 24px);
-    grid-column: 1 / -1;
-    margin: 0 0 14px;
-    width: 100%;
-  }
-  .team-expander[open] .team-details,
-  .team-expander[open] .team-details:has(> .um-card + .um-card),
-  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)),
-  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)),
-  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
-    align-items: start;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    left: 50%;
-    padding-top: 30px;
-    position: absolute;
-    top: calc(100% + 30px);
-    transform: translateX(-50%);
-    width: min(calc(220% + var(--um-gap)), calc(100vw - 36px));
-  }
-  .team-expander[open] .team-details > .um-card {
-    box-sizing: border-box;
-    justify-self: stretch;
-    min-width: 0;
-    overflow: visible;
-    padding: clamp(16px, 1.5vw, 22px) clamp(10px, 1.1vw, 14px)
-      clamp(14px, 1.3vw, 18px);
-    width: 100%;
-  }
-  .team-expander[open] .tiger-eye-team-details {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    width: min(calc(500% + (4 * var(--um-gap))), calc(100vw - 36px)) !important;
-  }
-  .team-expander[open] .tiger-eye-team-details > .um-card {
-    grid-column: auto !important;
-    grid-row: 1 !important;
-  }
-}
-/* 1300px-1699px landscape: BM card names and manager names. */
-/* 1300px-1699px landscape: final BM name and manager-name scaling. */
-@media (min-width: 1300px) and (max-width: 1699px) and (orientation: landscape) {
-  .bm-grid > .bm-branch > .bm-card .bm-name {
-    font-size: clamp(16px, 1.25vw, 20px);
-    min-height: clamp(34px, 2.8vw, 40px);
-  }
-  .bm-grid > .bm-branch > .bm-card .bm-manager-name {
-    font-size: clamp(14px, 1vw, 25px);
   }
 }
 /* 651px-1400px: hide desktop connectors; reposition BM grid, branches, cards, and UM panels. */
