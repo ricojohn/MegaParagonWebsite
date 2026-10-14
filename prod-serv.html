@@ -401,6 +401,7 @@
         <a class="footer-terms" href="#">Terms of Service</a>
       </div>
     </footer>
+    <script src="JS/scroll-state.js"></script>
     <script src="JS/meta-pixel.js"></script>
     <script src="JS/navigation.js"></script>
     <script src="JS/forms.js?v=hostinger-php-1"></script>
@@ -410,15 +411,5 @@
       </span>
       <span class="back-to-top-label">Back to top</span>
     </a>
-    <script>
-      const backToTop = document.querySelector(".back-to-top");
-
-      function updateBackToTop() {
-        backToTop.classList.toggle("is-visible", window.scrollY > 240);
-      }
-
-      window.addEventListener("scroll", updateBackToTop, { passive: true });
-      updateBackToTop();
-    </script>
   </body>
 </html>
