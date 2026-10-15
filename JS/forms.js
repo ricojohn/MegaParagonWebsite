@@ -88,7 +88,9 @@ function setupForm(form) {
         try {
           data = JSON.parse(responseText);
         } catch {
-          throw new Error("The form endpoint returned an unexpected response. Check that the PHP API files are deployed.");
+          throw new Error(
+            "The form endpoint returned an unexpected response. Check that the PHP API files are deployed.",
+          );
         }
       }
 

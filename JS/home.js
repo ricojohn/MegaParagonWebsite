@@ -147,7 +147,7 @@ if (HERO_PARTICLES && !prefersReducedMotion) {
           particles: {
             // A denser network keeps the hero background visually active
             // without competing with the video and headline.
-            number: { value: isSmallScreen ? 60 : 120 },
+            number: { value: isSmallScreen ? 40 : 80 },
             color: { value: ["#d4a85a", "#f0cf8e", "#ffffff"] },
             links: {
               enable: true,
@@ -356,7 +356,10 @@ if (!prefersReducedMotion && "IntersectionObserver" in window) {
         el.classList.add("revealed");
         revealObserver.unobserve(el);
         const delay = Number(el.dataset.delay || 0);
-        window.setTimeout(() => el.removeAttribute("data-reveal"), 1400 + delay);
+        window.setTimeout(
+          () => el.removeAttribute("data-reveal"),
+          1400 + delay,
+        );
       });
     },
     { threshold: 0.15, rootMargin: "0px 0px -6% 0px" },

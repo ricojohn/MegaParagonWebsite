@@ -69,6 +69,20 @@
   /* Supporting neutral colors used for secondary text, dividers, and borders. */
   --muted: #5a6070;
   --line: rgba(0, 43, 69, 0.12);
+
+  /* Careers reference palette shared by join.css and join.js visuals. */
+  --career-navy: #0a2240;
+  --career-navy-2: #143a63;
+  --career-gold: #d4a85a;
+  --career-gold-2: #f0cf8e;
+  --career-gold-dark: #a87a22;
+  --career-paper: #ffffff;
+  --career-soft: #f3f7fb;
+  --career-muted: #5b6b7f;
+  --career-line: #e2e8f0;
+  --career-placeholder-1: #dfe8f3;
+  --career-placeholder-2: #c9d7e8;
+  --career-placeholder-ink: #486080;
 }
 /* Shared page defaults: controls scrolling, the base background, text color,
    font, and line spacing for every page using this stylesheet. */

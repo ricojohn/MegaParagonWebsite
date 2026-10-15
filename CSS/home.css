@@ -320,48 +320,13 @@ body.home-page {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  height: 100svh;
   justify-content: center;
+  /* Keeps the video as the first-screen focus while allowing the title block
+     to follow naturally in this same hero section on every device. */
   min-height: 100vh;
   min-height: 100svh;
   padding: 92px 0 20px;
   position: relative;
-}
-.hero .scroll-cue {
-  align-items: center;
-  color: var(--white);
-  display: flex;
-  flex-direction: column;
-  font-size: 0.72rem;
-  font-weight: 700;
-  gap: 8px;
-  letter-spacing: 0.18em;
-  grid-column: 2;
-  margin: 0;
-  opacity: 0.8;
-  position: relative;
-  text-decoration: none;
-  text-transform: uppercase;
-  width: max-content;
-}
-.hero .scroll-cue::after {
-  animation: hero-cue 1.6s ease-in-out infinite;
-  border-bottom: 2px solid #f0cf8e;
-  border-right: 2px solid #f0cf8e;
-  content: "";
-  height: 11px;
-  transform: rotate(45deg);
-  width: 11px;
-}
-@keyframes hero-cue {
-  0%,
-  100% {
-    transform: translateY(0) rotate(45deg);
-  }
-  50% {
-    transform: translateY(5px) rotate(45deg);
-  }
 }
 
 /* Hero entrance animation: each item rises in using its own --d delay. */
@@ -376,9 +341,6 @@ body.home-page {
 .hero-first .hint.in {
   --d: 0.2s;
 }
-.hero-first .scroll-cue.in {
-  --d: 0.7s;
-}
 @keyframes hero-up {
   to {
     opacity: 1;
@@ -391,7 +353,7 @@ body.home-page {
 .hero .vwrap {
   margin: 0 auto;
   position: relative;
-  width: min(100%, 1500px, max(300px, calc((100svh - 120px) * 16 / 9)));
+  width: min(100%, 1700px, max(300px, calc((100svh - 80px) * 16 / 9)));
   z-index: 1;
 }
 /* Animated gold ring around the video: a slow light travels the frame. */
@@ -508,7 +470,7 @@ body.home-page {
 }
 .hero-title {
   color: var(--white);
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1.04;
@@ -520,7 +482,7 @@ body.home-page {
 }
 .hero-lead {
   color: var(--white);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.6;
   margin: 0 auto 28px;
   max-width: 36em;
@@ -1199,7 +1161,6 @@ html {
   .hero .vwrap::before,
   .hero .news-cta .dot,
   .hero .news-cta .arr,
-  .hero .scroll-cue::after,
   .news-skeleton i {
     animation: none;
   }
@@ -1347,4 +1308,187 @@ html.lenis body {
 .tag-update {
   background: rgba(44, 74, 124, 0.1);
   color: var(--violet);
+}
+
+/* Responsive home hero refinements: stack and resize the current design like
+   the reference hero without changing its content or visual treatment. */
+@media (max-width: 1100px) {
+  .hero .stage {
+    width: min(100%, 1080px);
+  }
+  .hero .vwrap {
+    width: min(100%, 1250px, calc((100svh - 140px) * 16 / 9));
+  }
+}
+
+@media (max-width: 860px) {
+  .hero {
+    min-height: calc(100svh + 180px);
+    padding: 0 20px calc(var(--hero-curve) + 40px);
+  }
+  .hero .stage {
+    width: 100%;
+  }
+  .hero-video-column {
+    transform: none;
+  }
+  .hero-first {
+    min-height: 100svh;
+    padding: 104px 0 24px;
+  }
+  .hero .vwrap {
+    width: min(100%, calc(100vw - 40px), 900px);
+  }
+  .hero-video-meta {
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin-top: 14px;
+  }
+  .hero .hint {
+    font-size: 0.76rem;
+    line-height: 1.35;
+    max-width: 30ch;
+  }
+  .hero-copy {
+    padding: 32px 0 96px;
+    text-align: center;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+  }
+  .hero-lead {
+    font-size: 1rem;
+    max-width: 42em;
+  }
+  .hero .cta,
+  .hero .trust {
+    justify-content: center;
+  }
+  .hero .trust {
+    gap: 12px 20px;
+  }
+  .hero-copy .badge {
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding-inline: 16px;
+  }
+  .hero-first {
+    min-height: calc(100svh - 8px);
+    padding-top: 92px;
+  }
+  .hero .vwrap {
+    width: 100%;
+  }
+  .hero .vcard {
+    border-radius: 14px;
+  }
+  .hero-video-meta {
+    align-items: start;
+    gap: 12px;
+  }
+  .hero .hint {
+    max-width: 24ch;
+  }
+  .hero .cta .btn {
+    flex-basis: 100%;
+  }
+  .hero .trust {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-inline: auto;
+    text-align: left;
+    width: max-content;
+  }
+  .hero .trust li {
+    max-width: 30ch;
+  }
+  .hero .badge {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
+/* D2 hero arrangement: text first with a large supporting video. The layout
+   stays inside the existing hero section and stacks text above video on
+   smaller screens for reliable responsive behavior. */
+@media (min-width: 861px) {
+  .hero .stage {
+    align-items: center;
+    column-gap: clamp(36px, 5vw, 72px);
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    min-height: calc(100svh - 40px);
+    text-align: left;
+    width: min(1700px, 100%);
+  }
+  .hero-first {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: center;
+    min-height: 0;
+    padding: 112px 0 40px;
+  }
+  .hero-copy {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 104px 0 40px;
+    text-align: left;
+  }
+  .hero .cta,
+  .hero .trust {
+    justify-content: flex-start;
+  }
+  .hero .trust {
+    margin-left: 0;
+  }
+  .hero-copy .badge {
+    margin-left: 0;
+  }
+  .hero-video-column {
+    transform: none;
+  }
+  .hero .vwrap {
+    width: 100%;
+  }
+  .hero-video-meta {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (min-width: 1101px) {
+  /* Lets the D2 hero use the open side space independently of the navbar
+     width while retaining comfortable viewport gutters. */
+  .hero {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero .stage {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    padding: 44px 0 56px;
+  }
+  .hero-first {
+    order: 2;
+    min-height: 0;
+    padding: 24px 0 72px;
+  }
+  .hero .cta,
+  .hero .trust {
+    justify-content: center;
+  }
+  .hero-copy .badge {
+    margin-inline: auto;
+  }
 }
