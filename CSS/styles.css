@@ -183,6 +183,61 @@ body.modal-open .site-header {
   /* De-emphasizes the header while a modal or login dialog is open. */
   filter: blur(10px);
 }
+
+/* Shared form feedback: confirms successful submissions and explains errors
+   without moving the page or replacing the form. */
+.form-toast {
+  align-items: center;
+  background: #fff;
+  border-left: 4px solid #2f8a5b;
+  border-radius: 10px;
+  box-shadow: 0 14px 34px rgba(10, 34, 64, 0.22);
+  color: var(--navy);
+  display: flex;
+  gap: 10px;
+  max-width: min(420px, calc(100vw - 32px));
+  opacity: 0;
+  padding: 14px 18px;
+  pointer-events: none;
+  position: fixed;
+  right: 24px;
+  top: 24px;
+  transform: translateY(-14px);
+  transition: opacity 220ms ease, transform 220ms ease;
+  visibility: hidden;
+  z-index: 100;
+}
+.form-toast i {
+  color: #2f8a5b;
+  font-size: 1.15rem;
+}
+.form-toast span {
+  overflow-wrap: anywhere;
+}
+.form-toast.error {
+  border-left-color: #c94b4b;
+}
+.form-toast.error i {
+  color: #c94b4b;
+}
+.required-marker {
+  color: #c0392b;
+  font-weight: 800;
+}
+.form-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+.form-toast + .back-to-top {
+  z-index: 101;
+}
+.inq .submit.is-sent,
+.join-page .card .submit.is-sent {
+  background: #2f8a5b;
+  color: #fff;
+}
+
 a {
   /* Removes browser link decoration so component styles define link appearance. */
   color: inherit;

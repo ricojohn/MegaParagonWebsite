@@ -115,6 +115,12 @@ body.home-page {
   object-fit: cover;
   width: 100%;
 }
+.hero-youtube-video {
+  border: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
 
 /* Video fallback state shown when the hero media cannot be loaded. */
 .hero-media.video-unavailable {
@@ -750,8 +756,51 @@ html {
   top: 0;
   width: 460px;
 }
+.news-section#announcements::before {
+  display: none;
+}
+.announcements-arcs {
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+.announcement-ring {
+  background: repeating-radial-gradient(
+    circle,
+    transparent 0 58px,
+    rgba(212, 168, 90, 0.3) 58px 60px
+  );
+  border-radius: 50%;
+  -webkit-mask-image: radial-gradient(
+    circle,
+    #000 30%,
+    transparent 70%
+  );
+  mask-image: radial-gradient(circle, #000 30%, transparent 70%);
+  position: absolute;
+}
+.announcement-ring-top {
+  height: 760px;
+  right: -260px;
+  top: -260px;
+  width: 760px;
+}
+.announcement-ring-bottom {
+  bottom: -220px;
+  height: 520px;
+  left: -220px;
+  opacity: 0.6;
+  width: 520px;
+}
 .news-section > * {
   position: relative;
+  z-index: 1;
+}
+.news-section > .announcements-arcs {
+  position: absolute;
+  z-index: 0;
 }
 /* The kicker is hidden elsewhere on the site; show it in this section. */
 .news-section .page-kicker {

@@ -167,22 +167,58 @@ if (HERO_PARTICLES && !prefersReducedMotion) {
   });
 }
 
-// Pauses the hero video while it is off-screen to save data and battery. It
-// resumes only if the visitor has not paused it themselves.
-if (heroVideoFile && videoPlayPause && "IntersectionObserver" in window) {
+// Pauses the YouTube hero video while it is mostly off-screen to save data and
+// battery. It resumes when the hero returns unless the visitor paused it.
+const heroYoutubeFrame = document.getElementById("heroYoutubePlayer");
+let heroYoutubePlayer = null;
+let youtubePausedByVisibility = false;
+let youtubePausedByVisitor = false;
+
+function observeYouTubeHero() {
+  if (!heroYoutubePlayer || !("IntersectionObserver" in window)) return;
+
+  const hero = document.getElementById("hero");
+  if (!hero) return;
+
   new IntersectionObserver(
     ([entry]) => {
-      const pausedByVisitor =
-        videoPlayPause.getAttribute("aria-label") === "Play video";
-      if (!entry.isIntersecting) {
-        heroVideoFile.pause();
-      } else if (!pausedByVisitor) {
-        heroVideoFile.play().catch(() => {});
+      const mostlyVisible = entry.intersectionRatio >= 0.5;
+      const mostlyHidden = entry.intersectionRatio < 0.25;
+
+      if (mostlyHidden) {
+        youtubePausedByVisibility = true;
+        heroYoutubePlayer.pauseVideo();
+      } else if (mostlyVisible && !youtubePausedByVisitor) {
+        youtubePausedByVisibility = false;
+        heroYoutubePlayer.playVideo();
       }
     },
-    { threshold: 0.15 },
-  ).observe(document.getElementById("hero"));
+    { threshold: [0, 0.25, 0.5, 1] },
+  ).observe(hero);
 }
+
+function initializeYouTubeHero() {
+  if (!heroYoutubeFrame || !window.YT || !window.YT.Player) return;
+
+  heroYoutubePlayer = new window.YT.Player(heroYoutubeFrame, {
+    events: {
+      onReady: observeYouTubeHero,
+      onStateChange: (event) => {
+        if (event.data === window.YT.PlayerState.PLAYING) {
+          youtubePausedByVisitor = false;
+        } else if (
+          event.data === window.YT.PlayerState.PAUSED &&
+          !youtubePausedByVisibility
+        ) {
+          youtubePausedByVisitor = true;
+        }
+      },
+    },
+  });
+}
+
+window.onYouTubeIframeAPIReady = initializeYouTubeHero;
+if (window.YT && window.YT.Player) initializeYouTubeHero();
 
 // Gentle magnetic pull on the hero buttons for mouse users.
 if (

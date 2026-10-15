@@ -1,11 +1,22 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Mega Paragon | Products &amp; Services</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Products &amp; Services | The Mega Paragon</title>
+    <meta
+      name="description"
+      content="Protect what matters most. Explore our insurance solutions tailored for Filipino families and send us a message."
+    />
     <link rel="stylesheet" href="CSS/styles.css" />
     <link rel="stylesheet" href="CSS/prod-serv.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -15,142 +26,494 @@
       type="image/png"
       href="assets/mainlogo/MP_Logo_Horizontal_Colored.png"
     />
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+    ></script>
   </head>
-  <body id="pageTop" class="profile-nav-page">
-    <main>
-      <section class="product-hero">
-        <img
-          class="product-hero-image"
-          src="assets/prod-serv/prod-serv-img.png"
-          alt=""
-          fetchpriority="high"
-          decoding="async"
-        />
-        <div class="product-container product-hero-content">
-          <p class="product-eyebrow">Products &amp; services</p>
-          <h1>Protect What<br /><em>Matters Most.</em></h1>
-          <p>
+  <body class="prod-serv-page">
+    <nav class="rail" id="rail" aria-label="Story progress">
+      <i class="fill" id="railFill"></i>
+      <a href="#c1" data-c="c1"><span>Today</span></a
+      ><a href="#c2" data-c="c2"><span>Life happens</span></a
+      ><a href="#c3" data-c="c3"><span>Protection</span></a
+      ><a href="#c4" data-c="c4"><span>Guidance</span></a
+      ><a href="#c5" data-c="c5"><span>Why us</span></a
+      ><a href="#inquire" data-c="inquire"><span>Let's talk</span></a>
+    </nav>
+
+    <!-- HERO: form on the left, story on the right -->
+    <header class="hero" id="top">
+      <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
+      <div class="wrap hero-grid">
+        <form
+          class="inq"
+          id="inquiryFormTop"
+          data-form-type="inquiry"
+          method="POST"
+          action="/api/inquiry.php"
+        >
+          <div class="fields">
+            <h3>Send Us a Message</h3>
+            <p class="s2">
+              Fill out the form below and our team will get back to you as soon
+              as possible.
+            </p>
+            <div class="row">
+              <div>
+                <label for="top-name"
+                  >Full Name
+                  <span class="required-marker" aria-hidden="true"
+                    >*</span
+                  ></label
+                ><input
+                  id="top-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div>
+                <label for="top-email"
+                  >Email Address
+                  <span class="required-marker" aria-hidden="true"
+                    >*</span
+                  ></label
+                ><input
+                  id="top-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+            </div>
+            <label for="top-phone"
+              >Phone Number
+              <span class="required-marker" aria-hidden="true">*</span></label
+            ><input
+              id="top-phone"
+              name="phone"
+              type="tel"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              autocomplete="tel"
+              required
+            />
+            <label for="top-subject">Subject</label
+            ><select id="top-subject" name="subject">
+              <option value="">Select a subject</option>
+              <option>Family Protection</option>
+              <option>Education Planning</option>
+              <option>Health Insurance</option>
+              <option>Retirement Planning</option>
+              <option>Business Insurance</option>
+              <option>Investment Plans</option>
+              <option>Life Insurance</option>
+              <option>Non-Life Insurance</option>
+              <option>Investment Planning</option>
+              <option>Life and Wealth Coaching</option>
+              <option>Other</option>
+            </select>
+            <label for="top-message">Message</label
+            ><textarea
+              id="top-message"
+              name="message"
+              placeholder="Tell us how we can help you..."
+            ></textarea>
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAAFXdpHurvJIUfn2P"
+            ></div>
+            <button class="submit" type="submit">
+              Get a Free Consultation
+              <span aria-hidden="true"
+                ><i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+              ></span>
+            </button>
+            <p class="safe">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i> Your
+              information is safe with us.
+            </p>
+          </div>
+        </form>
+        <div class="hcopy">
+          <div class="kick gi">Products &amp; Services</div>
+          <h1 id="h1">Protect What<br /><em>Matters Most.</em></h1>
+          <p class="lead gi">
             Your family's future deserves certainty. Explore our insurance
             solutions tailored for Filipino families.
           </p>
-          <a class="product-hero-button" href="#contactSection">
-            Get a Free Quote
-            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-          </a>
-          <div class="product-hero-stats" aria-label="Company statistics">
-            <div><strong>P500M+</strong><span>Claims Paid</span></div>
+          <div class="gi cta-w">
+            <a class="btn" href="#inquire"
+              >Get a Free Quote
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+            ></a>
+          </div>
+          <div class="stats gi">
             <div>
-              <strong>10,000+</strong><span>Filipino Families Protected</span>
+              <div class="od" data-od="P|500|M+"></div>
+              <small>Claims Paid</small>
             </div>
-            <div><strong>15+</strong><span>Years of Service</span></div>
+            <div>
+              <div class="od" data-od="|10,000|+"></div>
+              <small>Filipino Families Protected</small>
+            </div>
+            <div>
+              <div class="od" data-od="|15|+"></div>
+              <small>Years of Service</small>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+      <svg
+        class="wave"
+        viewBox="0 0 1440 90"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path d="M0 90V50C240 0 560 0 860 38C1100 68 1280 70 1440 40V90Z" />
+        <path
+          class="gold"
+          d="M0 50C240 0 560 0 860 38C1100 68 1280 70 1440 40"
+        />
+      </svg>
+    </header>
 
-      <section class="product-solutions" id="products">
-        <div class="product-container">
-          <div class="product-section-head">
-            <p class="product-kicker">Our insurance solutions</p>
-            <h2>Our Insurance Solutions</h2>
-            <p>
+    <!-- CHAPTER 1 -->
+    <section class="chap cream" id="c1">
+      <div class="wrap split">
+        <div data-reveal="left">
+          <div class="kick">Chapter 01 <i>· Today</i></div>
+          <h2>Every family has <em>a story.</em></h2>
+          <p class="lede">
+            It starts with the people who matter most: the ones you plan for,
+            work for, and come home to. We help you keep that story safe,
+            whatever chapter you're in.
+          </p>
+        </div>
+        <div class="photo" data-reveal="right">
+          <div class="ph">
+            <img
+              src="assets/prod-serv/prod-serv-img.png"
+              alt="Filipino family spending time together"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 2: "what if" cards (each worry flips to the product that answers it) -->
+    <section class="chap" id="c2">
+      <div class="wrap">
+        <div class="center" data-reveal="up">
+          <div class="kick">Chapter 02 <i>· Then life happens</i></div>
+          <h2>Life is full of <em>"what ifs."</em></h2>
+          <p class="sub">
+            A sudden illness, a lost income, a school year that costs more than
+            expected. Tap a card to see how protection answers each one.
+          </p>
+        </div>
+      </div>
+      <div class="mq" aria-hidden="true">
+        <div>
+          <span>What if you get sick?</span><span>What if income stops?</span
+          ><span>What if school fees come due?</span
+          ><span>What if an accident happens?</span
+          ><span>What if you could plan for all of it?</span
+          ><span>What if you get sick?</span><span>What if income stops?</span
+          ><span>What if school fees come due?</span
+          ><span>What if an accident happens?</span
+          ><span>What if you could plan for all of it?</span
+          ><span>What if you get sick?</span><span>What if income stops?</span
+          ><span>What if school fees come due?</span
+          ><span>What if an accident happens?</span
+          ><span>What if you could plan for all of it?</span
+          ><span>What if you get sick?</span><span>What if income stops?</span
+          ><span>What if school fees come due?</span
+          ><span>What if an accident happens?</span
+          ><span>What if you could plan for all of it?</span>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="wgrid" data-reveal="up">
+          <div
+            class="flip"
+            tabindex="0"
+            role="group"
+            aria-label="What if a sudden illness? Flip to see the answer"
+          >
+            <div class="fi">
+              <div class="ff">
+                <div class="ico" data-ic="heart"></div>
+                <small>WHAT IF</small>
+                <h3>...a sudden illness?</h3>
+                <span>Tap or hover to see the answer</span>
+              </div>
+              <div class="fb">
+                <div>
+                  <small>THE ANSWER</small>
+                  <h3>Health Insurance</h3>
+                  <p>
+                    Protect yourself and your family from unexpected medical
+                    expenses with comprehensive health plans.
+                  </p>
+                </div>
+                <button
+                  class="ask"
+                  type="button"
+                  data-subject="Health Insurance"
+                >
+                  Ask about this
+                  <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flip"
+            tabindex="0"
+            role="group"
+            aria-label="What if your income stops? Flip to see the answer"
+          >
+            <div class="fi">
+              <div class="ff">
+                <div class="ico" data-ic="umbrella"></div>
+                <small>WHAT IF</small>
+                <h3>...your income stops?</h3>
+                <span>Tap or hover to see the answer</span>
+              </div>
+              <div class="fb">
+                <div>
+                  <small>THE ANSWER</small>
+                  <h3>Family Protection</h3>
+                  <p>
+                    Comprehensive life insurance plans that provide financial
+                    security for your loved ones in case of unexpected events.
+                  </p>
+                </div>
+                <button
+                  class="ask"
+                  type="button"
+                  data-subject="Family Protection"
+                >
+                  Ask about this
+                  <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flip"
+            tabindex="0"
+            role="group"
+            aria-label="What if school fees come due? Flip to see the answer"
+          >
+            <div class="fi">
+              <div class="ff">
+                <div class="ico" data-ic="cap"></div>
+                <small>WHAT IF</small>
+                <h3>...school fees come due?</h3>
+                <span>Tap or hover to see the answer</span>
+              </div>
+              <div class="fb">
+                <div>
+                  <small>THE ANSWER</small>
+                  <h3>Education Planning</h3>
+                  <p>
+                    Secure your children's future with education insurance plans
+                    designed to fund their academic journey.
+                  </p>
+                </div>
+                <button
+                  class="ask"
+                  type="button"
+                  data-subject="Education Planning"
+                >
+                  Ask about this
+                  <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flip"
+            tabindex="0"
+            role="group"
+            aria-label="What if an accident happens? Flip to see the answer"
+          >
+            <div class="fi">
+              <div class="ff">
+                <div class="ico" data-ic="car"></div>
+                <small>WHAT IF</small>
+                <h3>...an accident happens?</h3>
+                <span>Tap or hover to see the answer</span>
+              </div>
+              <div class="fb">
+                <div>
+                  <small>THE ANSWER</small>
+                  <h3>Non-Life Insurance</h3>
+                  <p>
+                    Secure your valuable assets with confidence. Our non-life
+                    insurance solutions protect you against accidents, losses,
+                    and unforeseen events.
+                  </p>
+                </div>
+                <button
+                  class="ask"
+                  type="button"
+                  data-subject="Non-Life Insurance"
+                >
+                  Ask about this
+                  <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cta-row" style="margin-top: 44px">
+          <a class="btn" href="#inquire"
+            >Talk to us about your plan
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 3: pinned horizontal scroll of the six solutions -->
+    <section class="cream" id="c3">
+      <div class="hs" id="hs">
+        <div class="hs-in">
+          <div class="wrap hs-head">
+            <div class="kick">Our Insurance Solutions <i>· Chapter 03</i></div>
+            <h2>Our Insurance <em>Solutions</em></h2>
+            <p class="sub" style="margin-bottom: 6px">
               We offer a comprehensive range of life insurance products designed
               specifically for Filipino families and individuals.
             </p>
           </div>
-          <div class="product-solution-grid">
-            <article class="product-solution-card">
-              <div class="product-icon">
-                <i class="fa-solid fa-umbrella" aria-hidden="true"></i>
-              </div>
-              <div>
-                <h3>Family Protection</h3>
-                <p>
-                  Comprehensive life insurance plans that provide financial
-                  security for your loved ones in case of unexpected events.
-                </p>
-              </div>
+          <div class="hs-track" id="hst">
+            <article class="pc">
+              <span class="no">01</span>
+              <div class="ic" data-ic="umbrella"></div>
+              <h3>Family Protection</h3>
+              <p>
+                Comprehensive life insurance plans that provide financial
+                security for your loved ones in case of unexpected events.
+              </p>
+              <button class="ask" data-subject="Family Protection">
+                Ask about this
+                <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              </button>
             </article>
-            <article class="product-solution-card">
-              <div class="product-icon">
-                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-              </div>
-              <div>
-                <h3>Education Planning</h3>
-                <p>
-                  Secure your children's future with education insurance plans
-                  designed to fund their academic journey.
-                </p>
-              </div>
+            <article class="pc">
+              <span class="no">02</span>
+              <div class="ic" data-ic="cap"></div>
+              <h3>Education Planning</h3>
+              <p>
+                Secure your children's future with education insurance plans
+                designed to fund their academic journey.
+              </p>
+              <button class="ask" data-subject="Education Planning">
+                Ask about this
+                <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              </button>
             </article>
-            <article class="product-solution-card">
-              <div class="product-icon">
-                <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
-              </div>
-              <div>
-                <h3>Health Insurance</h3>
-                <p>
-                  Protect yourself and your family from unexpected medical
-                  expenses with comprehensive health plans.
-                </p>
-              </div>
+            <article class="pc">
+              <span class="no">03</span>
+              <div class="ic" data-ic="heart"></div>
+              <h3>Health Insurance</h3>
+              <p>
+                Protect yourself and your family from unexpected medical
+                expenses with comprehensive health plans.
+              </p>
+              <button class="ask" data-subject="Health Insurance">
+                Ask about this
+                <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              </button>
             </article>
-            <article class="product-solution-card">
-              <div class="product-icon">
-                <i class="fa-solid fa-person-cane" aria-hidden="true"></i>
-              </div>
-              <div>
-                <h3>Retirement Planning</h3>
-                <p>
-                  Plan for a comfortable retirement with pension plans designed
-                  to provide financial independence.
-                </p>
-              </div>
+            <article class="pc">
+              <span class="no">04</span>
+              <div class="ic" data-ic="sun"></div>
+              <h3>Retirement Planning</h3>
+              <p>
+                Plan for a comfortable retirement with pension plans designed to
+                provide financial independence.
+              </p>
+              <button class="ask" data-subject="Retirement Planning">
+                Ask about this
+                <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              </button>
             </article>
-            <article class="product-solution-card">
-              <div class="product-icon">
-                <i class="fa-solid fa-building" aria-hidden="true"></i>
-              </div>
-              <div>
-                <h3>Business Insurance</h3>
-                <p>
-                  Protect your business with specialized insurance solutions
-                  designed for Filipino entrepreneurs.
-                </p>
-              </div>
+            <article class="pc">
+              <span class="no">05</span>
+              <div class="ic" data-ic="building"></div>
+              <h3>Business Insurance</h3>
+              <p>
+                Protect your business with specialized insurance solutions
+                designed for Filipino entrepreneurs.
+              </p>
+              <button class="ask" data-subject="Business Insurance">
+                Ask about this
+                <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              </button>
             </article>
-            <article class="product-solution-card">
-              <div class="product-icon">
-                <i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i>
-              </div>
-              <div>
-                <h3>Investment Plans</h3>
-                <p>
-                  Grow your wealth with investment-linked insurance plans that
-                  offer protection and potential returns.
-                </p>
-              </div>
+            <article class="pc">
+              <span class="no">06</span>
+              <div class="ic" data-ic="trend"></div>
+              <h3>Investment Plans</h3>
+              <p>
+                Grow your wealth with investment-linked insurance plans that
+                offer protection and potential returns.
+              </p>
+              <button class="ask" data-subject="Investment Plans">
+                Ask about this
+                <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              </button>
+            </article>
+            <article
+              class="pc"
+              style="
+                justify-content: center;
+                align-items: flex-start;
+                background: linear-gradient(160deg, var(--navy), var(--navy2));
+                color: #fff;
+                border: 0;
+              "
+            >
+              <h3 style="margin-bottom: 12px; color: var(--gold2)">
+                Want to know more?
+              </h3>
+              <p style="color: #c8d6e6; flex: none">
+                Tell us what you need and we'll point you to the right plan.
+              </p>
+              <a class="btn" href="#inquire"
+                >Want to know more?
+                <i class="fa-solid fa-arrow-down" aria-hidden="true"></i
+              ></a>
             </article>
           </div>
-          <a class="product-solutions-button" href="#contactSection">
-            Want to know more?
-            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-          </a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="product-categories">
-        <div class="product-container">
-          <div class="product-section-head">
-            <p class="product-kicker">Explore our services</p>
-            <h2>Protection, Growth &amp; Guidance</h2>
-            <p>
-              Our service categories bring together protection and financial
-              planning in one cohesive approach.
-            </p>
-          </div>
-          <div class="product-category-grid">
-            <article>
-              <i class="fa-solid fa-people-roof" aria-hidden="true"></i>
+    <!-- CHAPTER 4: stacking cards -->
+    <section class="chap dark" id="c4">
+      <div class="wrap">
+        <div class="center" data-reveal="up">
+          <div class="kick">Explore Our Services <i>· Chapter 04</i></div>
+          <h2>Protection, Growth <em>&amp; Guidance</em></h2>
+          <p class="sub">
+            Our service categories bring together protection and financial
+            planning in one cohesive approach.
+          </p>
+        </div>
+        <div style="margin-top: 20px">
+          <article class="stk sc1" style="--i: 0">
+            <div class="ic" data-ic="house"></div>
+            <div>
               <h3>Life Insurance</h3>
               <p>
                 Protect your loved ones' future with a solid financial safety
@@ -158,13 +521,15 @@
                 covered - whether it's daily expenses, education, or long-term
                 security - no matter what tomorrow brings.
               </p>
-              <a class="product-category-link" href="#contactSection">
-                Learn More
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-              </a>
-            </article>
-            <article>
-              <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+              <button class="more" data-subject="Life Insurance">
+                Learn more
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </article>
+          <article class="stk sc2" style="--i: 1">
+            <div class="ic" data-ic="shield"></div>
+            <div>
               <h3>Non-Life Insurance</h3>
               <p>
                 Secure your valuable assets with confidence. From cars and homes
@@ -172,27 +537,31 @@
                 against accidents, losses, and unforeseen events - so you can
                 move forward worry-free.
               </p>
-              <a class="product-category-link" href="#contactSection">
-                Learn More
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-              </a>
-            </article>
-            <article>
-              <i class="fa-solid fa-store" aria-hidden="true"></i>
+              <button class="more" data-subject="Non-Life Insurance">
+                Learn more
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </article>
+          <article class="stk sc3" style="--i: 2">
+            <div class="ic" data-ic="coins"></div>
+            <div>
               <h3>Investment Planning</h3>
               <p>
                 Grow your wealth with clear strategies tailored to your goals.
                 Our investment planning service helps you maximize returns while
-                managing risks, guiding you step-by-step toward financial
-                independence and long-term prosperity.
+                managing risks, guiding you through step-by-step toward
+                financial independence and long-term prosperity.
               </p>
-              <a class="product-category-link" href="#contactSection">
-                Learn More
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-              </a>
-            </article>
-            <article>
-              <i class="fa-solid fa-chart-column" aria-hidden="true"></i>
+              <button class="more" data-subject="Investment Planning">
+                Learn more
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </article>
+          <article class="stk sc4" style="--i: 3">
+            <div class="ic" data-ic="chart"></div>
+            <div>
               <h3>Life and Wealth Coaching</h3>
               <p>
                 Transform the way you handle money and life decisions. Through
@@ -200,216 +569,303 @@
                 your mindset, and create sustainable habits that bring you
                 closer to the life you envision.
               </p>
-              <a class="product-category-link" href="#contactSection">
-                Learn More
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-              </a>
-            </article>
-          </div>
+              <button class="more" data-subject="Life and Wealth Coaching">
+                Learn more
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="product-why">
-        <div class="product-container">
-          <div class="product-section-head">
-            <p class="product-kicker">Why choose The Mega Paragon</p>
-            <h2>Protection With Personalized Support</h2>
-            <p>
-              We're committed to providing the best insurance solutions for
-              Filipino families with personalized service and support.
-            </p>
-          </div>
-          <div class="product-why-grid">
-            <article>
-              <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-              <h3>Trusted Experience</h3>
-              <p>
-                Over 15 years of experience serving Filipino families with
-                integrity and dedication.
-              </p>
-            </article>
-            <article>
-              <i class="fa-solid fa-users" aria-hidden="true"></i>
-              <h3>Local Expertise</h3>
-              <p>
-                Our team understands the unique needs of Filipino families and
-                provides tailored solutions.
-              </p>
-            </article>
-            <article>
-              <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
-              <h3>Fast Claim Process</h3>
-              <p>
-                We ensure a smooth and quick claims process when you need us the
-                most.
-              </p>
-            </article>
-            <article>
-              <i class="fa-solid fa-phone" aria-hidden="true"></i>
-              <h3>24/7 Support</h3>
-              <p>
-                Our dedicated support team is available around the clock to
-                assist you.
-              </p>
-            </article>
+    <!-- CHAPTER 5: scroll story. The four reasons arrive one by one, then a shield covers them: "We've got you covered." -->
+    <section class="cv" id="c5">
+      <div class="cv-pin" id="cvPin">
+        <div class="cv-in">
+          <div class="wrap">
+            <div class="cv-grid">
+              <div class="cv-left">
+                <div class="kick" style="justify-content: flex-start">
+                  Why Choose The Mega Paragon <i>· Chapter 05</i>
+                </div>
+                <h2>Protection With <em>Personalized Support</em></h2>
+                <p class="sub" style="text-align: left; margin: 0 0 20px">
+                  We're committed to providing the best insurance solutions for
+                  Filipino families with personalized service and support.
+                </p>
+                <span class="cv-tag" id="cvTag">Why choose us</span>
+                <div class="cv-big" id="cvBig">
+                  Here's what you<br />can count on.
+                </div>
+                <div class="cv-prog"><i id="cvProg"></i></div>
+              </div>
+              <div class="rs-list" id="cvList">
+                <div class="shield" aria-hidden="true">
+                  <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                </div>
+                <div class="rs">
+                  <div class="ic" data-ic="shieldck"></div>
+                  <div>
+                    <b>Trusted Experience</b
+                    ><span class="d"
+                      >Over 15 years of experience serving Filipino families
+                      with integrity and dedication.</span
+                    >
+                  </div>
+                  <span class="chk" aria-hidden="true"
+                    ><i class="fa-solid fa-check" aria-hidden="true"></i
+                  ></span>
+                </div>
+                <div class="rs">
+                  <div class="ic" data-ic="users"></div>
+                  <div>
+                    <b>Local Expertise</b
+                    ><span class="d"
+                      >Our team understands the unique needs of Filipino
+                      families and provides tailored solutions.</span
+                    >
+                  </div>
+                  <span class="chk" aria-hidden="true"
+                    ><i class="fa-solid fa-check" aria-hidden="true"></i
+                  ></span>
+                </div>
+                <div class="rs">
+                  <div class="ic" data-ic="bolt"></div>
+                  <div>
+                    <b>Fast Claim Process</b
+                    ><span class="d"
+                      >We ensure a smooth and quick claims process when you need
+                      us the most.</span
+                    >
+                  </div>
+                  <span class="chk" aria-hidden="true"
+                    ><i class="fa-solid fa-check" aria-hidden="true"></i
+                  ></span>
+                </div>
+                <div class="rs">
+                  <div class="ic" data-ic="headset"></div>
+                  <div>
+                    <b>24/7 Support</b
+                    ><span class="d"
+                      >Our dedicated support team is available around the clock
+                      to assist you.</span
+                    >
+                  </div>
+                  <span class="chk" aria-hidden="true"
+                    ><i class="fa-solid fa-check" aria-hidden="true"></i
+                  ></span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-      <section class="product-contact-section" id="contactSection">
-        <div class="product-container product-contact-grid">
-          <div class="product-contact-copy">
-            <p class="product-kicker">Reach out</p>
-            <h2>Ready to Start a Conversation?</h2>
-            <p>
-              Tell us what you need and let's explore the right solution for
-              you.
-            </p>
-          </div>
-          <div class="product-contact-form-card">
+      </div>
+    </section>
+
+    <!-- CHAPTER 6: one-tap situations -->
+    <section class="chap cream" id="c6">
+      <div class="wrap">
+        <div class="center" data-reveal="up">
+          <div class="kick">Chapter 06 <i>· Your next chapter</i></div>
+          <h2>Not sure <em>where to start?</em></h2>
+          <p class="sub">
+            Pick the situation closest to yours and we'll suggest a good first
+            conversation.
+          </p>
+        </div>
+        <div class="chips" id="chips" data-reveal="up">
+          <button
+            class="chip"
+            aria-pressed="false"
+            data-rec="Family Protection"
+          >
+            Protecting my family
+          </button>
+          <button
+            class="chip"
+            aria-pressed="false"
+            data-rec="Education Planning"
+          >
+            My children's education
+          </button>
+          <button class="chip" aria-pressed="false" data-rec="Health Insurance">
+            My health
+          </button>
+          <button
+            class="chip"
+            aria-pressed="false"
+            data-rec="Retirement Planning"
+          >
+            Planning retirement
+          </button>
+          <button
+            class="chip"
+            aria-pressed="false"
+            data-rec="Business Insurance"
+          >
+            My business
+          </button>
+          <button class="chip" aria-pressed="false" data-rec="Investment Plans">
+            Growing my savings
+          </button>
+        </div>
+        <div id="rb" class="rb" aria-live="polite">
+          <p class="hint6">
+            <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> Tap the
+            one closest to you
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REACH OUT: the second (identical) form -->
+    <section class="reach" id="inquire">
+      <div class="wrap reach-grid">
+        <div class="copy" data-reveal="left">
+          <div class="kick">Reach Out</div>
+          <h2>Ready to Start <em>a Conversation</em></h2>
+          <p class="sub" style="color: #c8d6e6">
+            Tell us what you need and let's explore the right solution for you.
+          </p>
+          <ul class="pts">
+            <li>Free consultation</li>
+            <li>Plans built around your family</li>
+            <li>Your information is safe with us</li>
+          </ul>
+        </div>
+        <form
+          class="inq"
+          id="inquiryFormBottom"
+          data-form-type="inquiry"
+          method="POST"
+          action="/api/inquiry.php"
+        >
+          <div class="fields">
             <h3>Send Us a Message</h3>
-            <p>
+            <p class="s2">
               Fill out the form below and our team will get back to you as soon
               as possible.
             </p>
-            <form
-              id="inquiryForm"
-              data-form-type="inquiry"
-              method="POST"
-              action="/api/inquiry.php"
-            >
-              <div class="product-contact-form-row">
-                <div>
-                  <label for="product-contact-name">Full Name *</label
-                  ><input
-                    id="product-contact-name"
-                    name="name"
-                    type="text"
-                    required
-                  />
-                </div>
-                <div>
-                  <label for="product-contact-email">Email Address *</label
-                  ><input
-                    id="product-contact-email"
-                    name="email"
-                    type="email"
-                    required
-                  />
-                </div>
-              </div>
+            <div class="row">
               <div>
-                <label for="product-contact-phone">Phone Number *</label
+                <label for="bottom-name"
+                  >Full Name
+                  <span class="required-marker" aria-hidden="true"
+                    >*</span
+                  ></label
                 ><input
-                  id="product-contact-phone"
-                  name="phone"
-                  type="tel"
+                  id="bottom-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
                   required
                 />
               </div>
               <div>
-                <label for="product-contact-subject">Subject</label
-                ><select id="product-contact-subject" name="subject">
-                  <option value="">Select a subject</option>
-                  <option>Life Insurance</option>
-                  <option>Non-Life Insurance</option>
-                  <option>Investment Planning</option>
-                  <option>Life &amp; Wealth Coaching</option>
-                  <option>General Inquiry</option>
-                </select>
+                <label for="bottom-email"
+                  >Email Address
+                  <span class="required-marker" aria-hidden="true"
+                    >*</span
+                  ></label
+                ><input
+                  id="bottom-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
               </div>
-              <div>
-                <label for="product-contact-message">Message</label
-                ><textarea
-                  id="product-contact-message"
-                  name="message"
-                  placeholder="Tell us how we can help you..."
-                ></textarea>
-              </div>
-              <button type="submit">
-                Get a Free Consultation
-                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-              </button>
-              <p class="product-contact-note">
-                <i class="fa-solid fa-lock" aria-hidden="true"></i> Your
-                information is safe with us.
-              </p>
-              <!-- Submission status appears here after forms.js handles the request. -->
-              <div class="form-message" id="formMessage" role="status"></div>
-            </form>
+            </div>
+            <label for="bottom-phone"
+              >Phone Number
+              <span class="required-marker" aria-hidden="true">*</span></label
+            ><input
+              id="bottom-phone"
+              name="phone"
+              type="tel"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              autocomplete="tel"
+              required
+            />
+            <label for="bottom-subject">Subject</label
+            ><select id="bottom-subject" name="subject">
+              <option value="">Select a subject</option>
+              <option>Family Protection</option>
+              <option>Education Planning</option>
+              <option>Health Insurance</option>
+              <option>Retirement Planning</option>
+              <option>Business Insurance</option>
+              <option>Investment Plans</option>
+              <option>Life Insurance</option>
+              <option>Non-Life Insurance</option>
+              <option>Investment Planning</option>
+              <option>Life and Wealth Coaching</option>
+              <option>Other</option>
+            </select>
+            <label for="bottom-message">Message</label
+            ><textarea
+              id="bottom-message"
+              name="message"
+              placeholder="Tell us how we can help you..."
+            ></textarea>
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAAFXdpHurvJIUfn2P"
+            ></div>
+            <button class="submit" type="submit">
+              Get a Free Consultation
+              <span aria-hidden="true"
+                ><i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+              ></span>
+            </button>
+            <p class="safe">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i> Your
+              information is safe with us.
+            </p>
           </div>
-        </div>
-      </section>
-    </main>
-    <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-section footer-brand">
-          <img
-            src="assets/mainlogo/The Mega Paragon Logo_Horizontal_Gold.png"
-            alt="The Mega Paragon"
-          />
-          <p class="footer-commitment">
-            Committed to Excellence. <br />Committed to You.
-          </p>
-          <h4>Follow Us</h4>
-          <div class="social-links">
-            <a href="#" aria-label="Facebook"
-              ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
-            ></a>
-            <a href="#" aria-label="Instagram"
-              ><i class="fa-brands fa-instagram" aria-hidden="true"></i
-            ></a>
-            <a href="#" aria-label="YouTube"
-              ><i class="fa-brands fa-youtube" aria-hidden="true"></i
-            ></a>
-            <a href="#" aria-label="TikTok"
-              ><i class="fa-brands fa-tiktok" aria-hidden="true"></i
-            ></a>
-          </div>
-        </div>
-        <div class="footer-categories">
-          <div class="footer-section">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="about">About Us</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Products &amp; Services</h4>
-            <ul>
-              <li><a href="products">Financial Solutions</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Contacts</h4>
-            <ul>
-              <li><a href="careers">Careers</a></li>
-              <li><a href="contact">Free Consultation</a></li>
-            </ul>
-          </div>
-          <div class="footer-section footer-partners">
-            <h4>Our Partners</h4>
-            <img src="assets/partners/prulife-logo.png" alt="Pru Life U.K." />
-          </div>
-        </div>
+        </form>
       </div>
-      <div class="footer-bottom">
-        <a class="footer-privacy" href="#">Privacy Policy</a>
-        <div class="footer-center">
-          <span class="tagline">TRUST | GROWTH | TOGETHER</span>
-          <span>&copy; 2026 The Mega Paragon. All Rights Reserved.</span>
-        </div>
-        <a class="footer-terms" href="#">Terms of Service</a>
-      </div>
+      <svg
+        class="wave2"
+        viewBox="0 0 1440 90"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path d="M0 90V50C240 0 560 0 860 38C1100 68 1280 70 1440 40V90Z" />
+        <path
+          class="gold"
+          d="M0 50C240 0 560 0 860 38C1100 68 1280 70 1440 40"
+        />
+      </svg>
+    </section>
+
+    <footer>
+      <b>TRUST | GROWTH | TOGETHER</b><br />&copy; 2026 The Mega Paragon. All
+      Rights Reserved.
     </footer>
-    <script src="JS/scroll-state.js"></script>
-    <script src="JS/meta-pixel.js"></script>
-    <script src="JS/navigation.js"></script>
-    <script src="JS/forms.js?v=hostinger-php-1"></script>
-    <a class="back-to-top" href="#pageTop" aria-label="Back to top">
-      <span aria-hidden="true">
-        <i class="fa-solid fa-angles-up"></i>
-      </span>
+    <div class="sticky" id="sticky">
+      <a class="btn" href="#inquire"
+        >Get a Free Quote
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+      ></a>
+    </div>
+    <a class="back-to-top" href="#top" aria-label="Back to top">
+      <span aria-hidden="true"><i class="fa-solid fa-angles-up"></i></span>
       <span class="back-to-top-label">Back to top</span>
     </a>
+    <script src="JS/scroll-state.js"></script>
+    <script src="JS/meta-pixel.js"></script>
+    <script src="JS/forms.js?v=hostinger-php-1"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"
+    ></script>
+    <script defer src="JS/prod-serv.js"></script>
   </body>
 </html>

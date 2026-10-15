@@ -192,6 +192,29 @@
     },
     { passive: true },
   );
+
+  const teamTrack = document.getElementById("teamCarouselTrack");
+  const teamSlides = teamTrack ? [...teamTrack.children] : [];
+  const teamPrevious = document.querySelector(
+    ".team-carousel-control.previous",
+  );
+  const teamNext = document.querySelector(".team-carousel-control.next");
+  let teamSlideIndex = 0;
+
+  const showTeamSlide = (index) => {
+    if (!teamTrack || !teamSlides.length) return;
+    teamSlideIndex =
+      (index + teamSlides.length) % teamSlides.length;
+    teamTrack.style.transform = `translateX(-${teamSlideIndex * 100}%)`;
+  };
+
+  teamPrevious?.addEventListener("click", () => {
+    showTeamSlide(teamSlideIndex - 1);
+  });
+  teamNext?.addEventListener("click", () => {
+    showTeamSlide(teamSlideIndex + 1);
+  });
+  showTeamSlide(0);
   const previousButton = document.getElementById("vprev");
   const nextButton = document.getElementById("vnext");
   if (previousButton) previousButton.onclick = () => goToSlide(currentSlide - 1);
@@ -242,57 +265,4 @@
     updateBackToTopVisibility();
   }
 
-  const confetti = (x, y) => {
-    const canvas = document.createElement("canvas");
-    canvas.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99";
-    document.body.appendChild(canvas);
-    const g = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const colors = ["#d4a85a", "#f0cf8e", "#0a2240", "#ffffff", "#143a63"];
-    const bits = Array.from({ length: 150 }, () => ({
-      x, y,
-      vx: (Math.random() - 0.5) * 18,
-      vy: -Math.random() * 16 - 5,
-      r: Math.random() * 5 + 3,
-      c: colors[(Math.random() * 5) | 0],
-      a: Math.random() * 6,
-      va: (Math.random() - 0.5) * 0.35,
-    }));
-    let frame = 0;
-    const tick = () => {
-      g.clearRect(0, 0, canvas.width, canvas.height);
-      bits.forEach((p) => {
-        p.vy += 0.38;
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vx *= 0.985;
-        p.a += p.va;
-        g.save();
-        g.translate(p.x, p.y);
-        g.rotate(p.a);
-        g.fillStyle = p.c;
-        g.fillRect(-p.r, -p.r / 2, p.r * 2, p.r);
-        g.restore();
-      });
-      if (++frame < 160) window.requestAnimationFrame(tick);
-      else canvas.remove();
-    };
-    tick();
-  };
-
-  // forms.js owns submission; celebrate when it marks a form message as successful.
-  if (!reducedMotion) {
-    document.querySelectorAll(".form-message").forEach((message) => {
-      let celebrated = false;
-      new MutationObserver(() => {
-        const ok = message.classList.contains("success");
-        if (ok && !celebrated) {
-          const b = message.closest("form").querySelector(".submit").getBoundingClientRect();
-          confetti(b.left + b.width / 2, b.top);
-        }
-        celebrated = ok;
-      }).observe(message, { attributes: true, attributeFilter: ["class"] });
-    });
-  }
 })();

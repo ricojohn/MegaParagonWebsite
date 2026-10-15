@@ -85,80 +85,29 @@
              the device); the messaging, calls to action, and trust indicators
              sit below it and appear as the visitor scrolls. -->
         <div class="stage">
-          <!-- Framed hero video card. The existing video controls remain
-               connected to JS/home.js. -->
+          <!-- Framed hero YouTube video card. -->
           <div class="hero-first">
           <div class="hero-video-column">
             <div class="vwrap in">
               <div class="vcard">
                         <div class="hero-media">
-                          <!-- Autoplay starts muted to comply with browser media
-                               policies; visitors can enable sound with the controls. -->
-                          <video
-                            class="hero-video-file"
-                            autoplay
-                            loop
-                            muted
-                            playsinline
-                            preload="metadata"
-                            aria-label="The Mega Paragon background video"
-                          >
-                            <source src="assets/placeholder.mp4" type="video/mp4" />
-                          </video>
-
-                          <!-- Branding shown if the hero video cannot be loaded. -->
-                          <img class="video-fallback-logo" src="assets/mainlogo/logo-horizontal-colored.png" alt="The Mega Paragon" />
-
-                          <!-- Custom controls for playback, volume, mute, and
-                               fullscreen behavior. -->
-                          <div class="video-controls" aria-label="Video controls">
-                            <button
-                              id="videoPlayPause"
-                              type="button"
-                              aria-label="Pause video"
-                            >
-                              <span class="video-control-icon" aria-hidden="true"
-                                >&#10074;&#10074;</span
-                              >
-                            </button>
-                            <div class="volume-btn-wrapper">
-                              <input
-                                id="videoVolume"
-                                class="volume-slider"
-                                type="range"
-                                min="0"
-                                max="1"
-                                step="0.01"
-                                value="1"
-                                aria-label="Video volume"
-                              />
-                              <button
-                                id="videoSoundToggle"
-                                type="button"
-                                aria-label="Mute video"
-                              >
-                                <span class="video-control-icon" aria-hidden="true"
-                                  >&#128266;</span
-                                >
-                              </button>
-                            </div>
-                            <button
-                              id="videoFullscreen"
-                              type="button"
-                              aria-label="Enter fullscreen"
-                            >
-                              <span class="video-control-icon" aria-hidden="true"
-                                >&#x26F6;</span
-                              >
-                            </button>
-                          </div>
+                          <iframe
+                            id="heroYoutubePlayer"
+                            class="hero-youtube-video"
+                            src="https://www.youtube.com/embed/-AVa4GpS-BM?autoplay=1&mute=1&loop=1&playlist=-AVa4GpS-BM&controls=1&rel=0&enablejsapi=1"
+                            title="The Mega Paragon"
+                            allow="autoplay; encrypted-media; picture-in-picture"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                          ></iframe>
                         </div>
                       </div>
 
             </div>
             <div class="hero-video-meta">
               <p class="hint in">
-                Playing muted. Tap the speaker on the video for sound.
+                Playing muted. Use the YouTube controls to enable sound, pause,
+                or skip ahead.
               </p>
             </div>
           </div>
@@ -228,6 +177,10 @@
       <!-- Announcements preview section. JS/announcements.js loads the latest
            announcements into the news grid below. -->
       <section class="news-section page-content" id="announcements">
+        <div class="announcements-arcs" aria-hidden="true">
+          <span class="announcement-ring announcement-ring-top"></span>
+          <span class="announcement-ring announcement-ring-bottom"></span>
+        </div>
         <div class="section-heading">
           <div data-reveal="up">
             <p class="page-kicker">WHAT'S HAPPENING</p>
@@ -373,6 +326,7 @@
     <script src="JS/announcements.js?v=hostinger-php-1"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.9.1/tsparticles.slim.bundle.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="JS/navigation.js"></script>
     <script src="JS/home.js"></script>
   </body>

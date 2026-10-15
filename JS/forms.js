@@ -10,10 +10,43 @@ function sanitizeInput(input) {
   return input.replace(/<[^>]*>/g, "").trim();
 }
 
+function showFormToast(type, message) {
+  let toast = document.getElementById("formToast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "formToast";
+    toast.className = "form-toast";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+    document.body.append(toast);
+  }
+
+  toast.className = `form-toast ${type}`;
+  toast.replaceChildren();
+  const icon = document.createElement("i");
+  icon.className = `fa-solid ${type === "success" ? "fa-circle-check" : "fa-circle-exclamation"}`;
+  icon.setAttribute("aria-hidden", "true");
+  const text = document.createElement("span");
+  text.textContent = message;
+  toast.append(icon, text);
+  requestAnimationFrame(() => toast.classList.add("is-visible"));
+  window.clearTimeout(toast.dismissTimer);
+  toast.dismissTimer = window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+  }, 5000);
+}
+
 function setupForm(form) {
   const formType = form.dataset.formType || form.id.replace("Form", "");
-  const messageDiv = form.querySelector(".form-message");
   const submitButton = form.querySelector("[type=submit]");
+  const originalButtonContent = submitButton.innerHTML;
+  const phoneInput = form.querySelector('input[name="phone"]');
+
+  if (phoneInput) {
+    phoneInput.addEventListener("input", () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, "");
+    });
+  }
 
   // Determine portal endpoint based on form type
   const endpoints = {
@@ -29,10 +62,13 @@ function setupForm(form) {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    messageDiv.classList.remove("success", "error");
-    messageDiv.textContent = "Sending...";
-    messageDiv.classList.add("is-visible");
     submitButton.disabled = true;
+
+    if (!form.querySelector('[name="cf-turnstile-response"]')?.value) {
+      showFormToast("error", "Please complete the verification first.");
+      submitButton.disabled = false;
+      return;
+    }
 
     try {
       let payload;
@@ -95,12 +131,18 @@ function setupForm(form) {
       }
 
       if (!response.ok) {
-        throw new Error(data.error || data.message || "Submission failed");
+        const error = new Error(data.error || data.message || "Submission failed");
+        error.status = response.status;
+        throw error;
       }
 
-      messageDiv.textContent =
-        data.message || "Thank you! We will get back to you soon.";
-      messageDiv.classList.add("success");
+      submitButton.classList.add("is-sent");
+      submitButton.innerHTML =
+        '<i class="fa-solid fa-circle-check" aria-hidden="true"></i> Sent';
+      showFormToast(
+        "success",
+        data.message || "Your message was sent successfully.",
+      );
 
       // Fire Meta Pixel event on success
       if (typeof window.fbq === "function") {
@@ -112,16 +154,22 @@ function setupForm(form) {
       // Reset form after delay
       setTimeout(() => {
         form.reset();
-        messageDiv.textContent = "";
-        messageDiv.classList.remove("is-visible", "success");
+        submitButton.classList.remove("is-sent");
+        submitButton.innerHTML = originalButtonContent;
       }, 2000);
     } catch (error) {
       console.error(`${formType} form submission failed:`, error);
-      messageDiv.textContent =
-        "We could not submit your form right now. Please try again later.";
-      messageDiv.classList.add("error");
+      showFormToast(
+        "error",
+        error.status === 429
+          ? "Too many attempts. Please wait a few minutes and try again."
+          : "We could not submit your form. Please try again.",
+      );
     } finally {
       submitButton.disabled = false;
+      if (window.turnstile) {
+        window.turnstile.reset(form.querySelector(".cf-turnstile"));
+      }
     }
   });
 }
