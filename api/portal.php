@@ -11,6 +11,45 @@ function fail_request(int $status, string $message): void
     exit;
 }
 
+function verify_recaptcha($token, array $values): void
+{
+    if (!is_string($token) || trim($token) === '') {
+        fail_request(422, 'Please complete the reCAPTCHA check and try again.');
+    }
+
+    $secret = trim(getenv('RECAPTCHA_SECRET_KEY') ?: ($values['RECAPTCHA_SECRET_KEY'] ?? ''));
+    if ($secret === '') {
+        fail_request(503, 'reCAPTCHA is not configured on the server.');
+    }
+
+    $curl = curl_init('https://www.google.com/recaptcha/api/siteverify');
+    curl_setopt_array($curl, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => http_build_query([
+            'secret' => $secret,
+            'response' => trim($token),
+        ]),
+        CURLOPT_CONNECTTIMEOUT => 10,
+        CURLOPT_TIMEOUT => 15,
+    ]);
+    $response = curl_exec($curl);
+    $status = (int) curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
+
+    if ($response === false || $status !== 200) {
+        fail_request(502, 'Unable to verify reCAPTCHA. Please try again later.');
+    }
+
+    $result = json_decode($response);
+    if (!is_object($result)) {
+        fail_request(502, 'Google reCAPTCHA returned an unexpected response.');
+    }
+    if (($result->success ?? false) !== true) {
+        fail_request(422, 'reCAPTCHA verification failed. Please try again.');
+    }
+}
+
 function portal_request(string $type): void
 {
     $routes = [
@@ -49,9 +88,11 @@ function portal_request(string $type): void
     $headers = ['Accept: application/json', 'X-API-Key: ' . $key];
     $body = null;
     if ($type === 'join') {
+        verify_recaptcha($_POST['g-recaptcha-response'] ?? null, $values);
         // PHP parses multipart fields. cURL creates a new boundary for optional CV uploads.
         $body = [];
         foreach ($_POST as $name => $value) {
+            if ($name === 'g-recaptcha-response') continue;
             if (!is_string($value)) fail_request(422, 'Invalid form field.');
             $body[$name === 'name' ? 'full_name' : $name] = $value;
         }
@@ -74,6 +115,10 @@ function portal_request(string $type): void
         $body = file_get_contents('php://input');
         $decoded = json_decode($body);
         if (!is_object($decoded) || json_last_error() !== JSON_ERROR_NONE) fail_request(400, 'Invalid JSON submission.');
+        verify_recaptcha($decoded->{'g-recaptcha-response'} ?? null, $values);
+        unset($decoded->{'g-recaptcha-response'});
+        $body = json_encode($decoded);
+        if ($body === false) fail_request(400, 'Invalid JSON submission.');
         $headers[] = 'Content-Type: application/json';
     }
 
