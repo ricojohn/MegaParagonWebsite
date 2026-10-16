@@ -14,11 +14,13 @@ function fail_request(int $status, string $message): void
 function verify_recaptcha($token, array $values): void
 {
     if (!is_string($token) || trim($token) === '') {
+        error_log('[reCAPTCHA] Missing or invalid response token.');
         fail_request(422, 'Please complete the reCAPTCHA check and try again.');
     }
 
     $secret = trim(getenv('RECAPTCHA_SECRET_KEY') ?: ($values['RECAPTCHA_SECRET_KEY'] ?? ''));
     if ($secret === '') {
+        error_log('[reCAPTCHA] RECAPTCHA_SECRET_KEY is not configured.');
         fail_request(503, 'reCAPTCHA is not configured on the server.');
     }
 
@@ -35,17 +37,30 @@ function verify_recaptcha($token, array $values): void
     ]);
     $response = curl_exec($curl);
     $status = (int) curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    $curlErrorNumber = curl_errno($curl);
     curl_close($curl);
 
     if ($response === false || $status !== 200) {
+        error_log('[reCAPTCHA] Verification request failed: ' . json_encode([
+            'http_status' => $status,
+            'curl_errno' => $curlErrorNumber,
+        ]));
         fail_request(502, 'Unable to verify reCAPTCHA. Please try again later.');
     }
 
     $result = json_decode($response);
     if (!is_object($result)) {
+        error_log('[reCAPTCHA] Verification returned an invalid JSON object.');
         fail_request(502, 'Google reCAPTCHA returned an unexpected response.');
     }
     if (($result->success ?? false) !== true) {
+        // Log only diagnostic codes, never the secret, token or full response.
+        $errorCodes = $result->{'error-codes'} ?? [];
+        error_log('[reCAPTCHA] Verification rejected: ' . json_encode([
+            'error_codes' => is_array($errorCodes)
+                ? array_values(array_filter($errorCodes, 'is_string'))
+                : [],
+        ]));
         fail_request(422, 'reCAPTCHA verification failed. Please try again.');
     }
 }
