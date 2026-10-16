@@ -26,11 +26,6 @@
       type="image/png"
       href="assets/mainlogo/MP_Logo_Horizontal_Colored.png"
     />
-    <script
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-      async
-      defer
-    ></script>
   </head>
   <body class="join-page">
     <!-- HERO: quick form at the start -->
@@ -151,8 +146,8 @@
               placeholder="Share your background, strengths, or what interests you about The Mega Paragon."
             ></textarea>
             <div
-              class="cf-turnstile"
-              data-sitekey="__TURNSTILE_SITE_KEY__"
+              data-recaptcha
+              data-sitekey="6LfgVvItAAAAAGoBRSXE8r7nkW3dbiKejjiGcBVT"
             ></div>
             <button class="submit" type="submit">Submit</button>
           </div>
@@ -828,10 +823,40 @@
               placeholder="Share your background, strengths, or what interests you about The Mega Paragon."
             ></textarea>
             <div
-              class="cf-turnstile"
-              data-sitekey="__TURNSTILE_SITE_KEY__"
+              data-recaptcha
+              data-sitekey="6LfgVvItAAAAAGoBRSXE8r7nkW3dbiKejjiGcBVT"
             ></div>
-            <button class="submit" type="submit">Submit</button>
+            <button class="join-submit" type="submit">Submit</button>
+            <!-- Submission status appears here after forms.js handles the request. -->
+            <div class="form-message" id="formMessage" role="status"></div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-section footer-brand">
+          <img
+            src="assets/mainlogo/The Mega Paragon Logo_Horizontal_Gold.png"
+            alt="The Mega Paragon"
+          />
+          <p class="footer-commitment">
+            Committed to Excellence. <br />Committed to You.
+          </p>
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fa-brands fa-instagram" aria-hidden="true"></i
+            ></a>
+            <a href="#" aria-label="YouTube"
+              ><i class="fa-brands fa-youtube" aria-hidden="true"></i
+            ></a>
+            <a href="#" aria-label="TikTok"
+              ><i class="fa-brands fa-tiktok" aria-hidden="true"></i
+            ></a>
           </div>
         </form>
       </div>

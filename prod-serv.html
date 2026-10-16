@@ -26,11 +26,6 @@
       type="image/png"
       href="assets/mainlogo/MP_Logo_Horizontal_Colored.png"
     />
-    <script
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-      async
-      defer
-    ></script>
   </head>
   <body class="prod-serv-page">
     <nav class="rail" id="rail" aria-label="Story progress">
@@ -124,8 +119,8 @@
               placeholder="Tell us how we can help you..."
             ></textarea>
             <div
-              class="cf-turnstile"
-              data-sitekey="__TURNSTILE_SITE_KEY__"
+              data-recaptcha
+              data-sitekey="6LfgVvItAAAAAGoBRSXE8r7nkW3dbiKejjiGcBVT"
             ></div>
             <button class="submit" type="submit">
               Get a Free Consultation
@@ -811,8 +806,8 @@
               placeholder="Tell us how we can help you..."
             ></textarea>
             <div
-              class="cf-turnstile"
-              data-sitekey="__TURNSTILE_SITE_KEY__"
+              data-recaptcha
+              data-sitekey="6LfgVvItAAAAAGoBRSXE8r7nkW3dbiKejjiGcBVT"
             ></div>
             <button class="submit" type="submit">
               Get a Free Consultation
@@ -820,10 +815,13 @@
                 ><i class="fa-solid fa-arrow-right" aria-hidden="true"></i
               ></span>
             </button>
-            <p class="safe">
-              <i class="fa-solid fa-lock" aria-hidden="true"></i> Your
-              information is safe with us.
-            </p>
+              <p class="safe">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i> Your
+                information is safe with us.
+              </p>
+              <!-- Submission status appears here after forms.js handles the request. -->
+              <div class="form-message" id="formMessage" role="status"></div>
+            </form>
           </div>
         </form>
       </div>

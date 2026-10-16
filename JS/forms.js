@@ -36,6 +36,89 @@ function showFormToast(type, message) {
   }, 5000);
 }
 
+let recaptchaApiPromise;
+const recaptchaWidgets = new WeakMap();
+
+function loadRecaptcha() {
+  if (window.grecaptcha && typeof window.grecaptcha.ready === "function") {
+    return Promise.resolve(window.grecaptcha);
+  }
+
+  if (!recaptchaApiPromise) {
+    recaptchaApiPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src =
+        "https://www.google.com/recaptcha/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        if (
+          !window.grecaptcha ||
+          typeof window.grecaptcha.ready !== "function"
+        ) {
+          recaptchaApiPromise = null;
+          reject(new Error("Google reCAPTCHA did not initialize."));
+          return;
+        }
+        window.grecaptcha.ready(() => resolve(window.grecaptcha));
+      };
+      script.onerror = () => {
+        recaptchaApiPromise = null;
+        reject(new Error("Google reCAPTCHA could not be loaded."));
+      };
+      document.head.appendChild(script);
+    });
+  }
+
+  return recaptchaApiPromise;
+}
+
+function getRecaptchaToken(form) {
+  const container = form.querySelector("[data-recaptcha]");
+  const sitekey = container && container.dataset.sitekey;
+  if (!sitekey) {
+    return Promise.reject(new Error("The reCAPTCHA site key is not configured."));
+  }
+
+  return loadRecaptcha().then((grecaptcha) => {
+    let state = recaptchaWidgets.get(form);
+    if (!state) {
+      state = { widgetId: null, pending: null };
+      state.widgetId = grecaptcha.render(container, {
+        sitekey,
+        size: "invisible",
+        callback: (token) => {
+          if (!state.pending) return;
+          state.pending.resolve(token);
+          state.pending = null;
+        },
+        "error-callback": () => {
+          if (!state.pending) return;
+          state.pending.reject(new Error("Google reCAPTCHA verification failed."));
+          state.pending = null;
+        },
+        "expired-callback": () => {
+          if (!state.pending) return;
+          state.pending.reject(new Error("Google reCAPTCHA expired. Please try again."));
+          state.pending = null;
+        },
+      });
+      recaptchaWidgets.set(form, state);
+    }
+
+    return new Promise((resolve, reject) => {
+      state.pending = { resolve, reject };
+      try {
+        grecaptcha.reset(state.widgetId);
+        grecaptcha.execute(state.widgetId);
+      } catch (error) {
+        state.pending = null;
+        reject(error);
+      }
+    });
+  });
+}
+
 function setupForm(form) {
   const formType = form.dataset.formType || form.id.replace("Form", "");
   const submitButton = form.querySelector("[type=submit]");
@@ -64,13 +147,8 @@ function setupForm(form) {
     event.preventDefault();
     submitButton.disabled = true;
 
-    if (!form.querySelector('[name="cf-turnstile-response"]')?.value) {
-      showFormToast("error", "Please complete the verification first.");
-      submitButton.disabled = false;
-      return;
-    }
-
     try {
+      const recaptchaToken = await getRecaptchaToken(form);
       let payload;
       const isJoinForm = formType === "join";
 
@@ -90,6 +168,7 @@ function setupForm(form) {
             );
           }
         }
+        payload.append("g-recaptcha-response", recaptchaToken);
       } else {
         // Handle JSON payload for inquiries (map name -> full_name)
         const formData = new FormData(form);
@@ -101,6 +180,7 @@ function setupForm(form) {
             payload[key] = sanitizeInput(String(value));
           }
         }
+        payload["g-recaptcha-response"] = recaptchaToken;
       }
 
       // The PHP proxy adds X-API-Key; the browser sends only public form data.
@@ -167,9 +247,6 @@ function setupForm(form) {
       );
     } finally {
       submitButton.disabled = false;
-      if (window.turnstile) {
-        window.turnstile.reset(form.querySelector(".cf-turnstile"));
-      }
     }
   });
 }
