@@ -752,7 +752,7 @@
                   <figure class="district-gallery-item">
                     <div class="district-gallery-placeholder">
                       <img
-                        src="assets/areas/dm/gallery/dm8.JPG"
+                        src="assets/areas/dm/gallery/dm8.jpg"
                         alt="Coach Pau with the team"
                       />
                     </div>
@@ -971,7 +971,6 @@
         <a class="footer-terms" href="#">Terms of Service</a>
       </div>
     </footer>
-    <script src="JS/scroll-state.js"></script>
     <script src="JS/navigation.js"></script>
     <script src="JS/about-prof.js"></script>
     <script src="JS/about-team.js"></script>
@@ -979,5 +978,13 @@
       ><span aria-hidden="true"><i class="fa-solid fa-angles-up"></i></span
       ><span class="back-to-top-label">Back to top</span></a
     >
+    <script>
+      const backToTop = document.querySelector(".back-to-top");
+      window.addEventListener(
+        "scroll",
+        () => backToTop.classList.toggle("is-visible", window.scrollY > 240),
+        { passive: true },
+      );
+    </script>
   </body>
 </html>

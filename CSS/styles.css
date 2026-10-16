@@ -1,7 +1,5 @@
-/* Shared typography: loads the Roboto weights used across navigation, headings,
-   buttons, page copy, and footer text. */
+/* Shared: font faces and design tokens used by the main pages. */
 @font-face {
-  /* Regular body copy and standard navigation text. */
   font-family: "Roboto";
   src: url("../../assets/Mega%20Paragon%20Team%20Logos/TMP%20Official%20Logo%202024/Fonts/roboto.regular.ttf")
     format("truetype");
@@ -10,7 +8,6 @@
 }
 
 @font-face {
-  /* Medium-weight labels, links, and navigation items. */
   font-family: "Roboto";
   src: url("../../assets/Mega%20Paragon%20Team%20Logos/TMP%20Official%20Logo%202024/Fonts/roboto.medium%20(1).ttf")
     format("truetype");
@@ -19,7 +16,6 @@
 }
 
 @font-face {
-  /* Bold headings, buttons, and emphasized footer labels. */
   font-family: "Roboto";
   src: url("../../assets/Mega%20Paragon%20Team%20Logos/TMP%20Official%20Logo%202024/Fonts/roboto.bold.ttf")
     format("truetype");
@@ -28,19 +24,15 @@
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-/* Google Fonts fallback for environments where the local font files are unavailable. */
 
-/* Shared design tokens: colors and gradients reused by the header, buttons,
-   highlighted text, borders, and footer. Change these values to recolor the
-   main site without editing each component separately. */
+/* Shared: color palette, gradients, and reusable values. */
 :root {
-  /* Core Mega Paragon brand colors used throughout the website. */
   --navy: #002b45;
+  --navy-light: #001f33;
+  --yellow: #d9a85c;
   --gold: #d9a85c;
-  --white: #ffffff;
-
-  /* Brand gradients used by buttons, highlighted text, navigation, and
-     page-specific hero or feature sections. */
+  --red: #d33333;
+  --orange: #d9a85c;
   --gold-gradient: linear-gradient(
     135deg,
     #d9a85c 0%,
@@ -59,45 +51,23 @@
     #002b45 50%,
     #001f33 100%
   );
-
-  /* Accent colors used by specific page sections and content categories. */
-  --red: #d33333;
   --green: #1a5c3a;
-  --orange: #d9a85c;
   --violet: #002b45;
-
-  /* Supporting neutral colors used for secondary text, dividers, and borders. */
+  --white: #ffffff;
+  --cream: #f5f4f0;
   --muted: #5a6070;
   --line: rgba(0, 43, 69, 0.12);
-
-  /* Careers reference palette shared by join.css and join.js visuals. */
-  --career-navy: #0a2240;
-  --career-navy-2: #143a63;
-  --career-gold: #d4a85a;
-  --career-gold-2: #f0cf8e;
-  --career-gold-dark: #a87a22;
-  --career-paper: #ffffff;
-  --career-soft: #f3f7fb;
-  --career-muted: #5b6b7f;
-  --career-line: #e2e8f0;
-  --career-placeholder-1: #dfe8f3;
-  --career-placeholder-2: #c9d7e8;
-  --career-placeholder-ink: #486080;
 }
-/* Shared page defaults: controls scrolling, the base background, text color,
-   font, and line spacing for every page using this stylesheet. */
+/* Shared: document and body defaults. */
 html {
-  /* Enables smooth anchor scrolling and prevents horizontal page overflow. */
   scroll-behavior: smooth;
   overflow-x: hidden;
   scrollbar-width: none;
 }
 html::-webkit-scrollbar {
-  /* Hides the WebKit scrollbar while preserving page scrolling. */
   display: flex;
 }
 body {
-  /* Establishes the shared canvas color and default text appearance. */
   margin: 0;
   background: white;
   color: var(--navy);
@@ -105,10 +75,8 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
 }
-/* Back-to-top control: the floating button shown on the main content pages.
-   JavaScript adds .is-visible after the visitor scrolls. */
+/* Main pages: Back to Top control. Area pages do not load this stylesheet. */
 .back-to-top {
-  /* Creates the fixed circular button in the lower-right corner. */
   align-items: center;
   background: var(--gold);
   border-radius: 50%;
@@ -133,12 +101,10 @@ body {
   z-index: 20;
 }
 .back-to-top > span:first-child {
-  /* Sizes and centers the arrow/icon inside the button. */
   display: flex;
   font-size: 13px;
 }
 .back-to-top-label {
-  /* Tooltip text displayed beside the button on hover or keyboard focus. */
   background: var(--navy);
   border-radius: 4px;
   color: #fff;
@@ -156,11 +122,9 @@ body {
 }
 .back-to-top:hover,
 .back-to-top:focus-visible {
-  /* Lightens the button while it is being interacted with. */
   background: #edc66e;
 }
 .back-to-top.is-visible {
-  /* Makes the button interactive after scrolling reveals it. */
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
@@ -168,83 +132,22 @@ body {
 }
 .back-to-top.is-visible:hover,
 .back-to-top.is-visible:focus-visible {
-  /* Lifts the visible button slightly for tactile feedback. */
   transform: translateY(-3px);
 }
 .back-to-top:hover .back-to-top-label,
 .back-to-top:focus-visible .back-to-top-label {
-  /* Reveals the Back to top tooltip during interaction. */
   opacity: 1;
   transform: translateX(0);
 }
-/* Site-wide header foundation: removes default link styling and keeps the
-   transparent header fixed above page content. */
+/* Shared: base links and fixed site header. */
 body.modal-open .site-header {
-  /* De-emphasizes the header while a modal or login dialog is open. */
   filter: blur(10px);
 }
-
-/* Shared form feedback: confirms successful submissions and explains errors
-   without moving the page or replacing the form. */
-.form-toast {
-  align-items: center;
-  background: #fff;
-  border-left: 4px solid #2f8a5b;
-  border-radius: 10px;
-  box-shadow: 0 14px 34px rgba(10, 34, 64, 0.22);
-  color: var(--navy);
-  display: flex;
-  gap: 10px;
-  max-width: min(420px, calc(100vw - 32px));
-  opacity: 0;
-  padding: 14px 18px;
-  pointer-events: none;
-  position: fixed;
-  right: 24px;
-  top: 24px;
-  transform: translateY(-14px);
-  transition: opacity 220ms ease, transform 220ms ease;
-  visibility: hidden;
-  z-index: 100;
-}
-.form-toast i {
-  color: #2f8a5b;
-  font-size: 1.15rem;
-}
-.form-toast span {
-  overflow-wrap: anywhere;
-}
-.form-toast.error {
-  border-left-color: #c94b4b;
-}
-.form-toast.error i {
-  color: #c94b4b;
-}
-.required-marker {
-  color: #c0392b;
-  font-weight: 800;
-}
-.form-toast.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-}
-.form-toast + .back-to-top {
-  z-index: 101;
-}
-.inq .submit.is-sent,
-.join-page .card .submit.is-sent {
-  background: #2f8a5b;
-  color: #fff;
-}
-
 a {
-  /* Removes browser link decoration so component styles define link appearance. */
   color: inherit;
   text-decoration: none;
 }
 .site-header {
-  /* Full-width fixed header wrapper shared by every page. */
   align-items: center;
   background: transparent;
   box-sizing: border-box;
@@ -261,12 +164,10 @@ a {
   z-index: 100;
 }
 .brand img {
-  /* Controls the displayed width of the centered Mega Paragon logo. */
   display: block;
   width: 112px;
 }
 .brand {
-  /* Centers the logo independently of the left and right navigation items. */
   display: flex;
   align-items: center;
   left: 50%;
@@ -277,13 +178,10 @@ a {
   z-index: 2;
 }
 .brand::after {
-  /* Removes any inherited decorative underline from the logo link. */
   display: none;
 }
-/* Desktop navigation: styles the glass navigation bar, centered Mega Paragon
-   logo, page links, About dropdown position, and portal login link. */
+/* Shared: desktop navigation, branding, dropdown placement, and login link. */
 .main-nav {
-  /* Glass-style navigation panel containing menu links and the logo. */
   align-items: center;
   background: rgba(0, 43, 69, 0.65);
   border: 2px solid transparent;
@@ -304,7 +202,6 @@ a {
   background-clip: padding-box, border-box;
 }
 .main-nav a {
-  /* Default size, spacing, and color for navigation links. */
   align-items: center;
   background: transparent;
   border-radius: 8px;
@@ -319,16 +216,13 @@ a {
   position: relative;
 }
 .main-nav a.brand {
-  /* Prevents the logo link from inheriting normal link animations. */
   transition: none !important;
 }
 .main-nav a.brand:hover {
-  /* Keeps the logo visually unchanged when hovered. */
   background: transparent !important;
   color: white !important;
 }
 .main-nav a::after {
-  /* Reserves the animated underline area used by normal nav links. */
   content: "";
   position: absolute;
   bottom: -4px;
@@ -339,17 +233,14 @@ a {
   transition: width 0.3s ease;
 }
 .main-nav a.brand::after {
-  /* The logo does not receive the navigation underline. */
   display: none !important;
 }
 .main-nav a:hover::after,
 .main-nav .active::after {
-  /* Expands the underline for hovered or current-page links. */
   width: 100%;
 }
 .main-nav a:hover,
 .main-nav .active {
-  /* Gold highlight applied to hovered and active navigation links. */
   background: linear-gradient(135deg, #8b7355 0%, #d2b48c 100%);
   color: #000000;
   border-radius: 8px;
@@ -358,14 +249,12 @@ a {
 .main-nav a.brand:hover,
 .main-nav a.brand:focus,
 .main-nav a.brand:active {
-  /* Overrides hover/focus/active effects so the logo remains transparent. */
   background: transparent !important;
   color: white !important;
   padding: 0;
   transform: none;
 }
 .main-nav .brand {
-  /* Removes the logo from normal link flow and keeps it centered. */
   display: flex;
   height: auto;
   padding: 0;
@@ -380,7 +269,6 @@ a {
 .home-page .main-nav a.brand:hover,
 .home-page .main-nav a.brand:focus,
 .home-page .main-nav a.brand:active {
-  /* Shared logo reset for the home page and profile-style navigation pages. */
   background: transparent !important;
   border-radius: 0;
   color: inherit;
@@ -389,7 +277,6 @@ a {
   transform: translateX(-50%);
 }
 .main-nav .nav-dropdown {
-  /* Positions the About menu below the navigation bar. */
   display: flex;
   flex-direction: column;
   left: 28px;
@@ -398,7 +285,6 @@ a {
   min-width: 230px;
 }
 .about-dropdown {
-  /* Desktop navigation override: keeps the menu hidden until it is opened. */
   background: var(--navy);
   border-radius: 0 0 8px 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -410,23 +296,19 @@ a {
   min-width: 0;
 }
 .main-nav.open .about-dropdown {
-  /* Displays the About submenu when the navigation has been opened. */
   display: flex;
   opacity: 1;
   pointer-events: auto;
   transform: translateY(8px);
 }
 .about-dropdown a {
-  /* Styles submenu links placed below the About trigger. */
   color: rgba(255, 255, 255, 0.8) !important;
   padding-left: 36px !important;
 }
 .main-nav > .login-link {
-  /* Pushes the standalone desktop login link to the right edge. */
   margin-left: auto;
 }
 .login-link {
-  /* Portal/login link used in the desktop header and profile-style pages. */
   align-items: center;
   border: 1px solid transparent;
   box-sizing: border-box;
@@ -446,13 +328,12 @@ a {
   border-radius: 0;
 }
 .login-link:hover {
-  /* Gold hover state for portal/login links outside the main nav. */
   background: var(--gold);
   border-color: var(--gold);
   color: var(--navy);
 }
-.profile-nav-page .login-link {
-  /* Normalizes login appearance on interior profile-style pages. */
+.profile-nav-page .login-link,
+.profile-body .login-link {
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0;
@@ -462,8 +343,8 @@ a {
     border-color 0.3s ease,
     color 0.3s ease;
 }
-.profile-nav-page .login-link:hover {
-  /* Interior-page login hover state. */
+.profile-nav-page .login-link:hover,
+.profile-body .login-link:hover {
   background: var(--gold);
   border-color: var(--gold);
   color: var(--navy);
@@ -472,7 +353,6 @@ a {
 .main-nav > .login-link:hover,
 .main-nav > .login-link:focus,
 .main-nav > .login-link:active {
-  /* Keeps the desktop login item aligned with the other 44px nav links. */
   border: 1px solid transparent;
   box-sizing: border-box;
   height: 44px;
@@ -480,12 +360,10 @@ a {
   transform: none;
 }
 .main-nav > .login-link::after {
-  /* Prevents the login item from receiving the normal nav underline. */
   display: none;
 }
 .main-nav > .login-link:hover,
 .main-nav > .login-link:focus-visible {
-  /* White focus/hover treatment for the login item inside the nav bar. */
   background: #fff;
   border-color: transparent;
   color: #000;
@@ -493,10 +371,8 @@ a {
   padding: 0 16px;
   transform: none;
 }
-/* Mobile navigation control: styles the hamburger button and its X-shaped
-   icon when aria-expanded="true". */
+/* Shared: mobile menu button and expanded-state icon. */
 .menu-toggle {
-  /* Mobile hamburger button shown beside the centered logo. */
   align-items: center;
   background: transparent;
   border: 1px solid var(--navy);
@@ -515,52 +391,42 @@ a {
   z-index: 3;
 }
 .menu-toggle span {
-  /* Three horizontal bars that form the hamburger icon. */
   background: currentColor;
   display: block;
   height: 2px;
   width: 20px;
 }
 .menu-toggle[aria-expanded="true"] span:nth-child(1) {
-  /* Rotates the first bar into the top half of the close icon. */
   transform: translateY(6px) rotate(45deg);
 }
 .menu-toggle[aria-expanded="true"] span:nth-child(2) {
-  /* Hides the middle bar when the menu is expanded. */
   opacity: 0;
 }
 .menu-toggle[aria-expanded="true"] span:nth-child(3) {
-  /* Rotates the third bar into the bottom half of the close icon. */
   transform: translateY(-6px) rotate(-45deg);
 }
 .profile-nav-page .menu-toggle {
-  /* Uses light hamburger styling over interior-page dark headers. */
   border-color: rgba(255, 255, 255, 0.5);
   color: white;
 }
 
-/* Shared content styles: affects headings, highlighted <em> text, call-to-action
-   buttons, page content spacing, intro copy, and numbered information grids. */
+/* Shared: typography, buttons, and general content layout. */
 h1,
 h2 {
-  /* Shared heading family, weight, spacing, and compressed line height. */
   font-family: "Roboto", sans-serif;
   letter-spacing: -0.06em;
   line-height: 0.95;
   font-weight: 700;
 }
 h1 {
-  /* Main page title scale, including large desktop hero titles. */
   font-size: clamp(3.5rem, 8vw, 8.5rem);
   margin: 25px 0;
 }
 h2 {
-  /* Secondary section heading scale. */
   font-size: clamp(2.7rem, 5vw, 5.5rem);
   margin: 20px 0;
 }
 em {
-  /* Applies the gold gradient to emphasized words in headings or copy. */
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   background-clip: text;
@@ -569,7 +435,6 @@ em {
   font-style: normal;
 }
 .button {
-  /* Shared gold call-to-action button used across page sections. */
   background: var(--gold-gradient);
   color: var(--navy);
   display: inline-block;
@@ -581,30 +446,44 @@ em {
   transition: all 0.3s ease;
 }
 .button:hover {
-  /* Inverts and lifts buttons on pointer hover. */
   background: var(--navy);
   color: var(--gold);
   transform: translateY(-2px);
 }
 .page-content {
-  /* Constrains and offsets sections such as home announcements and other
-     standard page content below the fixed header. */
   margin: auto;
   max-width: 1300px;
   padding: 110px 7vw;
   position: relative;
   z-index: 2;
 }
+.intro-layout,
 .lead {
-  /* Larger introductory paragraph text below page or hero headings. */
   color: var(--navy) !important;
   font-size: 1.25rem;
   line-height: 1.4;
 }
-/* Site footer: controls the footer brand/commitment, category links, partner
-   logos, social icons, and the privacy/terms bottom row on every main page. */
+.numbered-grid {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 100px;
+  padding-top: 25px;
+}
+.numbered-grid strong {
+  color: var(--red);
+  display: block;
+  font-family: "Space Grotesk";
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+}
+.numbered-grid span {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* Shared: footer structure, links, branding, partners, and social controls. */
 .site-footer {
-  /* Full-width dark footer background and stacking context. */
   background: #1a3a52;
   color: #a7b0c5;
   padding: 0;
@@ -612,8 +491,6 @@ em {
   z-index: 5;
 }
 .footer-content {
-  /* Stacks the footer brand and link groups into one mobile column. */
-  /* Main footer grid separating brand content from link categories. */
   align-items: start;
   display: grid;
   column-gap: 48px;
@@ -624,8 +501,6 @@ em {
   width: min(1115px, calc(100% - 80px));
 }
 .footer-categories {
-  /* Keeps footer categories in a readable two-column phone grid. */
-  /* Groups footer navigation columns beside the brand block on desktop. */
   align-self: center;
   display: grid;
   column-gap: 35px;
@@ -635,17 +510,14 @@ em {
   min-width: 0;
 }
 .footer-section {
-  /* Vertical layout for each footer link category. */
   display: flex;
   flex-direction: column;
   min-width: 0;
 }
 .footer-categories .footer-section {
-  /* Aligns category headings with the rest of the footer grid. */
   padding-top: 0;
 }
 .footer-section h4 {
-  /* Uppercase footer category headings such as Company or Resources. */
   color: #fff;
   font-size: 13px;
   font-weight: 800;
@@ -655,52 +527,42 @@ em {
   text-transform: uppercase;
 }
 .footer-section ul {
-  /* Removes list bullets and browser spacing from footer menus. */
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .footer-section ul li {
-  /* Adds vertical separation between footer menu links. */
   margin: 0 0 8px;
 }
 .footer-section a {
-  /* Muted default style for footer navigation links. */
   color: #a7b0c5;
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.2s;
 }
 .footer-section a:hover {
-  /* Gold hover color for footer navigation links. */
   color: #d5a126;
 }
 .footer-brand {
-  /* Footer logo and company description area. */
   grid-column: 1;
 }
 .footer-brand img {
-  /* Gives the mobile footer logo more room than the desktop version. */
-  /* Sizes the company logo in the footer brand column. */
   display: block;
   margin: 0 0 24px;
   object-fit: contain;
   width: 150px;
 }
 .footer-brand p {
-  /* Styles descriptive footer copy below the logo. */
   font-size: 0.8rem;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.7);
   margin: 8px 0;
 }
 .footer-brand > p:not(.footer-commitment) {
-  /* Keeps ordinary brand description text italic and constrained. */
   font-style: italic;
   max-width: 250px;
 }
 .footer-commitment {
-  /* Prominent uppercase company commitment statement in the footer. */
   color: #fff !important;
   font-size: 14px !important;
   font-weight: 800;
@@ -711,26 +573,21 @@ em {
   text-transform: uppercase;
 }
 .footer-partners img {
-  /* Partner/sponsor logo sizing inside the footer. */
   display: block;
   height: auto;
   max-width: 150px;
   width: 100%;
 }
 .footer-partners {
-  /* Aligns partner logos with the left edge of the mobile footer. */
-  /* Container for partner/sponsor branding within the footer. */
   width: 100%;
 }
 .social-links {
-  /* Circular social-media controls in the footer. */
   align-items: center;
   display: flex;
   gap: 10px;
   margin: 0;
 }
 .social-links a {
-  /* Circular icon buttons for Instagram, YouTube, TikTok, and other socials. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -744,14 +601,12 @@ em {
   transition: all 0.2s;
 }
 .social-links a:hover {
-  /* Raises and recolors social icons on hover. */
   background: transparent;
   border-color: #d5a126;
   color: #d5a126;
   transform: translateY(-2px);
 }
 .footer-bottom {
-  /* Footer legal links and centered tagline/copyright row. */
   border-top: 1px solid #d5a126;
   color: #a7b0c5;
   display: grid;
@@ -764,12 +619,10 @@ em {
   width: min(1115px, calc(100% - 80px));
 }
 .footer-bottom .footer-privacy {
-  /* Places the Privacy Policy link on the left of the legal row. */
   grid-area: privacy;
   justify-self: start;
 }
 .footer-bottom .footer-center {
-  /* Centers the tagline or copyright content in the legal row. */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -777,35 +630,28 @@ em {
   text-align: center;
 }
 .footer-bottom .footer-terms {
-  /* Places the Terms of Service link on the right of the legal row. */
   grid-area: terms;
   justify-self: end;
 }
 .footer-bottom a {
-  /* Default appearance for footer legal links. */
   color: #a7b0c5;
   text-decoration: none;
   transition: color 0.2s;
 }
 .footer-bottom a:hover {
-  /* Gold hover state for Privacy Policy and Terms of Service. */
   color: #d5a126;
 }
 .tagline {
-  /* Adds tracking and weight to the footer tagline. */
   letter-spacing: 0.1em;
   font-weight: 600;
 }
-/* About dropdown: desktop hover behavior and link styling for the navigation
-   menu used on home, about, contact, join, and product/profile pages. */
+/* Shared: About dropdown menu. */
 .nav-dropdown {
-  /* Wraps the About trigger and provides the submenu positioning context. */
   position: relative;
   display: inline-flex;
   align-items: center;
 }
 .about-dropdown {
-  /* Hidden white submenu panel shown below the About navigation trigger. */
   background: white;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -825,20 +671,17 @@ em {
   z-index: 200;
 }
 .nav-dropdown:hover .about-dropdown {
-  /* Reveals the menu when the pointer rests over its navigation trigger. */
   opacity: 1;
   pointer-events: auto;
   transform: translateY(8px);
   transition-delay: 0s;
 }
 .main-nav.open .about-dropdown {
-  /* Reveals the same menu when mobile JavaScript opens the navigation. */
   opacity: 1;
   pointer-events: auto;
   transform: translateY(8px);
 }
 .about-dropdown a {
-  /* Dividers, padding, and text styling for each submenu option. */
   border-bottom: 1px solid var(--line);
   border-left: 2px solid transparent;
   color: var(--navy) !important;
@@ -853,18 +696,30 @@ em {
     color 0.15s;
 }
 .about-dropdown a:last-child {
-  /* Removes the divider after the final submenu option. */
   border-bottom: none;
 }
 .about-dropdown a:hover {
-  /* Gold left accent and extra indent for a hovered submenu option. */
   background: transparent !important;
   border-left-color: var(--gold);
   color: var(--navy) !important;
   padding-left: 24px !important;
 }
+.profile-nav-page .nav-dropdown-trigger {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  height: 44px;
+  padding: 0 16px;
+}
+.profile-nav-page .nav-dropdown-trigger:hover,
+.profile-nav-page .nav-dropdown-trigger:focus-visible {
+  color: var(--gold);
+}
 .profile-nav-page .about-dropdown {
-  /* Centers the profile-page submenu below its trigger. */
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -882,28 +737,22 @@ em {
 }
 .profile-nav-page .nav-dropdown:hover .about-dropdown,
 .profile-nav-page .main-nav.open .about-dropdown {
-  /* Opens the centered profile-page submenu on hover or menu activation. */
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, 8px);
 }
 .profile-nav-page .about-dropdown a {
-  /* Applies the standard submenu link padding to profile pages. */
   color: var(--navy) !important;
   padding: 12px 20px !important;
 }
 .profile-nav-page .about-dropdown a:hover {
-  /* Keeps profile submenu hover behavior consistent with the main menu. */
   border-left-color: var(--gold);
   color: var(--navy) !important;
   padding-left: 24px !important;
 }
-/* Mobile layout (760px and below): stacks the footer, resizes the header/logo,
-   changes navigation links to full-width rows, and makes the About menu fit
-   within the viewport. */
+/* Shared: mobile layout overrides for the main pages. */
 @media (max-width: 760px) {
   .site-footer {
-    /* Footer content becomes a single vertical column on phones. */
     padding: 0;
   }
   .footer-content {
@@ -926,7 +775,6 @@ em {
     justify-self: start;
   }
   .footer-bottom {
-    /* Legal links move below the centered footer content on phones. */
     gap: 20px;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -936,28 +784,23 @@ em {
     width: calc(100% - 48px);
   }
   .site-header {
-    /* Compact fixed header used by interior pages on narrow screens. */
     height: 56px;
     padding: 0 20px;
     top: 0;
   }
   .home-page .site-header {
-    /* The home hero needs a slightly different header offset. */
     height: auto;
     top: 14px;
   }
   .brand img {
-    /* Shrinks the centered header logo for narrow screens. */
     width: 100px;
   }
   .main-nav a {
-    /* Makes each mobile navigation option a full-width touch target. */
     height: 44px;
     padding: 0 24px;
     width: 100%;
   }
   .main-nav {
-    /* Keeps the mobile navigation bar compact while the menu is closed/open. */
     align-items: center;
     flex-wrap: nowrap;
     gap: 16px;
@@ -965,11 +808,9 @@ em {
     padding: 8px 16px;
   }
   .menu-toggle {
-    /* Displays the hamburger control only at the mobile breakpoint. */
     display: flex;
   }
   .main-nav .nav-dropdown {
-    /* Prevents the open About menu from overflowing the phone viewport. */
     display: flex;
     flex-basis: auto;
     left: 16px;
@@ -979,14 +820,15 @@ em {
     top: calc(100% + 4px);
     width: min(230px, calc(100vw - 32px));
   }
+  .profile-nav-page .nav-dropdown-trigger {
+    width: auto;
+  }
   .profile-nav-page .about-dropdown {
-    /* Aligns the profile submenu with the left side of the mobile menu. */
     left: 0;
     transform: translateY(-12px);
   }
   .main-nav .about-dropdown,
   .profile-nav-page .about-dropdown {
-    /* Removes desktop shadow and sizing assumptions on mobile. */
     box-sizing: border-box;
     box-shadow: none;
     position: absolute;
@@ -994,34 +836,35 @@ em {
   }
   .main-nav .about-dropdown a,
   .profile-nav-page .about-dropdown a {
-    /* Makes submenu options easy to tap across the available menu width. */
     box-sizing: border-box;
     min-width: 0;
     width: 100%;
   }
   .main-nav:not(.open) .about-dropdown {
-    /* Keeps the mobile submenu out of the layout while closed. */
     display: none;
   }
   .main-nav.open .about-dropdown,
   .profile-nav-page .main-nav.open .about-dropdown {
-    /* Shows the mobile submenu after JavaScript adds the open state. */
     display: flex;
     opacity: 1;
     pointer-events: auto;
     transform: translateY(8px);
   }
   .main-nav > .login-link {
-    /* The login link is moved into the mobile dropdown below. */
     display: none;
   }
   .main-nav .about-dropdown > .login-link {
-    /* Places the login action inside the expanded mobile menu. */
     display: flex;
     width: 100%;
   }
+  .hero-content {
+    padding: 52px 7vw 68px;
+  }
+  .numbered-grid {
+    grid-template-columns: 1fr;
+    margin-top: 55px;
+  }
   .site-footer {
-    /* Keeps any remaining footer children aligned vertically on phones. */
     align-items: flex-start;
     flex-direction: column;
     gap: 18px;
@@ -1029,8 +872,6 @@ em {
 }
 
 @media (max-width: 760px) and (orientation: landscape) {
-  /* Landscape phones: reduce navigation dimensions so the header does not
-     consume the limited vertical space. */
   .site-header {
     padding: 0 12px;
     top: 8px;
@@ -1039,88 +880,69 @@ em {
     top: 8px;
   }
   .main-nav {
-    /* Reduces the navigation bar height for landscape phone screens. */
     gap: 8px;
     padding: 4px 10px;
   }
   .main-nav a {
-    /* Shrinks landscape link text and touch-target padding. */
     font-size: 0.85rem;
     height: 36px;
     padding: 0 12px;
   }
   .brand img {
-    /* Reduces the logo width to preserve horizontal room in landscape. */
     width: 82px;
   }
   .menu-toggle {
-    /* Reduces the landscape hamburger button dimensions. */
     height: 34px;
     width: 34px;
   }
   .menu-toggle span {
-    /* Scales the hamburger bars with the smaller landscape button. */
     width: 17px;
   }
   .home-page .main-nav {
-    /* Applies extra compact spacing to the home hero navigation. */
     gap: 5px;
     padding: 3px 7px;
   }
   .home-page .main-nav .nav-dropdown {
-    /* Repositions the home About menu under the compact navigation. */
     left: 22px;
   }
   .home-page .main-nav a {
-    /* Uses smaller home navigation links on short landscape screens. */
     font-size: 0.74rem;
     height: 30px;
     padding: 0 8px;
   }
   .home-page .brand img {
-    /* Uses a compact home logo in landscape orientation. */
     width: 64px;
   }
   .home-page .menu-toggle {
-    /* Uses a compact home hamburger button in landscape orientation. */
     height: 28px;
     width: 28px;
   }
   .home-page .menu-toggle span {
-    /* Scales the compact home hamburger bars. */
     width: 14px;
   }
 }
 
 @media (orientation: landscape) and (max-height: 600px) {
-  /* Short landscape screens: apply the compact home header rules even when
-     the device width is larger than the phone breakpoint. */
   .home-page .site-header {
-    /* Moves the home header closer to the top on very short screens. */
     top: 6px;
   }
   .home-page .main-nav {
-    /* Keeps the home navigation compact when height, not width, is limited. */
     gap: 5px;
     padding: 3px 7px;
   }
   .home-page .main-nav a {
-    /* Keeps home links readable without consuming hero height. */
     font-size: 0.74rem;
     height: 30px;
     padding: 0 8px;
   }
   .home-page .brand img {
-    /* Preserves the small logo size on short landscape displays. */
     width: 64px;
   }
   .home-page .menu-toggle {
-    /* Preserves the small menu control on short landscape displays. */
     height: 28px;
     width: 28px;
   }
   .home-page .menu-toggle span {
-    /* Preserves the small hamburger bars on short landscape displays. */
     width: 14px;
   }
 }

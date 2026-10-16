@@ -1,5 +1,3 @@
-﻿/* Home navigation theme: changes the shared header from the interior-page
-   appearance to the white home-page navigation style. */
 body.home-page {
   background: white;
 }
@@ -30,14 +28,18 @@ body.home-page {
   padding: 0 16px;
   transform: none;
 }
-
-/* Main home-page wrapper and full-screen hero video area. */
 .page-main {
   min-height: 100vh;
 }
 .home-page .page-main {
   position: relative;
   background: white;
+}
+.hero-video {
+  background: #000;
+  position: relative;
+  margin-top: 0;
+  height: 100svh;
 }
 .hero-media {
   border-radius: 0;
@@ -47,9 +49,6 @@ body.home-page {
   width: 100%;
   z-index: 2;
 }
-
-/* Floating controls over the hero video: play/pause, volume, mute, and
-   fullscreen buttons. */
 .video-controls {
   align-items: center;
   bottom: 28px;
@@ -82,8 +81,6 @@ body.home-page {
   outline: none;
   transform: translateY(-2px);
 }
-
-/* Keeps the volume icon readable when its gold hover state is active. */
 .volume-btn-wrapper button:hover .video-control-icon,
 .volume-btn-wrapper button:focus-visible .video-control-icon {
   color: var(--navy) !important;
@@ -94,8 +91,6 @@ body.home-page {
   font-size: 1rem;
   line-height: 1;
 }
-
-/* Adds a subtle visual overlay above the video without blocking controls. */
 .hero-media::after {
   background: linear-gradient(
     180deg,
@@ -109,20 +104,11 @@ body.home-page {
   z-index: 1;
 }
 .hero-video-file {
-  /* Fills the hero while preserving the video's aspect ratio. */
   display: block;
   height: 100%;
   object-fit: cover;
   width: 100%;
 }
-.hero-youtube-video {
-  border: 0;
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-/* Video fallback state shown when the hero media cannot be loaded. */
 .hero-media.video-unavailable {
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy) 100%);
   display: flex;
@@ -133,7 +119,6 @@ body.home-page {
   opacity: 0;
 }
 .video-fallback-logo {
-  /* Centers the alternate logo while the video fallback state is active. */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -149,10 +134,118 @@ body.home-page {
 .video-unavailable .video-fallback-logo {
   display: block;
 }
-
-/* Disabled video controls and the optional hover-to-reveal play hint. */
-/* Vertical volume slider revealed when the volume control is hovered or
-   focused. */
+.video-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.video-play-hint {
+  align-items: center;
+  bottom: 36px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  opacity: 0;
+  position: absolute;
+  right: 48px;
+  transition: opacity 0.3s;
+  z-index: 4;
+}
+.hero-media:hover .video-play-hint {
+  opacity: 1;
+}
+.play-hint-icon {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  font-size: 1.2rem;
+  height: 56px;
+  justify-content: center;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+  width: 56px;
+}
+.video-play-hint:hover .play-hint-icon {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.08);
+}
+.play-hint-text {
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+}
+.video-lightbox {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  inset: 0;
+  justify-content: center;
+  padding: 0;
+  position: fixed;
+  z-index: 500;
+  overflow: hidden;
+}
+.video-lightbox[hidden] {
+  display: none;
+}
+.video-lightbox-inner {
+  position: relative;
+  width: 95vw;
+  height: 95vh;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-video {
+  border-radius: 8px;
+  display: block;
+  height: 80vh;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.lightbox-video::-webkit-media-controls {
+  display: none !important;
+}
+.lightbox-video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+.lightbox-controls {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.lightbox-btn {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 44px;
+  justify-content: center;
+  transition: background 0.2s;
+  width: 44px;
+}
+.lightbox-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
 .volume-btn-wrapper {
   align-items: center;
   flex-direction: column;
@@ -202,477 +295,197 @@ body.home-page {
   border: none;
   box-shadow: 0 0 6px rgba(255, 191, 0, 0.6);
 }
-
-/* Official home hero (v2): the video comes first, the messaging sits centered
-   beneath it, and a layered aurora + particle background fills the first
-   screen. The curved edge below it reveals as the visitor scrolls. */
-@property --hero-a {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-.hero {
-  --hero-curve: 90px;
-  align-items: stretch;
-  background:
-    radial-gradient(
-      900px 520px at 50% 18%,
-      rgba(212, 168, 90, 0.2),
-      transparent 62%
-    ),
-    radial-gradient(
-      700px 500px at 0% 100%,
-      rgba(20, 58, 99, 0.9),
-      transparent 70%
-    ),
-    linear-gradient(160deg, var(--navy), #0d2c52 60%, #143a63);
-  color: var(--white);
-  display: flex;
-  flex-direction: column;
-  isolation: isolate;
-  /* The whole first screen shows the background; the extra height is the
-     curved transition that appears as the visitor scrolls. */
-  min-height: calc(100vh + 220px);
-  min-height: calc(100svh + 220px);
-  overflow: hidden;
-  padding: 0 24px calc(var(--hero-curve) + 60px);
-  position: relative;
-}
-
-/* Soft drifting aurora glows (pure CSS, no library). */
-.hero .aurora {
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-}
-.hero .au {
-  animation: hero-drift 18s ease-in-out infinite alternate;
-  border-radius: 50%;
-  filter: blur(90px);
-  position: absolute;
-  will-change: transform;
-}
-.hero .a1 {
-  background: #1f5a8a;
-  height: 60vmax;
-  left: -18%;
-  opacity: 0.5;
-  top: -28%;
-  width: 60vmax;
-}
-.hero .a2 {
-  animation-delay: -9s;
-  background: var(--gold);
-  bottom: -26%;
-  height: 46vmax;
-  opacity: 0.22;
-  right: -12%;
-  width: 46vmax;
-}
-.hero .a3 {
-  animation-delay: -4s;
-  animation-duration: 24s;
-  background: #2a7fb0;
-  height: 38vmax;
-  opacity: 0.3;
-  right: 6%;
-  top: 22%;
-  width: 38vmax;
-}
-@keyframes hero-drift {
-  to {
-    transform: translate(8vw, 6vh) scale(1.18);
-  }
-}
-
-/* Container the particle library draws into (see JS/home.js). */
-.hero .hero-particles {
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-}
-
-/* Centered stage holding the video, messaging, and calls to action. */
-.hero .stage {
-  margin: 0 auto;
-  position: relative;
-  text-align: center;
-  width: min(1300px, 100%);
-  z-index: 1;
-}
-.hero-video-column {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  /* Raises the video slightly while keeping the scroll cue in this viewport. */
-  transform: translateY(-20px);
-  width: 100%;
-}
-.hero-video-meta {
-  align-items: center;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  margin-top: 16px;
-  width: 100%;
-}
-
-/* First screen: only the video, centered in the visible area of the device.
-   The messaging below stays out of view until the visitor scrolls. */
-.hero-first {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* Keeps the video as the first-screen focus while allowing the title block
-     to follow naturally in this same hero section on every device. */
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: 92px 0 20px;
-  position: relative;
-}
-
-/* Hero entrance animation: each item rises in using its own --d delay. */
-.hero .in {
-  animation: hero-up 0.8s var(--d, 0s) cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
-  opacity: 0;
-  transform: translateY(16px);
-}
-.hero-first .vwrap.in {
-  --d: 0.05s;
-}
-.hero-first .hint.in {
-  --d: 0.2s;
-}
-@keyframes hero-up {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Framed video card. The width follows the screen height so the video and the
-   start of the headline fit in the first view on most laptops. */
-.hero .vwrap {
-  margin: 0 auto;
-  position: relative;
-  width: min(100%, 1700px, max(300px, calc((100svh - 80px) * 16 / 9)));
-  z-index: 1;
-}
-/* Animated gold ring around the video: a slow light travels the frame. */
-.hero .vwrap::before {
-  animation: hero-spin 5s linear infinite;
-  background: conic-gradient(
-    from var(--hero-a),
-    rgba(212, 168, 90, 0.25) 0 55%,
-    var(--gold) 82%,
-    #f0cf8e 92%,
-    rgba(212, 168, 90, 0.25)
-  );
-  border-radius: 24px;
-  content: "";
-  inset: -3px;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box exclude,
-    linear-gradient(#000 0 0);
-  padding: 3px;
-  pointer-events: none;
-  position: absolute;
-  z-index: 3;
-}
-/* Warm glow beneath the card so it lifts off the background. */
-.hero .vwrap::after {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(212, 168, 90, 0.3),
-    transparent 70%
-  );
-  content: "";
-  filter: blur(28px);
-  inset: 10% 4% -8%;
-  pointer-events: none;
-  position: absolute;
-  z-index: -1;
-}
-@keyframes hero-spin {
-  to {
-    --hero-a: 360deg;
-  }
-}
-.hero .vcard {
-  aspect-ratio: 16 / 9;
-  background: #0d1f36;
-  border-radius: 20px;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  outline: 1px solid rgba(255, 255, 255, 0.14);
-  position: relative;
-}
-.hero .hero-media {
-  height: 100%;
-  inset: 0;
-  position: absolute;
-  width: 100%;
-}
-.hero .hero-video-file {
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-}
-.hero .video-fallback-logo {
-  max-height: 70%;
-  max-width: 80%;
-}
-.hero .badge {
-  align-self: flex-start;
-  background: #ffffff;
-  border-radius: 999px;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
-  color: var(--navy);
-  display: inline-flex;
-  font-size: 0.85rem;
-  font-weight: 800;
-  margin: 18px 0 0;
-  padding: 11px 18px;
-  position: relative;
-  z-index: 5;
-}
-.hero-copy .badge {
-  align-self: auto;
-  margin: 18px auto 0;
-}
-.hero .badge em {
-  /* Pru Life UK signature red for the partner name. */
-  -webkit-text-fill-color: #e31837;
-  color: #e31837;
-  font-style: normal;
-}
-.hero .hint {
-  align-self: start;
-  grid-column: 1;
-  font-size: 0.82rem;
-  justify-self: start;
-  margin: 0;
-  opacity: 0.7;
-  text-align: left;
-}
-
-/* Messaging centered beneath the video. */
-.hero-copy {
-  /* Pushes the title below the first video viewport so the scroll cue remains
-     the next visible interaction before the messaging is revealed. */
-  margin-top: 0;
-  min-width: 0;
-  padding: 40px 0 120px;
-  /* Leaves room for the fixed header when scrolling to this block. */
-  scroll-margin-top: 90px;
-}
-.hero-title {
-  color: var(--white);
-  font-size: clamp(2.4rem, 5.5vw, 5rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.04;
-  margin: 0 0 16px;
-}
-.hero-title span {
-  color: #f0cf8e;
-  display: block;
-}
-.hero-lead {
-  color: var(--white);
+#lightboxFullscreen {
   font-size: 1.2rem;
-  line-height: 1.6;
-  margin: 0 auto 28px;
-  max-width: 36em;
-  opacity: 0.9;
 }
-
-/* Matches the home footer to the dominant navy used by the hero background. */
-.home-page .site-footer {
-  background:
-    radial-gradient(
-      520px 260px at 12% 35%,
-      rgba(31, 90, 138, 0.5),
-      transparent 72%
-    ),
-    radial-gradient(
-      460px 280px at 88% 70%,
-      rgba(217, 168, 92, 0.2),
-      transparent 72%
-    ),
-    var(--navy);
-  isolation: isolate;
-  overflow: hidden;
-}
-
-/* Repeats the hero's soft aurora motion behind the footer content. */
-.home-page .site-footer::before {
-  background:
-    radial-gradient(
-      320px 220px at 48% 20%,
-      rgba(42, 127, 176, 0.22),
-      transparent 72%
-    ),
-    radial-gradient(
-      280px 180px at 72% 90%,
-      rgba(217, 168, 92, 0.14),
-      transparent 72%
-    );
-  content: "";
-  filter: blur(30px);
-  inset: -40px;
-  pointer-events: none;
-  position: absolute;
-  z-index: -1;
-}
-.home-page .site-footer .footer-content,
-.home-page .site-footer .footer-bottom {
-  position: relative;
-  z-index: 1;
-}
-
-/* Hero call-to-action buttons and their gold/outlined variants. */
-.hero .cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  justify-content: center;
-}
-.hero .btn {
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 800;
-  padding: 15px 28px;
-  text-decoration: none;
-  transition:
-    transform 0.2s,
-    background 0.2s,
-    box-shadow 0.2s;
-}
-.hero .btn-gold {
-  background: var(--gold);
-  border: 2px solid var(--gold);
-  color: var(--navy);
-}
-.hero .btn-gold:hover {
-  background: #f0cf8e;
-  box-shadow: 0 10px 24px rgba(212, 168, 90, 0.4);
-  transform: translateY(-2px);
-}
-.hero .btn-line {
-  background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.55);
-  color: var(--white);
-}
-.hero .btn-line:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* "See what's happening" link: scrolls to the announcements section. */
-.hero .news-cta {
-  align-items: center;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 999px;
-  color: var(--white);
-  display: inline-flex;
-  font-size: 0.92rem;
-  font-weight: 700;
-  gap: 10px;
-  margin-top: 22px;
-  padding: 10px 20px;
-  text-decoration: none;
-  transition:
-    background 0.2s,
-    border-color 0.2s;
-}
-.hero .news-cta:hover {
-  background: rgba(255, 255, 255, 0.16);
+.lightbox-close {
+  background: rgba(201, 168, 76, 0.2);
   border-color: var(--gold);
+  color: var(--gold);
+  font-size: 1.3rem;
 }
-.hero .news-cta .dot {
-  animation: hero-pulse 1.6s infinite;
-  background: #4ade80;
-  border-radius: 50%;
-  height: 8px;
-  width: 8px;
-}
-.hero .news-cta .arr {
-  animation: hero-bob 1.6s ease-in-out infinite;
-  color: #f0cf8e;
-}
-@keyframes hero-pulse {
-  50% {
-    opacity: 0.3;
-  }
-}
-@keyframes hero-bob {
-  50% {
-    transform: translateY(4px);
-  }
-}
-
-/* Trust indicators below the hero actions. */
-.hero .trust {
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 0.88rem;
-  font-weight: 700;
-  gap: 12px 30px;
-  justify-content: center;
-  list-style: none;
-  margin: 30px auto 0;
-  max-width: 780px;
-  opacity: 0.95;
-  padding: 22px 0 0;
-}
-.hero .trust li::before {
-  align-items: center;
-  background: var(--gold);
-  border-radius: 50%;
-  color: var(--navy);
-  content: "\2713";
-  display: inline-grid;
-  font-size: 11px;
-  height: 20px;
-  margin-right: 9px;
-  place-items: center;
-  width: 20px;
-}
-
-/* Curved white transition and gold edge separating the hero from news. */
-.hero .curve {
-  bottom: -1px;
+.icon {
   display: block;
-  height: var(--hero-curve);
+  height: 14px;
+  position: relative;
+  width: 14px;
+}
+.icon-pause::before,
+.icon-pause::after {
+  background: currentColor;
+  content: "";
+  height: 14px;
+  position: absolute;
+  top: 0;
+  width: 3px;
+}
+.icon-pause::before {
+  left: 3px;
+}
+.icon-pause::after {
+  right: 3px;
+}
+.icon-play {
+  border-bottom: 7px solid transparent;
+  border-left: 10px solid currentColor;
+  border-top: 7px solid transparent;
+  height: 0;
+  margin-left: 3px;
+  width: 0;
+}
+.icon-volume::before,
+.icon-muted::before {
+  border-bottom: 5px solid transparent;
+  border-right: 7px solid currentColor;
+  border-top: 5px solid transparent;
+  content: "";
   left: 0;
   position: absolute;
-  right: 0;
+  top: 2px;
+}
+.icon-volume::after,
+.icon-muted::after {
+  border: 2px solid currentColor;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  content: "";
+  height: 9px;
+  left: 5px;
+  position: absolute;
+  top: 2px;
+  transform: rotate(45deg);
+  width: 9px;
+}
+.icon-muted {
+  background: linear-gradient(
+    45deg,
+    transparent 46%,
+    currentColor 47%,
+    currentColor 54%,
+    transparent 55%
+  );
+}
+.icon-unavailable {
+  background: currentColor;
+  height: 3px;
+  transform: rotate(-45deg);
+  width: 14px;
+}
+.hero-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
-  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 3;
+  padding: 60px 80px;
 }
-.hero .curve path {
-  fill: var(--white);
+.hero-content {
+  text-align: left;
+  max-width: 500px;
 }
-.hero .curve .gold-edge {
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 3;
+.hero-kicker {
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin: 0 0 24px 0;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-
-/* Home intro and section-heading typography. */
+.hero-kicker::before {
+  content: "";
+  width: 32px;
+  height: 2px;
+  background: var(--gold);
+  display: block;
+}
+.hero-headline {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 24px;
+}
+.hero-headline .gold-text {
+  color: var(--gold);
+}
+.hero-sub {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 32px;
+  max-width: 400px;
+}
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-cta {
+  align-items: center;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  gap: 10px;
+  padding: 12px 28px;
+  transition: all 0.3s ease;
+  background: var(--navy);
+  border: 2px solid black;
+  color: white;
+}
+.hero-cta:hover {
+  background: white;
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.hero-cta-primary {
+  background: var(--navy-gradient-h);
+  border: 2px solid white;
+  color: white;
+}
+.hero-cta-primary:hover {
+  background: var(--gold-gradient-h);
+  border-color: white;
+  color: black;
+  box-shadow:
+    0 0 30px rgba(217, 168, 92, 0.6),
+    0 0 60px rgba(217, 168, 92, 0.3);
+  transform: translateY(-2px);
+}
+.hero-cta-secondary {
+  background: var(--navy-gradient-h);
+  border: 2px solid white;
+  color: white;
+}
+.hero-cta-secondary:hover {
+  background: var(--gold-gradient-h);
+  border-color: white;
+  color: black;
+  box-shadow:
+    0 0 30px rgba(217, 168, 92, 0.6),
+    0 0 60px rgba(217, 168, 92, 0.3);
+  transform: translateY(-2px);
+}
+.play-icon,
+.learn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
 .eyebrow,
 .page-kicker {
   background: var(--gold-gradient);
@@ -711,16 +524,9 @@ body.home-page {
   font-size: 1.25rem;
   line-height: 1.4;
 }
-
-/* Announcements section: soft background, a visible kicker, spotlight cards,
-   and loading placeholders. Cards are inserted by JS/announcements.js. */
-html {
-  scroll-behavior: smooth;
-}
 .section-heading {
   align-items: end;
   display: flex;
-  gap: 24px;
   justify-content: space-between;
   margin-bottom: 45px;
 }
@@ -732,105 +538,16 @@ html {
   max-width: 340px;
 }
 .news-section {
-  background: linear-gradient(180deg, #fff 0, #f4f7fb 100%);
+  background: white;
   color: var(--navy);
   max-width: none;
-  overflow: hidden;
-  padding: 90px 80px 56px;
-  position: relative;
-}
-/* Faint gold dot texture in the corner of the section. */
-.news-section::before {
-  background-image: radial-gradient(
-    rgba(212, 168, 90, 0.5) 1.5px,
-    transparent 1.6px
-  );
-  background-size: 22px 22px;
-  content: "";
-  height: 320px;
-  -webkit-mask-image: radial-gradient(circle at 100% 0, #000, transparent 70%);
-  mask-image: radial-gradient(circle at 100% 0, #000, transparent 70%);
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 460px;
-}
-.news-section#announcements::before {
-  display: none;
-}
-.announcements-arcs {
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-}
-.announcement-ring {
-  background: repeating-radial-gradient(
-    circle,
-    transparent 0 58px,
-    rgba(212, 168, 90, 0.3) 58px 60px
-  );
-  border-radius: 50%;
-  -webkit-mask-image: radial-gradient(
-    circle,
-    #000 30%,
-    transparent 70%
-  );
-  mask-image: radial-gradient(circle, #000 30%, transparent 70%);
-  position: absolute;
-}
-.announcement-ring-top {
-  height: 760px;
-  right: -260px;
-  top: -260px;
-  width: 760px;
-}
-.announcement-ring-bottom {
-  bottom: -220px;
-  height: 520px;
-  left: -220px;
-  opacity: 0.6;
-  width: 520px;
-}
-.news-section > * {
-  position: relative;
-  z-index: 1;
-}
-.news-section > .announcements-arcs {
-  position: absolute;
-  z-index: 0;
-}
-/* The kicker is hidden elsewhere on the site; show it in this section. */
-.news-section .page-kicker {
-  align-items: center;
-  -webkit-text-fill-color: currentColor;
-  background: none;
-  color: #a87a22;
-  display: flex;
-  gap: 12px;
-  margin: 0 0 12px;
-  max-width: none;
-  padding: 0;
-  text-align: left;
-  z-index: auto;
-}
-.news-section .page-kicker::before {
-  background: var(--gold);
-  content: "";
-  height: 2px;
-  width: 34px;
-}
-.news-section h2 em {
-  color: var(--gold);
-  font-style: normal;
+  padding: 80px 80px 48px;
 }
 .news-container {
-  background: transparent;
+  background: white;
   border-radius: 0;
-  margin-top: 40px;
   padding: 0;
+  margin-top: 40px;
 }
 .news-footer {
   display: flex;
@@ -838,148 +555,87 @@ html {
   margin-top: 48px;
 }
 .view-all-btn {
-  align-items: center;
   background: transparent;
   border: 2px solid var(--navy);
   border-radius: 50px;
   color: var(--navy);
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 0.95rem;
-  font-weight: 700;
-  gap: 8px;
   padding: 12px 40px;
+  font-size: 0.95rem;
+  font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .view-all-btn:hover {
   background: #d9a85c;
-  border-color: #d9a85c;
-  box-shadow: 0 10px 24px rgba(217, 168, 92, 0.4);
   color: black;
-  transform: translateY(-2px);
 }
-
-/* Dynamic announcement card grid and card content. */
 .news-grid {
   display: grid;
   gap: 22px;
   grid-template-columns: repeat(3, 1fr);
 }
 .news-card {
-  background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 6px;
   border-top: 3px solid var(--gold);
   box-shadow: 0 12px 28px rgba(0, 31, 51, 0.07);
   display: flex;
   flex-direction: column;
-  isolation: isolate;
   min-height: 330px;
-  overflow: hidden;
-  padding: 24px;
-  position: relative;
+  padding: 28px;
   transition:
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
-}
-/* Spotlight glow that follows the pointer across the card. */
-.news-card::before {
-  background: radial-gradient(
-    340px circle at var(--mx, -50%) var(--my, -50%),
-    rgba(212, 168, 90, 0.2),
-    transparent 60%
-  );
-  content: "";
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-  z-index: -1;
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 .news-card:hover {
-  box-shadow: 0 20px 40px rgba(0, 31, 51, 0.14);
-  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(0, 31, 51, 0.13);
+  transform: translateY(-4px);
 }
 .news-card-image {
-  aspect-ratio: 16 / 10;
-  background: #f0f0f0;
-  border-radius: 4px;
-  height: auto;
-  overflow: hidden;
   width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f0f0f0;
 }
 .news-card-image img {
-  display: block;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
-  width: 100%;
-}
-.news-card:hover .news-card-image img {
-  transform: scale(1.05);
+  display: block;
 }
 .news-card .announcement-featured-image {
-  aspect-ratio: 16 / 10;
   border-radius: 4px;
   display: block;
-  height: auto;
-  margin: 0 0 18px;
+  height: 260px;
+  margin-top: 20px;
   object-fit: cover;
   object-position: center;
-  transition: filter 0.4s ease;
   width: 100%;
 }
-.news-card:hover .announcement-featured-image {
-  filter: saturate(1.1) contrast(1.03);
-}
 .news-card h3 {
-  -webkit-box-orient: vertical;
   color: var(--navy);
-  display: -webkit-box;
-  font-size: 1.25rem;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  line-height: 1.3;
-  margin: 18px 0 10px;
-  overflow: hidden;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  margin: 22px 0 14px;
 }
 .news-card p {
-  -webkit-box-orient: vertical;
   color: var(--muted);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
   line-height: 1.65;
   margin: 0;
-  overflow: hidden;
 }
 .news-card .read-more {
   background: transparent;
   border: 0;
-  color: var(--navy);
   cursor: pointer;
   font: inherit;
+  color: var(--navy);
   font-weight: 700;
-  align-self: flex-start;
   margin-top: auto;
-  padding: 24px 0 0;
-  position: relative;
+  padding-top: 28px;
   text-align: left;
-}
-/* Underline that draws across the link when the card is hovered. */
-.news-card .read-more::after {
-  background: var(--gold);
-  bottom: -4px;
-  content: "";
-  height: 2px;
-  left: 0;
-  position: absolute;
-  transition: width 0.35s ease;
-  width: 0;
-}
-.news-card:hover .read-more::after,
-.news-card .read-more:focus-visible::after {
-  width: 100%;
 }
 .news-card .read-more:hover {
   color: var(--gold);
@@ -988,73 +644,8 @@ html {
   color: var(--muted);
   display: block;
   font-size: 0.8rem;
-  margin-top: 14px;
+  margin-top: 16px;
 }
-
-/* Card entrance: each card rises in as it scrolls into view. JS adds .js-reveal
-   to the grid and .in-view to each card, so cards stay visible without JS. */
-.news-grid.js-reveal .news-card:not(.in-view) {
-  opacity: 0;
-}
-.news-grid.js-reveal .news-card.in-view {
-  animation: card-in 0.7s calc(var(--i, 0) * 0.12s)
-    cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
-}
-@keyframes card-in {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-}
-
-/* Loading placeholders shown until the announcements arrive. */
-.news-skeleton {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  border-top: 3px solid var(--gold);
-  min-height: 330px;
-  padding: 24px;
-}
-.news-skeleton i {
-  animation: sk-shimmer 1.3s linear infinite;
-  background: linear-gradient(90deg, #e8edf3 25%, #f5f8fb 50%, #e8edf3 75%);
-  background-size: 200% 100%;
-  border-radius: 4px;
-  display: block;
-  margin-bottom: 14px;
-}
-.news-skeleton .sk-img {
-  aspect-ratio: 16 / 10;
-  margin-bottom: 18px;
-}
-.news-skeleton .sk-chip {
-  height: 22px;
-  width: 90px;
-}
-.news-skeleton .sk-line {
-  height: 14px;
-}
-.news-skeleton .w70 {
-  width: 70%;
-}
-.news-skeleton .w85 {
-  width: 85%;
-}
-@keyframes sk-shimmer {
-  to {
-    background-position: -200% 0;
-  }
-}
-.news-empty {
-  color: var(--muted);
-  grid-column: 1 / -1;
-  margin: 0;
-  padding: 28px 0;
-  text-align: center;
-}
-
-/* Category label displayed on announcement cards and in the detail modal. */
 .news-tag {
   align-self: flex-start;
   border-radius: 4px;
@@ -1064,12 +655,8 @@ html {
   padding: 6px 12px;
   text-transform: uppercase;
 }
-
-/* Announcement detail modal opened when a visitor selects a news card. */
 .announcement-modal {
   align-items: center;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
   background: rgba(0, 15, 25, 0.78);
   display: flex;
   inset: 0;
@@ -1103,8 +690,6 @@ html {
 .announcement-modal.is-open .announcement-modal-card {
   transform: translateY(0);
 }
-
-/* Modal close control and dynamically inserted announcement content. */
 .announcement-modal-close {
   align-items: center;
   background: var(--navy);
@@ -1161,68 +746,6 @@ html {
   line-height: 1.8;
   margin: 0;
 }
-
-/* Tablet: two announcement columns and tighter section padding. */
-@media (max-width: 1024px) {
-  .news-section {
-    padding: 70px 40px 48px;
-  }
-  .news-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Medium and tablet screens: tighter hero spacing. */
-@media (max-width: 860px) {
-  .hero {
-    padding: 0 18px calc(var(--hero-curve) + 80px);
-  }
-  .hero-first {
-    padding: 80px 0 20px;
-  }
-  /* Keeps the separate badge aligned with the video's left edge on smaller
-     screens without covering the video controls. */
-  .hero .badge {
-    font-size: 0.78rem;
-    margin: 18px 0 0;
-    padding: 9px 14px;
-  }
-  .hero-copy .badge {
-    margin: 18px auto 0;
-  }
-  .hero .hint {
-    margin: 0;
-  }
-  .hero .au {
-    filter: blur(60px);
-  }
-}
-
-/* Reduced-motion preference: keeps the hero visible without entrance or
-   ambient animation for visitors who request less motion. */
-@media (prefers-reduced-motion: reduce) {
-  .hero .in {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-  .hero .au,
-  .hero .vwrap::before,
-  .hero .news-cta .dot,
-  .hero .news-cta .arr,
-  .news-skeleton i {
-    animation: none;
-  }
-  .news-grid.js-reveal .news-card.in-view {
-    animation: none;
-  }
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-/* Mobile home layout: announcement cards become a swipeable row while the
-   full-screen hero is preserved. */
 @media (max-width: 760px) {
   .news-section {
     padding: 56px 20px 40px;
@@ -1243,92 +766,26 @@ html {
     max-width: 100%;
   }
   .news-container {
-    margin-top: 24px;
+    max-height: 430px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
   }
   .news-grid {
-    display: flex;
-    gap: 16px;
-    margin: 0 -20px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    padding: 6px 20px 18px;
-    scroll-padding: 0 20px;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-  .news-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .news-grid > * {
-    flex: 0 0 84%;
-    scroll-snap-align: center;
+    grid-template-columns: 1fr;
   }
   .news-card .announcement-featured-image {
-    height: auto;
+    height: 220px;
   }
-  .hero .vcard {
-    border-radius: 16px;
+  .hero-video {
+    margin-top: 0;
+    height: 100svh;
   }
-  .hero .video-controls {
-    bottom: 16px;
-    right: 16px;
-  }
-  .hero .video-controls button {
-    height: 38px;
-    width: 38px;
-  }
-  .hero .cta .btn {
-    flex: 1 1 100%;
-    text-align: center;
+  .hero-media {
+    border-radius: 0;
+    height: 100%;
   }
 }
-
-/* Smooth scrolling (Lenis): rules the library needs so the browser's own
-   smooth scrolling does not fight it, and so modals can still scroll. */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
-
-/* Scroll reveal: elements marked data-reveal fade and rise into place as they
-   enter the screen. JS adds .reveal-ready to <html>, so everything stays
-   visible if scripts are unavailable or motion is reduced. Optional values:
-   data-reveal="up | left | right | zoom | fade" and data-delay="150" (ms). */
-[data-reveal] {
-  transition:
-    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--rd, 0s),
-    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--rd, 0s);
-}
-.reveal-ready [data-reveal]:not(.revealed) {
-  opacity: 0;
-  transform: translateY(28px);
-}
-.reveal-ready [data-reveal="left"]:not(.revealed) {
-  transform: translateX(-36px);
-}
-.reveal-ready [data-reveal="right"]:not(.revealed) {
-  transform: translateX(36px);
-}
-.reveal-ready [data-reveal="zoom"]:not(.revealed) {
-  transform: scale(0.9);
-}
-.reveal-ready [data-reveal="fade"]:not(.revealed) {
-  transform: none;
-}
-
-/* Announcement category colors used for dynamically generated news tags. */
 .tag-announcement {
   background: rgba(212, 172, 93, 0.15);
   color: #8b7355;
@@ -1357,187 +814,4 @@ html.lenis body {
 .tag-update {
   background: rgba(44, 74, 124, 0.1);
   color: var(--violet);
-}
-
-/* Responsive home hero refinements: stack and resize the current design like
-   the reference hero without changing its content or visual treatment. */
-@media (max-width: 1100px) {
-  .hero .stage {
-    width: min(100%, 1080px);
-  }
-  .hero .vwrap {
-    width: min(100%, 1250px, calc((100svh - 140px) * 16 / 9));
-  }
-}
-
-@media (max-width: 860px) {
-  .hero {
-    min-height: calc(100svh + 180px);
-    padding: 0 20px calc(var(--hero-curve) + 40px);
-  }
-  .hero .stage {
-    width: 100%;
-  }
-  .hero-video-column {
-    transform: none;
-  }
-  .hero-first {
-    min-height: 100svh;
-    padding: 104px 0 24px;
-  }
-  .hero .vwrap {
-    width: min(100%, calc(100vw - 40px), 900px);
-  }
-  .hero-video-meta {
-    grid-template-columns: minmax(0, 1fr) auto;
-    margin-top: 14px;
-  }
-  .hero .hint {
-    font-size: 0.76rem;
-    line-height: 1.35;
-    max-width: 30ch;
-  }
-  .hero-copy {
-    padding: 32px 0 96px;
-    text-align: center;
-  }
-  .hero-title {
-    font-size: clamp(2rem, 8vw, 3.2rem);
-  }
-  .hero-lead {
-    font-size: 1rem;
-    max-width: 42em;
-  }
-  .hero .cta,
-  .hero .trust {
-    justify-content: center;
-  }
-  .hero .trust {
-    gap: 12px 20px;
-  }
-  .hero-copy .badge {
-    margin-inline: auto;
-  }
-}
-
-@media (max-width: 560px) {
-  .hero {
-    padding-inline: 16px;
-  }
-  .hero-first {
-    min-height: calc(100svh - 8px);
-    padding-top: 92px;
-  }
-  .hero .vwrap {
-    width: 100%;
-  }
-  .hero .vcard {
-    border-radius: 14px;
-  }
-  .hero-video-meta {
-    align-items: start;
-    gap: 12px;
-  }
-  .hero .hint {
-    max-width: 24ch;
-  }
-  .hero .cta .btn {
-    flex-basis: 100%;
-  }
-  .hero .trust {
-    align-items: flex-start;
-    flex-direction: column;
-    margin-inline: auto;
-    text-align: left;
-    width: max-content;
-  }
-  .hero .trust li {
-    max-width: 30ch;
-  }
-  .hero .badge {
-    max-width: 100%;
-    white-space: normal;
-  }
-}
-
-/* D2 hero arrangement: text first with a large supporting video. The layout
-   stays inside the existing hero section and stacks text above video on
-   smaller screens for reliable responsive behavior. */
-@media (min-width: 861px) {
-  .hero .stage {
-    align-items: center;
-    column-gap: clamp(36px, 5vw, 72px);
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    min-height: calc(100svh - 40px);
-    text-align: left;
-    width: min(1700px, 100%);
-  }
-  .hero-first {
-    grid-column: 2;
-    grid-row: 1;
-    justify-content: center;
-    min-height: 0;
-    padding: 112px 0 40px;
-  }
-  .hero-copy {
-    grid-column: 1;
-    grid-row: 1;
-    padding: 104px 0 40px;
-    text-align: left;
-  }
-  .hero .cta,
-  .hero .trust {
-    justify-content: flex-start;
-  }
-  .hero .trust {
-    margin-left: 0;
-  }
-  .hero-copy .badge {
-    margin-left: 0;
-  }
-  .hero-video-column {
-    transform: none;
-  }
-  .hero .vwrap {
-    width: 100%;
-  }
-  .hero-video-meta {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-}
-
-@media (min-width: 1101px) {
-  /* Lets the D2 hero use the open side space independently of the navbar
-     width while retaining comfortable viewport gutters. */
-  .hero {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
-@media (max-width: 860px) {
-  .hero .stage {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-  .hero-copy {
-    display: flex;
-    flex-direction: column;
-    order: 1;
-    padding: 44px 0 56px;
-  }
-  .hero-first {
-    order: 2;
-    min-height: 0;
-    padding: 24px 0 72px;
-  }
-  .hero .cta,
-  .hero .trust {
-    justify-content: center;
-  }
-  .hero-copy .badge {
-    margin-inline: auto;
-  }
 }

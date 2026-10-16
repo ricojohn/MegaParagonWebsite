@@ -376,11 +376,18 @@
         >
       </div>
     </main>
-    <script src="JS/scroll-state.js"></script>
     <script src="JS/paragon-blimitless.js"></script>
     <a class="back-to-top" href="#" aria-label="Back to top"
       ><span aria-hidden="true"><i class="fa-solid fa-angles-up"></i></span
       ><span class="back-to-top-label">Back to top</span></a
     >
+    <script>
+      const backToTop = document.querySelector(".back-to-top");
+      window.addEventListener(
+        "scroll",
+        () => backToTop.classList.toggle("is-visible", window.scrollY > 240),
+        { passive: true },
+      );
+    </script>
   </body>
 </html>
