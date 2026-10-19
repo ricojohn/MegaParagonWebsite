@@ -2,10 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Mega Paragon | Join us</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>The Mega Paragon | Join Our Team</title>
+    <meta
+      name="description"
+      content="Transform lives, build wealth, and join The Mega Paragon."
+    />
     <link rel="stylesheet" href="CSS/styles.css" />
     <link rel="stylesheet" href="CSS/join.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:ital,wght@0,500;0,700;0,800;1,700;1,800&display=swap"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -16,379 +27,850 @@
       href="assets/mainlogo/MP_Logo_Horizontal_Colored.png"
     />
   </head>
-  <body class="profile-nav-page">
-    <main>
-      <section class="join-hero" id="join">
-        <div class="join-hero-content">
-          <p class="join-eyebrow">Career opportunities</p>
-          <h1>Transform Lives. <em>Build Wealth.</em></h1>
-          <p>
+  <body class="join-page">
+    <!-- HERO: quick form at the start -->
+    <header class="hero">
+      <!-- Layered background: soft animated aurora (CSS) with a low-poly gold-glow pattern on top (Trianglify, built in the script) -->
+      <div class="h-aurora" aria-hidden="true">
+        <span class="h-au a1"></span><span class="h-au a2"></span
+        ><span class="h-au a3"></span>
+      </div>
+      <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
+      <div class="wrap grid">
+        <div>
+          <span class="pill in" style="--d: 0.05s"
+            ><b></b>Now Hiring · Career Opportunities</span
+          >
+          <h1 class="in" style="--d: 0.15s">
+            Transform Lives. <em>Build Wealth.</em>
+          </h1>
+          <p class="lead in" style="--d: 0.25s">
             Join the elite 1% of financial professionals who earn $200K+
             annually while making a meaningful impact on families' financial
             security.
           </p>
-          <div class="join-hero-actions">
-            <a class="join-button join-button-primary" href="#application"
-              >Start Your Journey &rarr;</a
-            >
+          <ul class="checks in" style="--d: 0.35s">
+            <li>Hands-on mentorship, not a script</li>
+            <li>Step-by-step licensing support</li>
+            <li>A clear path to leadership and recognition</li>
+          </ul>
+          <div class="in" style="--d: 0.45s">
+            <a class="btn mag" href="#join"
+              >Start Your Journey
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+            ></a>
           </div>
-          <div class="join-hero-stats">
+          <div class="stats in" style="--d: 0.55s">
             <div>
-              <strong>1M+</strong
+              <b data-to="1" data-suf="M+">0</b
               ><span>Lives &amp; Families<br />Impacted</span>
             </div>
             <div>
-              <strong>15+</strong><span>Years of<br />Experience</span>
+              <b data-to="15" data-suf="+">0</b
+              ><span>Years of<br />Experience</span>
             </div>
             <div>
-              <strong>500+</strong
+              <b data-to="500" data-suf="+">0</b
               ><span>Families &amp; Clients<br />Served</span>
             </div>
           </div>
         </div>
-      </section>
 
-      <section class="join-section join-why">
-        <div class="join-section-heading">
-          <p class="join-eyebrow">Why join us</p>
-          <h2>Why Choose Us?</h2>
-          <p>
+        <form
+          class="card in in-r"
+          style="--d: 0.3s"
+          id="joinFormTop"
+          data-form-type="join"
+          method="POST"
+          action="/api/join.php"
+          enctype="multipart/form-data"
+        >
+          <div class="fields">
+            <h3>Join Our Team</h3>
+            <p class="s2">
+              Complete the form below to introduce yourself to The Mega Paragon.
+            </p>
+            <div class="row">
+              <div>
+                <label for="top-name"
+                  >Full Name
+                  <span class="required-marker" aria-hidden="true"
+                    >*</span
+                  ></label
+                >
+                <input
+                  id="top-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+              <div>
+                <label for="top-email"
+                  >Email Address
+                  <span class="required-marker" aria-hidden="true"
+                    >*</span
+                  ></label
+                >
+                <input
+                  id="top-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
+            <label for="top-phone"
+              >Phone Number
+              <span class="required-marker" aria-hidden="true">*</span></label
+            >
+            <input
+              id="top-phone"
+              name="phone"
+              type="tel"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              autocomplete="tel"
+              placeholder="Your phone number"
+              required
+            />
+            <p class="hint">Include your country code if needed.</p>
+            <label for="top-message">Tell Us About Yourself</label>
+            <textarea
+              id="top-message"
+              name="message"
+              placeholder="Share your background, strengths, or what interests you about The Mega Paragon."
+            ></textarea>
+            <div
+              data-recaptcha
+              data-sitekey="6LfgVvItAAAAAGoBRSXE8r7nkW3dbiKejjiGcBVT"
+            ></div>
+            <button class="submit" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </header>
+
+    <div class="marq" aria-label="What we stand for">
+      <div>
+        <span>Professional Growth</span><span>Abundant Earning Potential</span
+        ><span>Recognition and Rewards</span><span>Adaptable Workstyle</span
+        ><span>Global Exposure</span><span>Opportunities for Impact</span
+        ><span>Next Generation Legacy Building</span>
+        <span>Professional Growth</span><span>Abundant Earning Potential</span
+        ><span>Recognition and Rewards</span><span>Adaptable Workstyle</span
+        ><span>Global Exposure</span><span>Opportunities for Impact</span
+        ><span>Next Generation Legacy Building</span>
+      </div>
+    </div>
+
+    <section class="bg-dots">
+      <div class="wrap">
+        <div class="center rv">
+          <div class="eyebrow">Who We're Looking For</div>
+          <h2>You don't need experience. <em>You need these.</em></h2>
+          <p class="sub">
+            We can teach you the products, the licensing and the skills. What we
+            can't teach is character. If these sound like you, you belong here.
+          </p>
+        </div>
+        <div class="traits">
+          <div class="tr rv">
+            <div class="te">
+              <i class="fa-solid fa-ear-listen" aria-hidden="true"></i>
+            </div>
+            <h3>You listen first</h3>
+            <p>You want to understand people before offering answers.</p>
+          </div>
+          <div class="tr rv">
+            <div class="te">
+              <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+            </div>
+            <h3>You love to learn</h3>
+            <p>Curious, coachable, and happy to ask questions.</p>
+          </div>
+          <div class="tr rv">
+            <div class="te">
+              <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            </div>
+            <h3>You care about families</h3>
+            <p>Protecting people's futures genuinely matters to you.</p>
+          </div>
+          <div class="tr rv">
+            <div class="te">
+              <i class="fa-solid fa-bullseye" aria-hidden="true"></i>
+            </div>
+            <h3>You're self-driven</h3>
+            <p>You show up and follow through without being chased.</p>
+          </div>
+          <div class="tr rv">
+            <div class="te">
+              <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+            </div>
+            <h3>You're honest</h3>
+            <p>In financial services, trust is everything, and you earn it.</p>
+          </div>
+          <div class="tr rv">
+            <div class="te">
+              <i class="fa-solid fa-rocket" aria-hidden="true"></i>
+            </div>
+            <h3>You want to grow</h3>
+            <p>Ready to build new skills, a business, and eventually a team.</p>
+          </div>
+        </div>
+        <div class="bring rv">
+          <div class="bx">
+            <h3>What you bring</h3>
+            <ul>
+              <li>A good attitude and work ethic</li>
+              <li>Willingness to be coached</li>
+              <li>Respect for people and their stories</li>
+            </ul>
+          </div>
+          <div class="bx win">
+            <h3>What we teach you</h3>
+            <ul>
+              <li>Product knowledge and licensing</li>
+              <li>Client conversations and financial planning</li>
+              <li>Building a business and leading a team</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fits rv">
+          <b>People from all kinds of backgrounds do well here</b
+          ><span>Teachers</span><span>Nurses</span
+          ><span>Retail &amp; sales</span><span>Customer service</span
+          ><span>Fresh graduates</span><span>Stay-at-home parents</span
+          ><span>Office professionals</span><span>Business owners</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn mag" href="#join"
+            >Sound like you? Start your journey
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft bg-arcs">
+      <div class="wrap">
+        <div class="center rv">
+          <div class="eyebrow">Why Join Us</div>
+          <h2>Why Choose <em>Us?</em></h2>
+          <p class="sub">
             We don't just offer a job - we provide a complete lifestyle
             transformation with unlimited earning potential.
           </p>
         </div>
-        <div class="benefit-grid">
-          <article class="benefit">
-            <div class="benefit-icon">$</div>
-            <div>
-              <h3>Unlimited Income and Bonuses</h3>
-              <p>
-                Rewarding your dedication and performance. Your earnings grow as
-                you do.
-              </p>
+        <div class="cards">
+          <div class="c rv">
+            <div class="ic">
+              <i class="fa-solid fa-sack-dollar" aria-hidden="true"></i>
             </div>
-          </article>
-          <article class="benefit">
-            <div class="benefit-icon">◎</div>
-            <div>
-              <h3>Meaningful Impact</h3>
-              <p>
-                Help Filipino families secure their financial future. Make a
-                meaningful difference in families' lives.
-              </p>
+            <h3>Unlimited Income and Bonuses</h3>
+            <p>
+              Rewarding your dedication and performance. Your earnings grow as
+              you do.
+            </p>
+          </div>
+          <div class="c rv">
+            <div class="ic">
+              <i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i>
             </div>
-          </article>
-          <article class="benefit">
-            <div class="benefit-icon">◇</div>
-            <div>
-              <h3>Flexible Lifestyle</h3>
-              <p>
-                Create your own schedule with time freedom. Take control of your
-                schedule and work-life balance.
-              </p>
+            <h3>Meaningful Impact</h3>
+            <p>
+              Help Filipino families secure their financial future. Make a
+              meaningful difference in families' lives.
+            </p>
+          </div>
+          <div class="c rv">
+            <div class="ic">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
             </div>
-          </article>
-          <article class="benefit">
-            <div class="benefit-icon">⚙</div>
-            <div>
-              <h3>Professional Development</h3>
-              <p>
-                Access to continuous workshops, training, and mentorship to
-                enhance your career.
-              </p>
+            <h3>Flexible Lifestyle</h3>
+            <p>
+              Create your own schedule with time freedom. Take control of your
+              schedule and work-life balance.
+            </p>
+          </div>
+          <div class="c rv">
+            <div class="ic">
+              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
             </div>
-          </article>
-          <article class="benefit">
-            <div class="benefit-icon">★</div>
-            <div>
-              <h3>Recognition and Awards</h3>
-              <p>
-                Celebrate your milestones with prestigious accolades. Be
-                celebrated for your achievements with awards and incentives.
-              </p>
+            <h3>Professional Development</h3>
+            <p>
+              Access to continuous workshops, training, and mentorship to
+              enhance your career.
+            </p>
+          </div>
+          <div class="c rv">
+            <div class="ic">
+              <i class="fa-solid fa-award" aria-hidden="true"></i>
             </div>
-          </article>
-          <article class="benefit">
-            <div class="benefit-icon">♧</div>
-            <div>
-              <h3>Succession Planning and Legacy Building</h3>
-              <p>
-                Plan for succession. Build a legacy and create lasting impact.
-              </p>
+            <h3>Recognition and Awards</h3>
+            <p>
+              Celebrate your milestones with prestigious accolades. Be
+              celebrated for your achievements with awards and incentives.
+            </p>
+          </div>
+          <div class="c rv">
+            <div class="ic">
+              <i class="fa-solid fa-people-roof" aria-hidden="true"></i>
             </div>
-          </article>
+            <h3>Succession Planning and Legacy Building</h3>
+            <p>
+              Plan for succession. Build a legacy and create lasting impact.
+            </p>
+          </div>
         </div>
-        <a class="join-section-cta" href="#application">
-          Start your journey
-          <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-        </a>
-      </section>
+        <div class="cta-row">
+          <a class="btn mag" href="#join"
+            >Start your journey
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i
+          ></a>
+        </div>
+      </div>
+    </section>
 
-      <section class="join-section join-opportunities" id="opportunities">
-        <div class="opportunity-grid">
-          <div class="opportunity-intro">
-            <p class="join-eyebrow">Why choose</p>
-            <h2>The Mega Paragon?</h2>
-            <div class="role-list">
-              <div class="role">
-                <span>P</span>
-                <strong>Professional Growth</strong>
+    <section class="dark">
+      <div class="wrap">
+        <div class="center rv">
+          <div class="eyebrow">Life With Us</div>
+          <h2>Meet the team <em>you'd be joining.</em></h2>
+          <p class="sub">
+            Get a glimpse of the people, energy, and shared moments that make
+            life at The Mega Paragon meaningful.
+          </p>
+        </div>
+        <div class="team-carousel rv" id="teamCarousel">
+          <button
+            class="team-carousel-control previous"
+            type="button"
+            aria-label="Show previous team photo"
+          >
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <div class="team-carousel-viewport">
+            <div class="team-carousel-track" id="teamCarouselTrack">
+              <figure
+                class="team-slide"
+                data-caption="Growing together as one team"
+              >
+                <img
+                  src="assets/join/team-1.JPG"
+                  alt="The Mega Paragon team gathered together at a team event"
+                />
+                <figcaption>Growing together as one team</figcaption>
+              </figure>
+              <figure
+                class="team-slide"
+                data-caption="Connecting through shared moments"
+              >
+                <img
+                  src="assets/join/team-2.png"
+                  alt="The Mega Paragon team sharing a meal together"
+                />
+                <figcaption>Connecting through shared moments</figcaption>
+              </figure>
+              <figure
+                class="team-slide"
+                data-caption="Learning and collaborating together"
+              >
+                <img
+                  src="assets/join/team-3.png"
+                  alt="The Mega Paragon team taking part in a group activity"
+                />
+                <figcaption>Learning and collaborating together</figcaption>
+              </figure>
+              <figure
+                class="team-slide"
+                data-caption="Celebrating milestones together"
+              >
+                <img
+                  src="assets/join/team-4.JPG"
+                  alt="The Mega Paragon team celebrating together at a formal event"
+                />
+                <figcaption>Celebrating milestones together</figcaption>
+              </figure>
+              <figure
+                class="team-slide"
+                data-caption="Building our future together"
+              >
+                <img
+                  src="assets/join/team-5.jpeg"
+                  alt="The Mega Paragon team gathered during a business event"
+                />
+                <figcaption>Building our future together</figcaption>
+              </figure>
+            </div>
+          </div>
+          <button
+            class="team-carousel-control next"
+            type="button"
+            aria-label="Show next team photo"
+          >
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft bg-mark">
+      <div class="wrap two">
+        <div class="rv">
+          <div class="eyebrow">Why Choose</div>
+          <h2>The Mega Paragon?</h2>
+          <div class="list">
+            <div class="li"><i>P</i>Professional Growth</div>
+            <div class="li"><i>A</i>Abundant Earning Potential</div>
+            <div class="li"><i>R</i>Recognition and Rewards</div>
+            <div class="li"><i>A</i>Adaptable Workstyle</div>
+            <div class="li"><i>G</i>Global Exposure</div>
+            <div class="li"><i>O</i>Opportunities for Impact</div>
+            <div class="li"><i>N</i>Next Generation Legacy Building</div>
+          </div>
+        </div>
+        <div class="rv">
+          <div class="ph leaders-photo" style="aspect-ratio: 16/10">
+            <img
+              src="assets/join/leaders.jpeg"
+              alt="The Mega Paragon leaders and advisors gathered together"
+            />
+          </div>
+          <div class="quote">
+            <div class="bar"></div>
+            <p>“Committed to Excellence. Committed to YOU.”</p>
+            <small>— The Mega Paragon</small>
+          </div>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn mag" href="#join"
+          >Start your journey
+          <i class="fa-solid fa-arrow-down" aria-hidden="true"></i
+        ></a>
+      </div>
+    </section>
+
+    <section class="bg-lines">
+      <div class="wrap">
+        <div class="center rv">
+          <div class="eyebrow">How It Works</div>
+          <h2>Your path, <em>step by step.</em></h2>
+          <p class="sub">From your first message to leading your own team.</p>
+        </div>
+        <div class="road rv">
+          <div class="st">
+            <div class="dot">1</div>
+            <div>
+              <h3>Introduce yourself</h3>
+              <p>Fill out the short form. It takes a minute.</p>
+            </div>
+          </div>
+          <div class="st">
+            <div class="dot">2</div>
+            <div>
+              <h3>Meet a mentor</h3>
+              <p>A friendly conversation about your goals.</p>
+            </div>
+          </div>
+          <div class="st">
+            <div class="dot">3</div>
+            <div>
+              <h3>Get licensed</h3>
+              <p>We guide you through the requirements.</p>
+            </div>
+          </div>
+          <div class="st">
+            <div class="dot">4</div>
+            <div>
+              <h3>Train &amp; start</h3>
+              <p>Part-time or full-time, with support behind you.</p>
+            </div>
+          </div>
+          <div class="st">
+            <div class="dot">5</div>
+            <div>
+              <h3>Grow &amp; lead</h3>
+              <p>Earn recognition and build your own team.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cta-row">
+          <a class="btn mag" href="#join"
+            >Take step one
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership story video from the official Mega Paragon YouTube channel. -->
+    <section class="bg-warm">
+      <div class="wrap">
+        <div class="center rv">
+          <div class="eyebrow">Our People</div>
+          <h2>Stories of <em>Success</em></h2>
+          <p class="sub">
+            Hear from The Mega Paragon's leaders about the journeys, values, and
+            shared purpose behind our growing team.
+          </p>
+        </div>
+
+        <div class="vcar rv" aria-label="The Mega Paragon leadership story">
+          <div class="vtrack" id="vtrack">
+            <div class="vs" data-id="o89-eO-1VMk">
+              <div class="vframe">
+                <iframe
+                  src="https://www.youtube.com/embed/o89-eO-1VMk?rel=0&playsinline=1"
+                  title="The Mega Paragon: Stories of Success, Leadership and Family"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
               </div>
-              <div class="role">
-                <span>A</span>
-                <strong>Abundant Earning Potential</strong>
-              </div>
-              <div class="role">
-                <span>R</span>
-                <strong>Recognition and Rewards</strong>
-              </div>
-              <div class="role">
-                <span>A</span>
-                <strong>Adaptable Workstyle</strong>
-              </div>
-              <div class="role">
-                <span>G</span>
-                <strong>Global Exposure</strong>
-              </div>
-              <div class="role">
-                <span>O</span>
-                <strong>Opportunities for Impact</strong>
-              </div>
-              <div class="role">
-                <span>N</span>
-                <strong>Next Generation Legacy Building</strong>
+              <div class="vcap">
+                <h3>
+                  The Mega Paragon: Stories of Success, Leadership &amp; Family
+                </h3>
+                <p>
+                  Discover the experiences and perspectives of the leaders who
+                  help shape The Mega Paragon's culture, support its people, and
+                  build a shared vision for growth.
+                </p>
               </div>
             </div>
           </div>
-          <aside class="join-quote">
-            <div class="join-gold-line"></div>
-            <blockquote>
-              “Committed to Excellence. Committed to YOU.”
-            </blockquote>
-            <p>— The Mega Paragon</p>
-          </aside>
         </div>
-        <a class="join-section-cta" href="#application">
-          Start your journey
-          <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-        </a>
-      </section>
 
-      <section class="join-section join-stories">
-        <div class="join-section-heading">
-          <p class="join-eyebrow">Our people</p>
-          <h2>Success Stories</h2>
-          <p>
-            Real people, real results. See how our team members transformed
-            their lives and careers.
-          </p>
+        <div class="stories">
+          <article class="s">
+            <div class="who">
+              <div class="ph av"><div></div></div>
+              <div><b>Angela Cruz</b><small>Former Teacher</small></div>
+            </div>
+            <div class="stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <q
+              >“I loved teaching, but I wanted room to grow. The first few
+              months had a learning curve, and my mentor was patient with every
+              question. Today I help families plan with confidence.”</q
+            >
+            <div class="res">Licensed within her first 3 months</div>
+          </article>
+          <article class="s">
+            <div class="who">
+              <div class="ph av"><div></div></div>
+              <div>
+                <b>Mark Villanueva</b><small>Former Retail Manager</small>
+              </div>
+            </div>
+            <div class="stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <q
+              >“I already knew how to talk to people, but not how to talk about
+              protection. The training taught me to listen first. The team trips
+              are a nice bonus, but what I enjoy most is hearing from clients
+              that we made a difference.”</q
+            >
+            <div class="res">Full-time after his first year</div>
+          </article>
+          <article class="s">
+            <div class="who">
+              <div class="ph av"><div></div></div>
+              <div><b>Jessa Mendoza</b><small>Former Nurse</small></div>
+            </div>
+            <div class="stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <q
+              >“Long shifts left me exhausted. Now I set my own schedule and
+              still get to take care of people, just in a different way. I wish
+              I had asked about it sooner.”</q
+            >
+            <div class="res">Moved from part-time to full-time</div>
+          </article>
+          <article class="s">
+            <div class="who">
+              <div class="ph av"><div></div></div>
+              <div>
+                <b>Carlo Reyes</b
+                ><small>Fresh graduate, Business Administration</small>
+              </div>
+            </div>
+            <div class="stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <q
+              >“I graduated with no connections and no clear plan. The training
+              broke everything into small steps, and before long I was meeting
+              my first families with a mentor beside me.”</q
+            >
+            <div class="res">Licensed within his first two months</div>
+          </article>
+          <article class="s">
+            <div class="who">
+              <div class="ph av"><div></div></div>
+              <div><b>Liza Navarro</b><small>Stay-at-home mom</small></div>
+            </div>
+            <div class="stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <q
+              >“I started with a few hours a week while my kids were at school.
+              Nobody pressured me to rush. When I was ready, I took on more, and
+              now this is my full-time work.”</q
+            >
+            <div class="res">Started part-time, now full-time</div>
+          </article>
+          <article class="s">
+            <div class="who">
+              <div class="ph av"><div></div></div>
+              <div>
+                <b>Rica Delos Santos</b
+                ><small>Former Office Administrator</small>
+              </div>
+            </div>
+            <div class="stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i
+              ><i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <q
+              >“I wanted work where my effort actually shows. The team checks in
+              on me regularly, and I never felt like I was figuring things out
+              on my own.”</q
+            >
+            <div class="res">Licensed and active within her first quarter</div>
+          </article>
         </div>
-        <div class="story-grid">
-          <article class="story">
-            <div class="story-person">
-              <div class="avatar">A</div>
-              <div>
-                <strong>Amanda Chen</strong><small>Former Teacher</small>
-              </div>
-            </div>
-            <div class="stars">★★★★★</div>
-            <p>
-              “I went from $45K as a teacher to $180K in my second year. The
-              training and support here is incredible. I’m finally able to
-              provide for my family the way I always dreamed.”
-            </p>
-            <div class="story-result">
-              Income: $45K &rarr; $180K in 18 months
-            </div>
-          </article>
-          <article class="story">
-            <div class="story-person">
-              <div class="avatar">R</div>
-              <div>
-                <strong>Robert Martinez</strong
-                ><small>Former Retail Manager</small>
-              </div>
-            </div>
-            <div class="stars">★★★★★</div>
-            <p>
-              “The company trips alone are worth it! Last year we went to Dubai,
-              Bali, and Switzerland. But the real reward is knowing I’m securing
-              families’ futures every day.”
-            </p>
-            <div class="story-result">Income: $38K &rarr; $220K in 2 years</div>
-          </article>
-          <article class="story">
-            <div class="story-person">
-              <div class="avatar">J</div>
-              <div>
-                <strong>Jessica Thompson</strong><small>Former Nurse</small>
-              </div>
-            </div>
-            <div class="stars">★★★★★</div>
-            <p>
-              “I was burned out from nursing. Now I help families plan for their
-              future while building my own. I’ve never been happier or more
-              financially secure.”
-            </p>
-            <div class="story-result">
-              Income: $65K &rarr; $195K in 20 months
-            </div>
-          </article>
+        <p class="note">
+          Individual results vary and depend on effort, skill and market
+          conditions.
+        </p>
+        <div class="cta-row" style="margin-top: 30px">
+          <a class="btn mag" href="#join"
+            >Write your own story
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i
+          ></a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="join-section join-application" id="application">
-        <div class="join-section-heading">
-          <p class="join-eyebrow">Take the next step</p>
-          <h2>Start Your Journey With Us</h2>
+    <section>
+      <div class="wrap">
+        <div class="center rv">
+          <div class="eyebrow">Questions</div>
+          <h2>Before you <em>apply</em></h2>
+        </div>
+        <div class="faq rv">
+          <details>
+            <summary>Do I need experience?</summary>
+            <p>
+              No. You'll learn through training and mentorship from day one.
+            </p>
+          </details>
+          <details>
+            <summary>Is this a pyramid scheme?</summary>
+            <p>
+              No. Income comes from helping clients with licensed insurance and
+              financial products.
+            </p>
+          </details>
+          <details>
+            <summary>Is licensing required?</summary>
+            <p>
+              Yes. Standard industry licensing applies, and we guide you through
+              each step.
+            </p>
+          </details>
+          <details>
+            <summary>How much can I earn?</summary>
+            <p>
+              Earnings are commission-based and depend on your effort. We'll
+              talk through realistic expectations with you.
+            </p>
+          </details>
+          <details>
+            <summary>Can I start part-time?</summary>
+            <p>
+              Yes. Many people begin alongside a job and grow at their own pace.
+            </p>
+          </details>
+          <details>
+            <summary>What happens after I apply?</summary>
+            <p>
+              Our team will connect with you to talk through the opportunity. No
+              pressure, no obligation.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEDICATED FORM SECTION: every CTA button on the page leads here -->
+    <section class="join" id="join">
+      <svg class="arcs" viewBox="0 0 1000 1000" aria-hidden="true">
+        <circle cx="500" cy="500" r="200" />
+        <circle cx="500" cy="500" r="330" />
+        <circle cx="500" cy="500" r="460" />
+      </svg>
+      <div class="wrap grid">
+        <div class="rv">
+          <div class="eyebrow">Take the Next Step</div>
+          <h2>Start Your Journey <em>With Us</em></h2>
           <p>
             Tell us a little about yourself and your interest in joining The
             Mega Paragon. Our team can connect with you about potential
             opportunities.
           </p>
+          <p class="slogan">Committed to Excellence.<br />Committed to YOU.</p>
         </div>
-        <div class="application-grid">
-          <form
-            class="join-form"
-            id="joinForm"
-            data-form-type="join"
-            method="POST"
-            action="/api/join.php"
-            enctype="multipart/form-data"
-          >
+
+        <form
+          class="card rv"
+          id="joinFormBottom"
+          data-form-type="join"
+          method="POST"
+          action="/api/join.php"
+          enctype="multipart/form-data"
+        >
+          <div class="fields">
             <h3>Join Our Team</h3>
-            <p>
+            <p class="s2">
               Complete the form below to introduce yourself to The Mega Paragon.
             </p>
-            <div class="form-grid">
-              <div class="field">
-                <label for="name">Full Name *</label
-                ><input
-                  id="name"
+            <div class="row">
+              <div>
+                <label for="bottom-name"
+                  >Full Name
+                  <span class="required-marker" aria-hidden="true"
+                    >*</span
+                  ></label
+                >
+                <input
+                  id="bottom-name"
                   name="name"
                   type="text"
+                  autocomplete="name"
                   placeholder="Your full name"
                   required
                 />
               </div>
-              <div class="field">
-                <label for="email">Email Address *</label
-                ><input
-                  id="email"
+              <div>
+                <label for="bottom-email"
+                  >Email Address
+                  <span class="required-marker" aria-hidden="true"
+                    >*</span
+                  ></label
+                >
+                <input
+                  id="bottom-email"
                   name="email"
                   type="email"
+                  autocomplete="email"
                   placeholder="you@example.com"
                   required
                 />
               </div>
-              <div class="field">
-                <label for="phone">Phone Number</label
-                ><input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="Your phone number"
-                  aria-describedby="phone-help"
-                />
-                <small id="phone-help"
-                  >Include your country code if needed.</small
-                >
-              </div>
-              <div class="field field-full">
-                <label for="message">Tell Us About Yourself</label
-                ><textarea
-                  id="message"
-                  name="message"
-                  placeholder="Share your background, strengths, or what interests you about The Mega Paragon."
-                ></textarea>
-              </div>
             </div>
+            <label for="bottom-phone"
+              >Phone Number
+              <span class="required-marker" aria-hidden="true">*</span></label
+            >
+            <input
+              id="bottom-phone"
+              name="phone"
+              type="tel"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              autocomplete="tel"
+              placeholder="Your phone number"
+              required
+            />
+            <p class="hint">Include your country code if needed.</p>
+            <label for="bottom-message">Tell Us About Yourself</label>
+            <textarea
+              id="bottom-message"
+              name="message"
+              placeholder="Share your background, strengths, or what interests you about The Mega Paragon."
+            ></textarea>
             <div
               data-recaptcha
               data-sitekey="6LfgVvItAAAAAGoBRSXE8r7nkW3dbiKejjiGcBVT"
             ></div>
-            <button class="join-submit" type="submit">Submit</button>
-            <!-- Submission status appears here after forms.js handles the request. -->
-            <div class="form-message" id="formMessage" role="status"></div>
-          </form>
-        </div>
-      </section>
-    </main>
-    <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-section footer-brand">
-          <img
-            src="assets/mainlogo/The Mega Paragon Logo_Horizontal_Gold.png"
-            alt="The Mega Paragon"
-          />
-          <p class="footer-commitment">
-            Committed to Excellence. <br />Committed to You.
-          </p>
-          <h4>Follow Us</h4>
-          <div class="social-links">
-            <a href="#" aria-label="Facebook"
-              ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
-            ></a>
-            <a href="#" aria-label="Instagram"
-              ><i class="fa-brands fa-instagram" aria-hidden="true"></i
-            ></a>
-            <a href="#" aria-label="YouTube"
-              ><i class="fa-brands fa-youtube" aria-hidden="true"></i
-            ></a>
-            <a href="#" aria-label="TikTok"
-              ><i class="fa-brands fa-tiktok" aria-hidden="true"></i
-            ></a>
+            <button class="submit" type="submit">Submit</button>
           </div>
-        </div>
-        <div class="footer-categories">
-          <div class="footer-section">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="about">About Us</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Products &amp; Services</h4>
-            <ul>
-              <li><a href="products">Financial Solutions</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Contacts</h4>
-            <ul>
-              <li><a href="careers">Careers</a></li>
-              <li><a href="contact">Free Consultation</a></li>
-            </ul>
-          </div>
-          <div class="footer-section footer-partners">
-            <h4>Our Partners</h4>
-            <img src="assets/partners/prulife-logo.png" alt="Pru Life U.K." />
-          </div>
-        </div>
+        </form>
       </div>
-      <div class="footer-bottom">
-        <a class="footer-privacy" href="#">Privacy Policy</a>
-        <div class="footer-center">
-          <span class="tagline">TRUST | GROWTH | TOGETHER</span>
-          <span>© 2026 The Mega Paragon. All Rights Reserved.</span>
-        </div>
-        <a class="footer-terms" href="#">Terms of Service</a>
-      </div>
+      <svg
+        class="join-wave"
+        viewBox="0 0 1440 90"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path d="M0 90V50C240 0 560 0 860 38C1100 68 1280 70 1440 40V90Z" />
+        <path
+          class="gold"
+          d="M0 50C240 0 560 0 860 38C1100 68 1280 70 1440 40"
+        />
+      </svg>
+    </section>
+
+    <footer>
+      <b>TRUST | GROWTH | TOGETHER</b><br />© 2026 The Mega Paragon. All Rights
+      Reserved.
     </footer>
+    <div class="sticky" id="sticky">
+      <a class="btn mag" href="#join"
+        >Start Your Journey
+        <i class="fa-solid fa-arrow-down" aria-hidden="true"></i
+      ></a>
+    </div>
+    <a class="back-to-top" href="#top" aria-label="Back to top">
+      <span aria-hidden="true"><i class="fa-solid fa-angles-up"></i></span>
+      <span class="back-to-top-label">Back to top</span>
+    </a>
+
+    <script src="JS/scroll-state.js"></script>
     <script src="JS/meta-pixel.js"></script>
     <script src="JS/navigation.js"></script>
     <script src="JS/forms.js?v=hostinger-php-2"></script>
-    <a class="back-to-top" href="#" aria-label="Back to top"
-      ><span aria-hidden="true"><i class="fa-solid fa-angles-up"></i></span
-      ><span class="back-to-top-label">Back to top</span></a
-    >
-    <script>
-      const backToTop = document.querySelector(".back-to-top");
-      window.addEventListener(
-        "scroll",
-        () => backToTop.classList.toggle("is-visible", window.scrollY > 240),
-        { passive: true },
-      );
-    </script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/trianglify@4.1.1/dist/trianglify.bundle.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"
+    ></script>
+    <script defer src="JS/join.js"></script>
   </body>
 </html>
