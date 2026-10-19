@@ -1,6 +1,7 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
+    <!-- Document metadata and responsive browser settings. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -8,20 +9,33 @@
       content="The Mega Paragon - people, systems, and momentum working as one."
     />
     <title>The Mega Paragon | Home</title>
+
+    <!-- Shared styles apply to the site header, navigation, buttons, content,
+         footer, and responsive layout. -->
     <link rel="stylesheet" href="CSS/styles.css" />
+
+    <!-- Home-page styles control the video hero and announcements section. -->
     <link rel="stylesheet" href="CSS/home.css" />
+
+    <!-- External icon library used by the social links and video controls. -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
+
+    <!-- Browser tab icon and font-loading optimization. -->
     <link rel="icon" type="image/png" href="assets/mainlogo/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
   </head>
 
-  <!--Main Page-->
+  <!-- Home page: the home-page class enables home-specific CSS overrides. -->
   <body class="home-page">
-    <!--Navbar-->
+    <!-- Fixed site header containing the mobile menu, centered logo,
+         About dropdown, and portal login link. -->
     <header class="site-header">
       <nav class="main-nav" aria-label="Main navigation">
+        <!-- Mobile navigation toggle. JavaScript updates aria-expanded and
+             opens or closes the navigation menu. -->
         <button
           class="menu-toggle"
           aria-label="Toggle navigation"
@@ -29,11 +43,14 @@
         >
           <span></span><span></span><span></span>
         </button>
-        <!--logo-->
+
+        <!-- Centered Mega Paragon brand link. -->
         <a class="brand" href="home" aria-label="The Mega Paragon home">
           <img src="assets/mainlogo/logo.png" alt="The Mega Paragon" />
         </a>
-        <!--about-dropdown-->
+
+        <!-- About navigation dropdown. The links are revealed by hover on
+             desktop and by the mobile menu state on smaller screens. -->
         <div class="nav-dropdown">
           <div class="about-dropdown">
             <a href="about">About Us</a>
@@ -42,90 +59,160 @@
             <a href="contact">Contact Us</a>
           </div>
         </div>
+
+        <!-- External link to the Mega Paragon portal login page. -->
         <a class="login-link" href="https://portal.themegaparagon.net/">
           Login
         </a>
       </nav>
     </header>
 
+    <!-- Main home-page content. -->
     <main class="page-main">
-      <section class="hero-video">
-        <div class="hero-media">
-          <video
-            class="hero-video-file"
-            autoplay
-            loop
-            muted
-            playsinline
-            preload="metadata"
-            aria-label="The Mega Paragon background video"
-          >
-            <source src="assets/placeholder.mp4" type="video/mp4" />
-          </video>
-          <img
-            class="video-fallback-logo"
-            src="assets/mainlogo/logo-horizontal-colored.png"
-            alt="The Mega Paragon"
-          />
-          <div class="video-controls" aria-label="Video controls">
-            <button id="videoPlayPause" type="button" aria-label="Pause video">
-              <span class="video-control-icon" aria-hidden="true"
-                >&#10074;&#10074;</span
-              >
-            </button>
-            <div class="volume-btn-wrapper">
-              <input
-                id="videoVolume"
-                class="volume-slider"
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value="1"
-                aria-label="Video volume"
-              />
-              <button
-                id="videoSoundToggle"
-                type="button"
-                aria-label="Mute video"
-              >
-                <span class="video-control-icon" aria-hidden="true"
-                  >&#128266;</span
-                >
-              </button>
+      <!-- Official home hero: brand messaging, decorative graphics, CTAs, and
+           the framed video presentation from the approved hero design. -->
+      <section class="hero" id="hero">
+        <!-- Layered background: a soft animated aurora (pure CSS) and a light
+             particle network drawn by tsParticles (configured in JS/home.js).
+             Both are decorative and hidden from assistive technology. -->
+        <div class="aurora" aria-hidden="true">
+          <span class="au a1"></span><span class="au a2"></span
+          ><span class="au a3"></span>
+        </div>
+        <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
+
+        <!-- Centered hero stage. The first screen shows only the video (sized to
+             the device); the messaging, calls to action, and trust indicators
+             sit below it and appear as the visitor scrolls. -->
+        <div class="stage">
+          <!-- Framed hero YouTube video card. -->
+          <div class="hero-first">
+          <div class="hero-video-column">
+            <div class="vwrap in">
+              <div class="vcard">
+                        <div class="hero-media">
+                          <iframe
+                            id="heroYoutubePlayer"
+                            class="hero-youtube-video"
+                            src="https://www.youtube.com/embed/-AVa4GpS-BM?autoplay=1&mute=1&loop=1&playlist=-AVa4GpS-BM&controls=1&rel=0&enablejsapi=1"
+                            title="The Mega Paragon"
+                            allow="autoplay; encrypted-media; picture-in-picture"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                          ></iframe>
+                        </div>
+                      </div>
+
             </div>
-            <button
-              id="videoFullscreen"
-              type="button"
-              aria-label="Enter fullscreen"
-            >
-              <span class="video-control-icon" aria-hidden="true"
-                >&#x26F6;</span
+            <div class="hero-video-meta">
+              <p class="hint in">
+                Playing muted. Use the YouTube controls to enable sound, pause,
+                or skip ahead.
+              </p>
+            </div>
+          </div>
+          </div>
+
+          <div class="hero-copy" id="heroCopy">
+            <!-- Primary home-page message and supporting description. -->
+            <h1 class="hero-title" data-reveal="up">
+              Take control.
+              <span>Build what's next.</span>
+            </h1>
+            <p class="hero-lead" data-reveal="up" data-delay="120">
+              Guidance from licensed advisors to protect your family and grow
+              your future, backed by Pru Life UK.
+            </p>
+
+            <!-- Primary visitor actions: consultation and recruitment. -->
+            <div class="cta" data-reveal="up" data-delay="240">
+              <a class="btn btn-gold" href="prod-serv.html"
+                >Book a free consultation</a
               >
-            </button>
+              <a class="btn btn-line" href="join.html">Join our team</a>
+            </div>
+
+            <!-- Scrolls to the announcements section on this page. -->
+            <a
+              class="news-cta"
+              data-reveal="up"
+              data-delay="360"
+              href="#announcements"
+              ><span class="dot" aria-hidden="true"></span>See what's
+              happening<span class="arr" aria-hidden="true">&darr;</span></a
+            >
+
+            <!-- Trust indicators supporting the hero message. -->
+            <ul class="trust" data-reveal="up" data-delay="480">
+              <li>Licensed advisors who listen first</li>
+              <li>Plans built around your family</li>
+              <li>Free first consultation, no pressure</li>
+            </ul>
+
+            <!-- Partnership badge centered below the trust indicators. -->
+            <span class="badge" data-reveal="up" data-delay="600"
+              >In partnership with <em>&nbsp; Pru Life UK</em></span
+            >
           </div>
         </div>
+
+        <!-- Curved transition from the navy hero into the white announcements
+             section below. -->
+        <svg
+          class="curve"
+          viewBox="0 0 1440 90"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 90V40C240 -10 560 -10 860 28C1100 58 1280 60 1440 30V90Z"
+          ></path>
+          <path
+            class="gold-edge"
+            d="M0 40C240 -10 560 -10 860 28C1100 58 1280 60 1440 30"
+          ></path>
+        </svg>
       </section>
+
+      <!-- Announcements preview section. JS/announcements.js loads the latest
+           announcements into the news grid below. -->
       <section class="news-section page-content" id="announcements">
+        <div class="announcements-arcs" aria-hidden="true">
+          <span class="announcement-ring announcement-ring-top"></span>
+          <span class="announcement-ring announcement-ring-bottom"></span>
+        </div>
         <div class="section-heading">
-          <div>
+          <div data-reveal="up">
             <p class="page-kicker">WHAT'S HAPPENING</p>
             <h2>Stay Informed. <em>Stay Connected.</em></h2>
           </div>
-          <p>
+          <p data-reveal="up" data-delay="150">
             Get the latest updates on our announcements, upcoming events, and
             company news. Be part of our journey.
           </p>
         </div>
         <div class="news-container">
-          <div class="news-grid"></div>
+          <!-- Announcement cards are inserted here from the announcements API. -->
+          <div class="news-grid" aria-live="polite" aria-busy="true">
+            <!-- Loading placeholders. JS/home.js removes them as soon as the
+                 real announcement cards are inserted. -->
+            <div class="news-skeleton" aria-hidden="true"><i class="sk-img"></i><i class="sk-chip"></i><i class="sk-line w70"></i><i class="sk-line"></i><i class="sk-line w85"></i></div>
+            <div class="news-skeleton" aria-hidden="true"><i class="sk-img"></i><i class="sk-chip"></i><i class="sk-line w70"></i><i class="sk-line"></i><i class="sk-line w85"></i></div>
+            <div class="news-skeleton" aria-hidden="true"><i class="sk-img"></i><i class="sk-chip"></i><i class="sk-line w70"></i><i class="sk-line"></i><i class="sk-line w85"></i></div>
+          </div>
         </div>
         <div class="news-footer">
-          <a href="announcements" class="view-all-btn">View All Updates →</a>
+          <!-- Takes visitors to the full announcements page. -->
+          <a href="announcements" class="view-all-btn" data-reveal="zoom"
+            >View All Updates
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
+          ></a>
         </div>
       </section>
     </main>
 
+    <!-- Announcement detail modal. Its contents are filled dynamically when a
+         visitor selects an announcement card. -->
     <div
       class="announcement-modal"
       id="homeAnnouncementModal"
@@ -133,10 +220,12 @@
     >
       <article
         class="announcement-modal-card"
+        data-lenis-prevent
         role="dialog"
         aria-modal="true"
         aria-labelledby="homeAnnouncementModalTitle"
       >
+        <!-- Closes the announcement dialog and returns focus to the page. -->
         <button
           class="announcement-modal-close"
           id="homeAnnouncementModalClose"
@@ -145,6 +234,8 @@
         >
           <span aria-hidden="true">&times;</span>
         </button>
+
+        <!-- Dynamic announcement metadata and content targets. -->
         <span class="news-tag" id="homeAnnouncementModalTag"></span>
         <span class="event-date" id="homeAnnouncementModalDate"></span>
         <h2 id="homeAnnouncementModalTitle"></h2>
@@ -152,8 +243,11 @@
       </article>
     </div>
 
+    <!-- Shared site footer containing brand information, social links,
+         navigation categories, partner branding, and legal links. -->
     <footer class="site-footer">
       <div class="footer-content">
+        <!-- Footer brand block and social media links. -->
         <div class="footer-section footer-brand">
           <img
             src="assets/mainlogo/The Mega Paragon Logo_Horizontal_Gold.png"
@@ -178,6 +272,8 @@
             ></a>
           </div>
         </div>
+
+        <!-- Footer navigation categories and partner logo. -->
         <div class="footer-categories">
           <div class="footer-section">
             <h4>Company</h4>
@@ -204,6 +300,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Footer legal links, tagline, and copyright notice. -->
       <div class="footer-bottom">
         <a class="footer-privacy" href="#">Privacy Policy</a>
         <div class="footer-center">
@@ -213,7 +311,22 @@
         <a class="footer-terms" href="#">Terms of Service</a>
       </div>
     </footer>
+
+    <!-- Floating control that returns visitors to the top of the home page. -->
+    <a class="back-to-top" href="#hero" aria-label="Back to top">
+      <span aria-hidden="true"
+        ><i class="fa-solid fa-angles-up"></i
+      ></span>
+      <span class="back-to-top-label">Back to top</span>
+    </a>
+
+    <!-- Announcement data/modal behavior, shared navigation behavior, and
+         home video controls. -->
+    <script src="JS/scroll-state.js"></script>
     <script src="JS/announcements.js?v=hostinger-php-1"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.9.1/tsparticles.slim.bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="JS/navigation.js"></script>
     <script src="JS/home.js"></script>
   </body>
