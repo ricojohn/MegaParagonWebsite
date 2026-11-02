@@ -173,6 +173,22 @@ const heroYoutubeFrame = document.getElementById("heroYoutubePlayer");
 let heroYoutubePlayer = null;
 let youtubePausedByVisibility = false;
 let youtubePausedByVisitor = false;
+let heroInView = true;
+let heroVideoSlideActive = true;
+
+// Plays the video only when the hero is on screen and the video slide is the
+// active carousel slide. Pausing is recorded so the visitor's own pause is kept.
+function syncHeroVideoPlayback() {
+  if (!heroYoutubePlayer || typeof heroYoutubePlayer.pauseVideo !== "function") return;
+  if (heroInView && heroVideoSlideActive) {
+    if (youtubePausedByVisitor) return;
+    youtubePausedByVisibility = false;
+    heroYoutubePlayer.playVideo();
+  } else {
+    youtubePausedByVisibility = true;
+    heroYoutubePlayer.pauseVideo();
+  }
+}
 
 function observeYouTubeHero() {
   if (!heroYoutubePlayer || !("IntersectionObserver" in window)) return;
@@ -180,22 +196,64 @@ function observeYouTubeHero() {
   const hero = document.getElementById("hero");
   if (!hero) return;
 
+  let firstCheck = true;
   new IntersectionObserver(
     ([entry]) => {
       const mostlyVisible = entry.intersectionRatio >= 0.5;
       const mostlyHidden = entry.intersectionRatio < 0.25;
 
-      if (mostlyHidden) {
-        youtubePausedByVisibility = true;
-        heroYoutubePlayer.pauseVideo();
-      } else if (mostlyVisible && !youtubePausedByVisitor) {
-        youtubePausedByVisibility = false;
-        heroYoutubePlayer.playVideo();
+      if (mostlyHidden && (heroInView || firstCheck)) {
+        heroInView = false;
+        firstCheck = false;
+        syncHeroVideoPlayback();
+      } else if (mostlyVisible && !heroInView) {
+        heroInView = true;
+        syncHeroVideoPlayback();
+      } else if (mostlyVisible && firstCheck) {
+        firstCheck = false;
+        syncHeroVideoPlayback();
       }
     },
     { threshold: [0, 0.25, 0.5, 1] },
   ).observe(hero);
 }
+
+// Hero carousel: slide 1 is the video, slide 2 is the "Take control" message.
+const heroCarousel = document.getElementById("heroCarousel");
+if (heroCarousel) {
+  const slides = [...heroCarousel.querySelectorAll(".hero-slide")];
+  const dots = [...heroCarousel.querySelectorAll(".hero-dot")];
+  let currentSlide = 0;
+
+  const showSlide = (index) => {
+    currentSlide = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      const active = i === currentSlide;
+      slide.classList.toggle("is-active", active);
+      slide.hidden = !active;
+    });
+    dots.forEach((dot, i) => {
+      const active = i === currentSlide;
+      dot.classList.toggle("is-active", active);
+      dot.setAttribute("aria-selected", String(active));
+    });
+    heroVideoSlideActive = currentSlide === 0;
+    syncHeroVideoPlayback();
+  };
+
+  const previous = heroCarousel.querySelector(".hero-prev");
+  const next = heroCarousel.querySelector(".hero-next");
+  if (previous) {
+    previous.addEventListener("click", () => showSlide(currentSlide - 1));
+  }
+  if (next) {
+    next.addEventListener("click", () => showSlide(currentSlide + 1));
+  }
+  dots.forEach((dot) =>
+    dot.addEventListener("click", () => showSlide(Number(dot.dataset.go))),
+  );
+}
+
 
 function initializeYouTubeHero() {
   if (!heroYoutubeFrame || !window.YT || !window.YT.Player) return;
@@ -219,6 +277,176 @@ function initializeYouTubeHero() {
 
 window.onYouTubeIframeAPIReady = initializeYouTubeHero;
 if (window.YT && window.YT.Player) initializeYouTubeHero();
+
+// Product finder: tabs switch the product details shown in the panel.
+const hpProducts = [
+  ["Family", "Family Protection", "Comprehensive life insurance plans that provide financial security for your loved ones in case of unexpected events.", ["Life insurance built around your family", "Guided by a licensed advisor", "A safety net for daily expenses and long-term needs"]],
+  ["Health", "Health Insurance", "Protect yourself and your family from unexpected medical expenses with comprehensive health plans.", ["Cover for unexpected medical expenses", "Plans for you and your family", "Clear guidance on your options"]],
+  ["Education", "Education Planning", "Secure your children's future with education insurance plans designed to fund their academic journey.", ["Plan ahead for school costs", "Protect your child's education goals", "Start early, at your own pace"]],
+  ["Retirement", "Retirement Planning", "Plan for a comfortable retirement with pension plans designed to provide financial independence.", ["Pension plans for later life", "Build toward financial independence", "Review your plan as life changes"]],
+  ["Business", "Business Insurance", "Protect your business with specialized insurance solutions designed for Filipino entrepreneurs.", ["Solutions for entrepreneurs", "Protect what you have built", "Talk through your needs with an advisor"]],
+  ["Savings", "Investment Plans", "Grow your wealth with investment-linked insurance plans that offer protection and potential returns.", ["Protection with potential returns", "Grow your wealth step by step", "Guidance on risk and goals"]],
+];
+const hpIcons = [
+  "fa-people-roof",
+  "fa-notes-medical",
+  "fa-graduation-cap",
+  "fa-clipboard-check",
+  "fa-briefcase",
+  "fa-coins",
+];
+const hpTabs = document.getElementById("hpTabs");
+const hpInd = document.getElementById("hpInd");
+const hpPanel = document.getElementById("hpPanel");
+if (hpTabs && hpInd && hpPanel) {
+  let activeProduct = 0;
+
+  const moveIndicator = () => {
+    const buttons = hpTabs.querySelectorAll("button");
+    const button = buttons[activeProduct];
+    if (!button) return;
+    hpInd.style.left = `${button.offsetLeft}px`;
+    hpInd.style.width = `${button.offsetWidth}px`;
+  };
+
+  const renderProduct = (index) => {
+    activeProduct = index;
+    const [, title, text, points] = hpProducts[index];
+    hpTabs.querySelectorAll("button").forEach((button, i) => {
+      button.setAttribute("aria-selected", String(i === index));
+    });
+    moveIndicator();
+
+    const panel = document.createElement("div");
+    panel.className = "hp-panel";
+
+    const copy = document.createElement("div");
+    const icon = document.createElement("div");
+    icon.className = "hp-ic";
+    icon.innerHTML = `<i class="fa-solid ${hpIcons[index]}" aria-hidden="true"></i>`;
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+    const body = document.createElement("p");
+    body.textContent = text;
+    const list = document.createElement("ul");
+    points.forEach((point) => {
+      const item = document.createElement("li");
+      item.textContent = point;
+      list.appendChild(item);
+    });
+    const actions = document.createElement("div");
+    actions.className = "hp-btns";
+    const quote = document.createElement("a");
+    quote.className = "hp-btn";
+    quote.href = "prod-serv.html";
+    quote.innerHTML =
+      'Get a free quote <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
+    const learn = document.createElement("a");
+    learn.className = "hp-btn hp-line";
+    learn.href = "prod-serv.html";
+    learn.innerHTML =
+      'Learn more <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
+    actions.append(quote, learn);
+    copy.append(icon, heading, body, list, actions);
+
+    const art = document.createElement("div");
+    art.className = "hp-art";
+    art.innerHTML = `<div>Photo<br>${hpProducts[index][0]}</div>`;
+
+    panel.append(copy, art);
+    hpPanel.replaceChildren(panel);
+  };
+
+  hpProducts.forEach(([name], index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.setAttribute("role", "tab");
+    button.textContent = name;
+    button.setAttribute("aria-selected", String(index === 0));
+    button.addEventListener("click", () => renderProduct(index));
+    hpTabs.appendChild(button);
+  });
+  renderProduct(0);
+  window.addEventListener("resize", moveIndicator);
+}
+
+// How it works: the step line and numbers animate once the steps are visible.
+const hpSteps = document.getElementById("hpSteps");
+if (hpSteps && "IntersectionObserver" in window && !prefersReducedMotion) {
+  const stepsObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) return;
+      hpSteps.classList.add("on");
+      stepsObserver.disconnect();
+    },
+    { threshold: 0.3 },
+  );
+  stepsObserver.observe(hpSteps);
+} else if (hpSteps) {
+  hpSteps.classList.add("on");
+}
+
+// Announcement filter chips, built from the categories of the live cards.
+const newsFilters = document.getElementById("newsFilters");
+const filterGrid = document.querySelector(".news-grid");
+if (filterGrid && newsFilters) {
+  let activeNewsFilter = "all";
+
+  const applyNewsFilter = () => {
+    filterGrid.querySelectorAll(".news-card").forEach((card) => {
+      card.hidden =
+        activeNewsFilter !== "all" && card.dataset.category !== activeNewsFilter;
+    });
+    newsFilters.querySelectorAll(".news-filter").forEach((button) => {
+      button.setAttribute(
+        "aria-pressed",
+        String(button.dataset.filter === activeNewsFilter),
+      );
+    });
+  };
+
+  const buildNewsFilters = () => {
+    const labels = new Map();
+    filterGrid.querySelectorAll(".news-card").forEach((card) => {
+      if (card.dataset.category && !labels.has(card.dataset.category)) {
+        labels.set(
+          card.dataset.category,
+          card.querySelector(".news-tag")?.textContent.trim() || card.dataset.category,
+        );
+      }
+    });
+    const categories = [...labels.keys()];
+    if (!categories.includes(activeNewsFilter)) activeNewsFilter = "all";
+    newsFilters.hidden = categories.length < 2;
+    if (newsFilters.hidden) {
+      filterGrid.querySelectorAll(".news-card").forEach((card) => {
+        card.hidden = false;
+      });
+      return;
+    }
+    if (newsFilters.dataset.built === categories.join("|")) {
+      applyNewsFilter();
+      return;
+    }
+    newsFilters.dataset.built = categories.join("|");
+    newsFilters.replaceChildren();
+    ["all", ...categories].forEach((value) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "news-filter";
+      button.dataset.filter = value;
+      button.textContent = value === "all" ? "All" : labels.get(value);
+      button.addEventListener("click", () => {
+        activeNewsFilter = value;
+        applyNewsFilter();
+      });
+      newsFilters.appendChild(button);
+    });
+    applyNewsFilter();
+  };
+
+  new MutationObserver(buildNewsFilters).observe(filterGrid, { childList: true });
+}
 
 // Gentle magnetic pull on the hero buttons for mouse users.
 if (
