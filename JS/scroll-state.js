@@ -6,7 +6,6 @@
     .find((entry) => entry instanceof PerformanceNavigationTiming);
   const shouldRestore =
     navigationEntry?.type === "back_forward" || performance.getEntriesByType("navigation").length === 0;
-  const scrollStateBackToTop = document.querySelector(".back-to-top");
 
   if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
@@ -17,6 +16,7 @@
   };
 
   const updateBackToTop = () => {
+    const scrollStateBackToTop = document.querySelector(".back-to-top");
     if (scrollStateBackToTop) {
       scrollStateBackToTop.classList.toggle("is-visible", window.scrollY > 240);
     }

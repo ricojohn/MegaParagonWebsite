@@ -1,99 +1,104 @@
-// About Profile page: controls the Company Profile carousel in about-prof.html.
-// It manages slide movement, previous/next controls, pagination dots, autoplay,
-// and pausing while the carousel is hovered or focused.
-const companyCarousel = document.querySelector("[data-company-carousel]");
+// Welcome carousel (reference design): slide track, prev/next buttons, dots, and 5s autoplay.
+const welcomeCarousel = document.querySelector("[data-welcome-carousel]");
+if (welcomeCarousel) {
+  const welcomeTrack = welcomeCarousel.querySelector("[data-welcome-track]");
+  const welcomeDots = document.querySelector("[data-welcome-dots]");
+  const welcomeSlideCount = welcomeTrack.children.length;
+  let welcomeIndex = 0;
+  let welcomeTimer;
 
-if (companyCarousel) {
-  const track = companyCarousel.querySelector(
-    ".profile-company-carousel-track",
-  );
-  const slides = [
-    ...companyCarousel.querySelectorAll(".profile-company-slide"),
-  ];
-  if (!track || slides.length === 0) {
-    companyCarousel.removeAttribute("data-company-carousel");
-  } else {
-    const realSlideCount = slides.length;
-    // Clone the first slide so the final transition loops smoothly back to slide one.
-    const firstSlideClone = slides[0].cloneNode(true);
-    firstSlideClone.classList.remove("is-active");
-    firstSlideClone.setAttribute("aria-hidden", "true");
-    track.appendChild(firstSlideClone);
-    slides.push(firstSlideClone);
-    const dots = [
-      ...companyCarousel.querySelectorAll(
-        ".profile-company-carousel-dots button",
-      ),
-    ];
-    const previousButton = companyCarousel.querySelector(
-      ".profile-company-carousel-prev",
-    );
-    const nextButton = companyCarousel.querySelector(
-      ".profile-company-carousel-next",
-    );
-    let currentIndex = 0;
-    let intervalId;
-
-    // Move the track and keep the active slide and pagination state synchronized.
-    const showSlide = (index) => {
-      currentIndex = index < 0 ? realSlideCount - 1 : index;
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle("is-active", slideIndex === currentIndex);
-      });
-      dots.forEach((dot, dotIndex) => {
-        const isActive = dotIndex === currentIndex % realSlideCount;
-        dot.classList.toggle("is-active", isActive);
-        dot.setAttribute("aria-selected", String(isActive));
-      });
-    };
-
-    // Reset the cloned final slide to the original first slide without a visible jump.
-    track.addEventListener("transitionend", () => {
-      if (currentIndex !== realSlideCount) return;
-      track.style.transition = "none";
-      currentIndex = 0;
-      track.style.transform = "translateX(0)";
-      slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle("is-active", slideIndex === 0);
-      });
-      requestAnimationFrame(() => {
-        track.style.transition = "";
-      });
-    });
-
-    // Restart the five-second autoplay timer after manual navigation or pointer exit.
-    const startRotation = () => {
-      clearInterval(intervalId);
-      intervalId = setInterval(() => showSlide(currentIndex + 1), 5000);
-    };
-
-    previousButton?.addEventListener("click", () => {
-      showSlide(currentIndex - 1);
-      startRotation();
-    });
-    nextButton?.addEventListener("click", () => {
-      showSlide(currentIndex + 1);
-      startRotation();
-    });
-    dots.forEach((dot, dotIndex) => {
-      dot.addEventListener("click", () => {
-        showSlide(dotIndex);
-        startRotation();
-      });
-    });
-    companyCarousel.addEventListener("mouseenter", () =>
-      clearInterval(intervalId),
-    );
-    companyCarousel.addEventListener("mouseleave", startRotation);
-    companyCarousel.addEventListener("focusin", () =>
-      clearInterval(intervalId),
-    );
-    companyCarousel.addEventListener("focusout", (event) => {
-      if (!companyCarousel.contains(event.relatedTarget)) startRotation();
-    });
-
-    showSlide(0);
-    startRotation();
+  for (let k = 0; k < welcomeSlideCount; k++) {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Photo ${k + 1}`);
+    dot.addEventListener("click", () => goWelcome(k));
+    welcomeDots.appendChild(dot);
   }
+
+  function goWelcome(k) {
+    welcomeIndex = (k + welcomeSlideCount) % welcomeSlideCount;
+    welcomeTrack.style.transform = `translateX(-${welcomeIndex * 100}%)`;
+    [...welcomeDots.children].forEach((dot, j) =>
+      dot.setAttribute("aria-current", j === welcomeIndex),
+    );
+    clearTimeout(welcomeTimer);
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      welcomeTimer = setTimeout(() => goWelcome(welcomeIndex + 1), 5000);
+    }
+  }
+
+  document
+    .querySelector("[data-welcome-prev]")
+    .addEventListener("click", () => goWelcome(welcomeIndex - 1));
+  document
+    .querySelector("[data-welcome-next]")
+    .addEventListener("click", () => goWelcome(welcomeIndex + 1));
+  goWelcome(0);
 }
+
+// Scroll reveal for elements marked data-rv, and the pointer spotlight on value cards.
+const aboutRevealItems = document.querySelectorAll("[data-rv]");
+if (
+  aboutRevealItems.length &&
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+  "IntersectionObserver" in window
+) {
+  document.documentElement.classList.add("rv-ready");
+  const aboutRevealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("rv-in");
+        aboutRevealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -6% 0px" },
+  );
+  aboutRevealItems.forEach((el) => aboutRevealObserver.observe(el));
+}
+
+document.querySelectorAll(".a6-val, .a6-band").forEach((card) => {
+  card.addEventListener("pointermove", (event) => {
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+    card.style.setProperty("--my", `${event.clientY - rect.top}px`);
+  });
+});
+
+// Pauses the Meet the Team video when it scrolls away and resumes it when it
+// returns, but only if it was playing when it left the screen.
+const teamVideoFrame = document.querySelector(".a6-vplace iframe");
+if (teamVideoFrame && "IntersectionObserver" in window) {
+  let teamVideoPlayer = null;
+  let resumeOnReturn = false;
+
+  const createTeamVideoPlayer = () => {
+    if (teamVideoPlayer || !window.YT || !window.YT.Player) return;
+    teamVideoPlayer = new window.YT.Player(teamVideoFrame);
+  };
+
+  const previousApiReady = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = () => {
+    if (previousApiReady) previousApiReady();
+    createTeamVideoPlayer();
+  };
+  createTeamVideoPlayer();
+
+  new IntersectionObserver(
+    ([entry]) => {
+      if (!teamVideoPlayer || typeof teamVideoPlayer.pauseVideo !== "function") {
+        return;
+      }
+      if (entry.intersectionRatio < 0.25) {
+        resumeOnReturn =
+          teamVideoPlayer.getPlayerState() === window.YT.PlayerState.PLAYING;
+        if (resumeOnReturn) teamVideoPlayer.pauseVideo();
+      } else if (entry.intersectionRatio >= 0.5 && resumeOnReturn) {
+        resumeOnReturn = false;
+        teamVideoPlayer.playVideo();
+      }
+    },
+    { threshold: [0, 0.25, 0.5] },
+  ).observe(teamVideoFrame);
+}
+

@@ -218,19 +218,31 @@ function observeYouTubeHero() {
   ).observe(hero);
 }
 
-// Hero carousel: slide 1 is the video, slide 2 is the "Take control" message.
+// Hero carousel: slides sit side by side in a track that slides horizontally,
+// so the transition is smooth and the controls stay in one fixed place.
 const heroCarousel = document.getElementById("heroCarousel");
 if (heroCarousel) {
+  const track = heroCarousel.querySelector("#heroSlides");
   const slides = [...heroCarousel.querySelectorAll(".hero-slide")];
   const dots = [...heroCarousel.querySelectorAll(".hero-dot")];
   let currentSlide = 0;
 
+  // Slide content replays its entrance every time the slide is shown, so it
+  // uses its own marker and is kept out of the page-wide scroll reveal below.
+  heroCarousel.querySelectorAll("[data-reveal]").forEach((el) => {
+    el.removeAttribute("data-reveal");
+    el.dataset.heroReveal = "";
+    el.style.setProperty("--rd", `${Number(el.dataset.delay || 0) / 1000}s`);
+  });
+
   const showSlide = (index) => {
     currentSlide = (index + slides.length) % slides.length;
+    if (track) {
+      track.style.transform = `translate3d(${-currentSlide * 100}%, 0, 0)`;
+    }
     slides.forEach((slide, i) => {
-      const active = i === currentSlide;
-      slide.classList.toggle("is-active", active);
-      slide.hidden = !active;
+      slide.classList.toggle("is-active", i === currentSlide);
+      slide.setAttribute("aria-hidden", String(i !== currentSlide));
     });
     dots.forEach((dot, i) => {
       const active = i === currentSlide;
@@ -295,6 +307,14 @@ const hpIcons = [
   "fa-briefcase",
   "fa-coins",
 ];
+const hpImages = [
+  "assets/home/solutions-section/family.png",
+  "assets/home/solutions-section/health.png",
+  "assets/home/solutions-section/education.png",
+  "assets/home/solutions-section/retirement.png",
+  "assets/home/solutions-section/business.png",
+  "assets/home/solutions-section/savings.png",
+];
 const hpTabs = document.getElementById("hpTabs");
 const hpInd = document.getElementById("hpInd");
 const hpPanel = document.getElementById("hpPanel");
@@ -351,7 +371,10 @@ if (hpTabs && hpInd && hpPanel) {
 
     const art = document.createElement("div");
     art.className = "hp-art";
-    art.innerHTML = `<div>Photo<br>${hpProducts[index][0]}</div>`;
+    const photo = document.createElement("img");
+    photo.src = hpImages[index];
+    photo.alt = title;
+    art.append(photo);
 
     panel.append(copy, art);
     hpPanel.replaceChildren(panel);
@@ -370,20 +393,38 @@ if (hpTabs && hpInd && hpPanel) {
   window.addEventListener("resize", moveIndicator);
 }
 
-// How it works: the step line and numbers animate once the steps are visible.
-const hpSteps = document.getElementById("hpSteps");
-if (hpSteps && "IntersectionObserver" in window && !prefersReducedMotion) {
-  const stepsObserver = new IntersectionObserver(
-    ([entry]) => {
-      if (!entry.isIntersecting) return;
-      hpSteps.classList.add("on");
-      stepsObserver.disconnect();
-    },
-    { threshold: 0.3 },
-  );
-  stepsObserver.observe(hpSteps);
-} else if (hpSteps) {
-  hpSteps.classList.add("on");
+// How it works: tapping a step shows its details in the panel below.
+const hpJr = document.getElementById("hpJr");
+if (hpJr) {
+  const hpTabs = [...hpJr.querySelectorAll(".hp-js")];
+  const hpPanels = [...document.querySelectorAll(".hp-jp")];
+  const showHpStep = (index) => {
+    hpTabs.forEach((tab, i) => {
+      const active = i === index;
+      tab.classList.toggle("on", active);
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+    });
+    hpPanels.forEach((panel, i) => {
+      panel.hidden = i !== index;
+    });
+    const panel = hpPanels[index];
+    if (panel && !prefersReducedMotion) {
+      panel.classList.remove("hp-jp-in");
+      void panel.offsetWidth;
+      panel.classList.add("hp-jp-in");
+    }
+  };
+  hpTabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => showHpStep(i));
+    tab.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+      const step = event.key === "ArrowRight" ? 1 : -1;
+      const nextIndex = (i + step + hpTabs.length) % hpTabs.length;
+      hpTabs[nextIndex].focus();
+      showHpStep(nextIndex);
+    });
+  });
 }
 
 // Announcement filter chips, built from the categories of the live cards.

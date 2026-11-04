@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Mega Paragon | About Us</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+    />
     <link rel="stylesheet" href="CSS/styles.css" />
     <link rel="stylesheet" href="CSS/about-prof.css" />
     <link rel="stylesheet" href="CSS/about-team.css" />
@@ -42,8 +46,9 @@
             <a href="contact">Contact Us</a>
           </div>
         </div>
-        <a class="login-link" href="https://portal.themegaparagon.net/login">
-          Login
+        <a class="login-link" href="https://portal.themegaparagon.net/">
+          <i class="fa-regular fa-user" aria-hidden="true"></i>
+          Log In
         </a>
       </nav>
     </header>
@@ -52,150 +57,160 @@
 
     <main class="profile-page">
       <!-- About Section -->
-      <section class="page-banner">
-        <div class="banner-inner">
-          <p class="profile-kicker">About Us</p>
-          <h1>About The Mega <em>Paragon</em></h1>
-          <p>
-            At The Mega Paragon, we are more than just life and wealth coaches —
-            we are a movement dedicated to fostering success and abundance.
-          </p>
-          <p>
-            Our mission is to empower individuals and families by promoting
-            personal and business growth, ensuring financial security for
-            generations to come.
-          </p>
+      <section class="a6 a6-hero" id="top">
+        <div class="a6-aurora" aria-hidden="true"></div>
+        <div class="a6-wrap a6-hgrid">
+          <div>
+            <div class="a6-kick">About us</div>
+            <h1>About The Mega <em>Paragon</em></h1>
+            <p class="a6-lead">
+              At The Mega Paragon, we are more than just life and wealth
+              coaches — we are a movement dedicated to fostering success and
+              abundance.
+            </p>
+            <p class="a6-lead">
+              Our mission is to empower individuals and families by promoting
+              personal and business growth, ensuring financial security for
+              generations to come.
+            </p>
+            <div class="a6-pillars">
+              <span>Life and wealth coaching</span>
+              <span>Financial advisory and planning</span>
+              <span>Leadership and business growth</span>
+            </div>
+          </div>
+          <div class="a6-hero-photo">
+            <img
+              src="assets/about/company-img.JPG"
+              alt="The Mega Paragon team together"
+            />
+          </div>
         </div>
-        <div class="profile-banner-collage" aria-label="The Mega Paragon team">
-          <img
-            src="assets/company-prof/company-img.JPG"
-            alt="The Mega Paragon team together"
+        <svg
+          class="a6-wedge"
+          viewBox="0 0 1440 90"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M0 90V50C240 0 560 0 860 38C1100 68 1280 70 1440 40V90Z" />
+          <path
+            class="gold"
+            d="M0 50C240 0 560 0 860 38C1100 68 1280 70 1440 40"
           />
-        </div>
+        </svg>
       </section>
 
       <!-- Company Description Section -->
 
-      <section class="profile-section profile-welcome">
-        <div class="profile-section-inner profile-two-column">
-          <div
-            class="profile-welcome-collage"
-            aria-label="Our Company images"
-            data-company-carousel
-          >
-            <div class="profile-company-carousel-viewport">
-              <div class="profile-company-carousel-track">
-                <figure class="profile-company-slide is-active">
-                  <img
-                    src="assets/company-prof/our-company/oc1.jpeg"
-                    alt="The Mega Paragon company gathering 1"
-                  />
-                </figure>
-                <figure class="profile-company-slide">
-                  <img
-                    src="assets/company-prof/our-company/oc2.jpeg"
-                    alt="The Mega Paragon company gathering 2"
-                  />
-                </figure>
-                <figure class="profile-company-slide">
-                  <img
-                    src="assets/company-prof/our-company/oc3.JPG"
-                    alt="The Mega Paragon company gathering 3"
-                  />
-                </figure>
-                <figure class="profile-company-slide">
-                  <img
-                    src="assets/company-prof/our-company/oc4.JPG"
-                    alt="The Mega Paragon company gathering 4"
-                  />
-                </figure>
-                <figure class="profile-company-slide">
-                  <img
-                    src="assets/company-prof/our-company/oc5.png"
-                    alt="The Mega Paragon company gathering 5"
-                  />
-                </figure>
-                <figure class="profile-company-slide">
-                  <img
-                    src="assets/company-prof/our-company/oc6.jpeg"
-                    alt="The Mega Paragon company gathering 6"
-                  />
-                </figure>
-                <figure class="profile-company-slide">
-                  <img
-                    src="assets/company-prof/our-company/oc7.png"
-                    alt="The Mega Paragon company gathering 7"
-                  />
-                </figure>
-                <figure class="profile-company-slide">
-                  <img
-                    src="assets/company-prof/our-company/oc8.JPG"
-                    alt="The Mega Paragon company gathering 8"
-                  />
-                </figure>
-                <figure class="profile-company-slide">
-                  <img
-                    src="assets/company-prof/our-company/oc9.png"
-                    alt="The Mega Paragon company gathering 9"
-                  />
-                </figure>
-                <figure class="profile-company-slide">
-                  <img
-                    src="assets/company-prof/our-company/oc10.jpg"
-                    alt="The Mega Paragon company gathering 10"
-                  />
-                </figure>
+      <section class="chap welcome a6 a6-welcome">
+        <div class="wrap">
+          <div class="wgrid">
+            <div data-rv>
+              <div class="kick">Welcome to</div>
+              <h2>Our <em>Company</em></h2>
+              <p class="tagline">
+                Empowering people to build a stronger, more secure financial
+                future.
+              </p>
+              <div class="pills">
+                <span>Coaching</span><span>Financial advisory</span
+                ><span>Leadership</span>
               </div>
             </div>
-            <button
-              class="profile-company-carousel-button profile-company-carousel-prev"
-              type="button"
-              aria-label="Previous company image"
-            >
-              &#8592;
-            </button>
-            <button
-              class="profile-company-carousel-button profile-company-carousel-next"
-              type="button"
-              aria-label="Next company image"
-            >
-              &#8594;
-            </button>
+            <div class="wtext" data-rv>
+              <p>
+                The Mega Paragon (TMP) is a dynamic and purpose-driven
+                organization composed of life and wealth coaches, financial
+                advisors, and business leaders dedicated to empowering
+                individuals, families, and organizations through financial
+                awareness, strategic planning, transformational leadership, and
+                holistic financial solutions.
+              </p>
+              <p>
+                Built on excellence, leadership, and innovation, TMP cultivates
+                a culture of growth, confidence, and meaningful impact while
+                helping clients and partners build secure and fulfilling lives.
+              </p>
+            </div>
           </div>
-          <div class="profile-copy">
-            <p class="profile-kicker">Welcome to</p>
-            <h2>Our <em>Company</em></h2>
-            <p class="profile-lead">
-              The Mega Paragon (TMP) is a dynamic and purpose-driven
-              organization composed of life and wealth coaches, financial
-              advisors, and business leaders dedicated to empowering
-              individuals, families, and organizations through financial
-              awareness, strategic planning, transformational leadership and
-              holistic financial solutions.
-            </p>
-            <p class="profile-lead">
-              Built on excellence, leadership, and innovation, TMP cultivates a
-              culture of growth, confidence, and meaningful impact while helping
-              clients and partners build secure and fulfilling lives.
-            </p>
-            <p class="profile-company-highlight">
-              Empowering people to build a stronger, more secure financial
-              future.
-            </p>
-            <div class="profile-company-meta" aria-label="Company focus areas">
-              <div>
-                <strong>01</strong>
-                <span>Our Purpose</span>
+          <div
+            class="car"
+            data-rv
+            data-welcome-carousel
+            aria-roledescription="carousel"
+            aria-label="Company photos"
+          >
+            <div class="track" data-welcome-track>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc1.jpeg"
+                  alt="The Mega Paragon company gathering 1"
+                />
               </div>
-              <div>
-                <strong>02</strong>
-                <span>Our People</span>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc2.jpeg"
+                  alt="The Mega Paragon company gathering 2"
+                />
               </div>
-              <div>
-                <strong>03</strong>
-                <span>Our Growth</span>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc3.JPG"
+                  alt="The Mega Paragon company gathering 3"
+                />
+              </div>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc4.JPG"
+                  alt="The Mega Paragon company gathering 4"
+                />
+              </div>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc5.png"
+                  alt="The Mega Paragon company gathering 5"
+                />
+              </div>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc6.jpeg"
+                  alt="The Mega Paragon company gathering 6"
+                />
+              </div>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc7.png"
+                  alt="The Mega Paragon company gathering 7"
+                />
+              </div>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc8.JPG"
+                  alt="The Mega Paragon company gathering 8"
+                />
+              </div>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc9.png"
+                  alt="The Mega Paragon company gathering 9"
+                />
+              </div>
+              <div class="slide">
+                <img
+                  src="assets/about/our-company/oc10.jpg"
+                  alt="The Mega Paragon company gathering 10"
+                />
               </div>
             </div>
+          </div>
+          <div class="cnav">
+            <button class="carbtn p" type="button" aria-label="Previous photo" data-welcome-prev>
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div class="cdots" data-welcome-dots></div>
+            <button class="carbtn n" type="button" aria-label="Next photo" data-welcome-next>
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
           </div>
         </div>
       </section>
@@ -207,7 +222,7 @@
           <div class="bg-frame bg-frame-1">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj1.jpeg"
+                src="assets/about/our-journey/oj1.jpeg"
                 alt="company group photo"
               />
             </div>
@@ -215,7 +230,7 @@
           <div class="bg-frame bg-frame-2">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj2.jpg"
+                src="assets/about/our-journey/oj2.jpg"
                 alt="company group photo"
               />
             </div>
@@ -223,7 +238,7 @@
           <div class="bg-frame bg-frame-3">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj3.jpg"
+                src="assets/about/our-journey/oj3.jpg"
                 alt="company group photo"
               />
             </div>
@@ -231,7 +246,7 @@
           <div class="bg-frame bg-frame-4">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj4.jpg"
+                src="assets/about/our-journey/oj4.jpg"
                 alt="company group photo"
               />
             </div>
@@ -239,7 +254,7 @@
           <div class="bg-frame bg-frame-5">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj5.JPG"
+                src="assets/about/our-journey/oj5.JPG"
                 alt="company group photo"
               />
             </div>
@@ -247,7 +262,7 @@
           <div class="bg-frame bg-frame-6">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj6.JPG"
+                src="assets/about/our-journey/oj6.JPG"
                 alt="company group photo"
               />
             </div>
@@ -255,7 +270,7 @@
           <div class="bg-frame bg-frame-7">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj7.JPG"
+                src="assets/about/our-journey/oj7.JPG"
                 alt="company group photo"
               />
             </div>
@@ -263,7 +278,7 @@
           <div class="bg-frame bg-frame-8">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj8.JPG"
+                src="assets/about/our-journey/oj8.JPG"
                 alt="company group photo"
               />
             </div>
@@ -271,7 +286,7 @@
           <div class="bg-frame bg-frame-9">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj9.jpg"
+                src="assets/about/our-journey/oj9.jpg"
                 alt="company group photo"
               />
             </div>
@@ -279,7 +294,7 @@
           <div class="bg-frame bg-frame-10">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj10.png"
+                src="assets/about/our-journey/oj10.png"
                 alt="company group photo"
               />
             </div>
@@ -287,7 +302,7 @@
           <div class="bg-frame bg-frame-11">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj11.JPG"
+                src="assets/about/our-journey/oj11.JPG"
                 alt="company group photo"
               />
             </div>
@@ -295,7 +310,7 @@
           <div class="bg-frame bg-frame-12">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj12.png"
+                src="assets/about/our-journey/oj12.png"
                 alt="company group photo"
               />
             </div>
@@ -303,7 +318,7 @@
           <div class="bg-frame bg-frame-13">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj13.JPG"
+                src="assets/about/our-journey/oj13.JPG"
                 alt="company group photo"
               />
             </div>
@@ -311,7 +326,7 @@
           <div class="bg-frame bg-frame-14">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj14.JPG"
+                src="assets/about/our-journey/oj14.JPG"
                 alt="company group photo"
               />
             </div>
@@ -319,7 +334,7 @@
           <div class="bg-frame bg-frame-15">
             <div class="image-placeholder">
               <img
-                src="assets/company-prof/our-journey/oj15.JPG"
+                src="assets/about/our-journey/oj15.JPG"
                 alt="company group photo"
               />
             </div>
@@ -329,12 +344,12 @@
         <!-- Irregular white space in the center -->
         <div class="background-center-panel" aria-hidden="true"></div>
         <div class="journey-content">
-          <section class="journey-card">
+          <section class="journey-card" data-rv="up">
             <div class="legacy-panel">
               <div class="legacy-image-placeholder">
                 <small
                   ><img
-                    src="assets/company-prof/our-journey/oj1.jpeg"
+                    src="assets/about/our-journey/oj1.jpeg"
                     alt="company group photo"
                 /></small>
               </div>
@@ -371,173 +386,112 @@
 
       <!-- Vision and Mission Section -->
 
-      <section
-        class="profile-section profile-principles vision-mission-section"
-      >
-        <div class="geometric-background" aria-hidden="true">
-          <svg
-            viewBox="0 0 1774 887"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g class="geo-blue-light">
-              <line x1="0" y1="58" x2="58" y2="0" />
-              <line x1="0" y1="214" x2="36" y2="178" />
-              <line x1="36" y1="178" x2="88" y2="126" />
-              <line x1="0" y1="257" x2="45" y2="212" />
-              <line x1="45" y1="212" x2="90" y2="167" />
-              <line x1="88" y1="157" x2="88" y2="248" />
-              <line x1="119" y1="130" x2="119" y2="218" />
-              <line x1="0" y1="290" x2="290" y2="0" />
-              <polyline points="0,667 130,790 185,840" />
-              <polyline points="0,750 90,830 153,887" />
-              <line x1="198" y1="819" x2="198" y2="887" />
-              <line x1="0" y1="1" x2="360" y2="1" />
-              <line x1="380" y1="1" x2="760" y2="1" />
-              <line x1="780" y1="1" x2="1120" y2="1" />
-              <line x1="1140" y1="1" x2="1500" y2="1" />
-              <line x1="1520" y1="1" x2="1774" y2="1" />
-            </g>
-            <g class="geo-gold">
-              <line x1="0" y1="150" x2="155" y2="0" />
-              <polyline points="1632,492 1632,470 1705,398 1774,330" />
-            </g>
-            <g class="geo-gold-soft">
-              <line x1="0" y1="205" x2="205" y2="0" />
-              <polyline points="0,576 198,819 238,857" />
-              <line x1="1774" y1="286" x2="1630" y2="430" />
-              <line x1="1774" y1="326" x2="1660" y2="440" />
-              <polyline points="1774,403 1640,535 1510,660 1280,887" />
-              <line x1="1632" y1="492" x2="1632" y2="887" />
-              <line x1="1720" y1="454" x2="1774" y2="400" />
-              <line x1="1718" y1="475" x2="1774" y2="420" />
-            </g>
-            <g class="geo-blue">
-              <line x1="0" y1="244" x2="245" y2="0" />
-              <line x1="90" y1="153" x2="90" y2="245" />
-              <polyline points="0,623 165,779 211,821" />
-              <polyline points="238,857 238,887" />
-              <polyline points="1774,450 1657,562 1518,697 1320,887" />
-              <line x1="1650" y1="474" x2="1650" y2="451" />
-              <line x1="1650" y1="451" x2="1718" y2="386" />
-              <line x1="1718" y1="386" x2="1774" y2="332" />
-              <line x1="1650" y1="475" x2="1650" y2="887" />
-              <line x1="1670" y1="455" x2="1670" y2="887" />
-              <line x1="1694" y1="430" x2="1694" y2="887" />
-              <line x1="1522" y1="650" x2="1522" y2="887" />
-              <line x1="1545" y1="628" x2="1545" y2="887" />
-            </g>
-          </svg>
-        </div>
-        <div class="background-glow" aria-hidden="true"></div>
-        <div
-          class="decor decor-top-left vision-decor vision-decor-top-left"
-          aria-hidden="true"
-        ></div>
-        <div
-          class="decor decor-bottom-right vision-decor vision-decor-bottom-right"
-          aria-hidden="true"
-        ></div>
-        <div
-          class="decor decor-right vision-decor vision-decor-right"
-          aria-hidden="true"
-        ></div>
-        <div class="profile-section-inner vision-mission-container">
-          <p class="profile-kicker vision-section-label section-label">
-            <span class="section-label-line"></span>
-            <span>Our Vision and Mission</span>
-          </p>
-          <div class="profile-card-grid vision-mission-grid">
-            <article class="profile-card vision-card">
-              <div class="vision-card-icon card-icon" aria-hidden="true">
-                <svg viewBox="0 0 64 64">
-                  <path
-                    d="M5 32C13 20 23 14 32 14s19 6 27 18c-8 12-18 18-27 18S13 44 5 32Z"
-                  />
-                  <circle cx="32" cy="32" r="8" />
-                  <circle cx="32" cy="32" r="2" fill="currentColor" />
-                  <path
-                    d="M32 5v5M32 54v5M9 9l4 4M51 51l4 4M55 9l-4 4M13 51l-4 4"
-                  />
-                </svg>
-              </div>
-              <h2 class="card-title">Our <span>Vision</span></h2>
+      <section class="a6 a6-vm-section">
+        <div class="a6-vm-inner">
+          <div class="a6-head a6-center" data-rv="up">
+            <div class="a6-kick a6-center">Our vision and mission</div>
+            <h2>What we <em>stand for</em></h2>
+          </div>
+          <div class="a6-vm">
+            <article class="a6-band a6-band-g" data-rv="up">
+              <span class="a6-bicon" aria-hidden="true"
+                ><i class="fa-solid fa-eye"></i
+              ></span>
+              <h3>Our <em>Vision</em></h3>
               <p>
                 A world where people and communities thrive and experience the
                 richness and beauty of a life well-lived, secured by financial
                 awareness and innovative financial solutions.
               </p>
-              <div class="card-detail" aria-hidden="true"></div>
             </article>
-            <article class="profile-card mission-card">
-              <div class="vision-card-icon card-icon" aria-hidden="true">
-                <svg viewBox="0 0 64 64">
-                  <path d="M8 52 26 28l11 14 7-9 13 19H8Z" />
-                  <path d="M26 28V10M26 11h17l-5 6 5 6H26" />
-                  <circle cx="17" cy="39" r="9" />
-                  <circle cx="17" cy="39" r="4" />
-                  <path d="M17 30v-3" />
-                </svg>
-              </div>
-              <h2 class="card-title">Our <span>Mission</span></h2>
+            <article class="a6-band a6-band-m" data-rv="up" style="--rd: 120ms">
+              <span class="a6-bicon" aria-hidden="true"
+                ><i class="fa-solid fa-bullseye"></i
+              ></span>
+              <h3>Our <em>Mission</em></h3>
               <p>
                 To empower individuals, families, and organizations through
                 client-centered, holistic, and innovative financial solutions
                 that cultivate stability, growth, and meaningful lives.
               </p>
-              <div class="card-detail" aria-hidden="true"></div>
             </article>
           </div>
         </div>
       </section>
-      <section class="profile-section profile-values">
-        <div class="profile-section-inner profile-values-inner">
-          <div class="profile-values-heading">
-            <p class="profile-kicker iricca-label">What guides us: IRICCA</p>
-            <h2>Our <em>Core Values</em></h2>
+      <section class="a6 a6-values">
+        <div class="a6-values-inner">
+          <div class="a6-head a6-head-dark a6-center" data-rv="up">
+            <div class="a6-kick a6-center">What guides us: IRICCA</div>
+            <h2>Our Core <em>Values</em></h2>
             <p>
               At The Mega Paragon, our values are the foundation of everything
               we do. IRICCA shapes how we lead, serve, and build lasting
               financial empowerment for individuals, families, and communities.
             </p>
           </div>
-          <div class="profile-values-grid">
-            <article class="profile-value-card">
+          <div class="a6-iricca" data-rv="up">
+            <div class="a6-seg"><b>I</b><span>Integrity</span></div>
+            <div class="a6-seg"><b>R</b><span>Respect</span></div>
+            <div class="a6-seg"><b>I</b><span>Innovative</span></div>
+            <div class="a6-seg"><b>C</b><span>Collaborative</span></div>
+            <div class="a6-seg"><b>C</b><span>Commitment</span></div>
+            <div class="a6-seg"><b>A</b><span>Accountability</span></div>
+          </div>
+          <div class="a6-vals">
+            <article class="a6-val" data-rv="up">
+              <div class="a6-vtop">
+                <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+              </div>
               <h3>Integrity</h3>
               <p>
                 We build trust through ethical guidance, honest relationships,
                 and responsible financial leadership.
               </p>
             </article>
-            <article class="profile-value-card">
+            <article class="a6-val" data-rv="up" style="--rd: 80ms">
+              <div class="a6-vtop">
+                <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+              </div>
               <h3>Respect</h3>
               <p>
                 We listen to every client, partner, and teammate with dignity,
                 empathy, and genuine care.
               </p>
             </article>
-            <article class="profile-value-card">
+            <article class="a6-val" data-rv="up" style="--rd: 160ms">
+              <div class="a6-vtop">
+                <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+              </div>
               <h3>Innovative</h3>
               <p>
                 We pursue forward-thinking strategies and practical solutions
                 that help people grow and thrive.
               </p>
             </article>
-            <article class="profile-value-card">
+            <article class="a6-val" data-rv="up" style="--rd: 240ms">
+              <div class="a6-vtop">
+                <i class="fa-solid fa-people-group" aria-hidden="true"></i>
+              </div>
               <h3>Collaborative</h3>
               <p>
                 We combine diverse strengths and shared expertise to create
                 better outcomes for the communities we serve.
               </p>
             </article>
-            <article class="profile-value-card">
+            <article class="a6-val" data-rv="up" style="--rd: 320ms">
+              <div class="a6-vtop">
+                <i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i>
+              </div>
               <h3>Commitment</h3>
               <p>
                 We stay dedicated to our clients' goals and to the consistent
                 pursuit of excellence in our work.
               </p>
             </article>
-            <article class="profile-value-card">
+            <article class="a6-val" data-rv="up" style="--rd: 400ms">
+              <div class="a6-vtop">
+                <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
+              </div>
               <h3>Accountability</h3>
               <p>
                 We take ownership of our decisions, follow through on our
@@ -548,20 +502,30 @@
         </div>
       </section>
 
-      <section class="team-hero">
-        <div class="team-hero-content">
-          <p class="team-eyebrow">Our leadership</p>
-          <h1>Meet the <span>Team</span></h1>
-          <p>
+      <section class="a6 a6-team" id="team">
+        <div class="a6-team-inner">
+          <div class="a6-kick a6-center" data-rv="up">Our leadership</div>
+          <h1 data-rv="up">Meet the <span>Team</span></h1>
+          <p class="a6-team-lead" data-rv="up" style="--rd: 120ms">
             Strong leadership. Dedicated teams. One vision. Get to know the
             people behind The Mega Paragon and the areas they guide.
           </p>
+          <div class="a6-vplace" data-rv="up" style="--rd: 240ms">
+            <iframe
+              src="https://www.youtube.com/embed/qEo8ourCX5k?enablejsapi=1"
+              title="Meet the Team - The Mega Paragon"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
       </section>
 
       <div class="team-main-container">
         <section class="team-section district-section">
-          <article class="district-card">
+          <article class="district-card" data-rv="up">
             <img
               class="district-card-background"
               src="assets/areas/dm/tmp-bg.png"
@@ -665,6 +629,7 @@
           </article>
           <section
             class="district-gallery"
+            data-rv="up"
             aria-label="District Manager image gallery"
           >
             <div class="district-gallery-heading">
@@ -802,7 +767,7 @@
         </section>
 
         <section class="team-section areas-section">
-          <div class="areas-section-heading">
+          <div class="areas-section-heading" data-rv="up">
             <p class="areas-small-title">The Mega Paragon</p>
             <h2>Our Areas</h2>
             <p>
@@ -810,7 +775,7 @@
               agents who make up their team.
             </p>
           </div>
-          <div class="areas-grid">
+          <div class="areas-grid" data-rv="up">
             <a class="area-card" href="ascent">
               <img
                 class="area-card-background"
@@ -827,8 +792,13 @@
               </div>
               <div class="area-content">
                 <h3>Paragon Ascent</h3>
-                <span>Area branch</span>
-                <div class="area-arrow" aria-hidden="true">&rarr;</div>
+                <p>
+                  Explore the leaders, branches, and teams that make up Paragon
+                  Ascent.
+                </p>
+                <div class="area-go">
+                  Explore the area <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </div>
               </div>
             </a>
             <a class="area-card" href="central">
@@ -846,8 +816,13 @@
               </div>
               <div class="area-content">
                 <h3>Paragon Central</h3>
-                <span>Area branch</span>
-                <div class="area-arrow" aria-hidden="true">&rarr;</div>
+                <p>
+                  Explore the leaders, branches, and teams that make up Paragon
+                  Central.
+                </p>
+                <div class="area-go">
+                  Explore the area <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </div>
               </div>
             </a>
             <a class="area-card" href="belimitless">
@@ -866,8 +841,13 @@
               </div>
               <div class="area-content">
                 <h3>Paragon Be Limitless</h3>
-                <span>Area branch</span>
-                <div class="area-arrow" aria-hidden="true">&rarr;</div>
+                <p>
+                  Explore the leaders, branches, and teams that make up Paragon
+                  Be Limitless.
+                </p>
+                <div class="area-go">
+                  Explore the area <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </div>
               </div>
             </a>
             <a class="area-card" href="ironeagles">
@@ -886,29 +866,19 @@
               </div>
               <div class="area-content">
                 <h3>Paragon Iron Eagles the Maximizer</h3>
-                <span>Area branch</span>
-                <div class="area-arrow" aria-hidden="true">&rarr;</div>
+                <p>
+                  Explore the leaders, branches, and teams that make up Paragon
+                  Iron Eagles the Maximizer.
+                </p>
+                <div class="area-go">
+                  Explore the area <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </div>
               </div>
             </a>
-          </div>
-          <div class="hierarchy-note">
-            <p>
-              <strong>Select an area</strong> to explore its complete leadership
-              structure:
-              <strong
-                >Area Manager &rarr; Branch Managers &rarr; Unit Managers &rarr;
-                Agents</strong
-              >
-            </p>
           </div>
         </section>
       </div>
 
-      <section class="team-bottom-banner">
-        <div class="team-gold-line"></div>
-        <h2>Different Paths. Same Mission.</h2>
-        <p>One team working together toward a bigger future.</p>
-      </section>
     </main>
     <footer class="site-footer">
       <div class="footer-content">
@@ -922,16 +892,16 @@
           </p>
           <h4>Follow Us</h4>
           <div class="social-links">
-            <a href="#" aria-label="Facebook"
+            <a href="https://www.facebook.com/TheMegaParagon" target="_blank" rel="noopener" aria-label="Facebook"
               ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
             ></a>
-            <a href="#" aria-label="Instagram"
+            <a href="https://www.instagram.com/themegaparagon/" target="_blank" rel="noopener" aria-label="Instagram"
               ><i class="fa-brands fa-instagram" aria-hidden="true"></i
             ></a>
-            <a href="#" aria-label="YouTube"
+            <a href="https://www.youtube.com/channel/UCFPcQxvugIlFvo3R4CVbzFA/about" target="_blank" rel="noopener" aria-label="YouTube"
               ><i class="fa-brands fa-youtube" aria-hidden="true"></i
             ></a>
-            <a href="#" aria-label="TikTok"
+            <a href="https://www.tiktok.com/@themegaparagon" target="_blank" rel="noopener" aria-label="TikTok"
               ><i class="fa-brands fa-tiktok" aria-hidden="true"></i
             ></a>
           </div>
@@ -973,6 +943,7 @@
     </footer>
     <script src="JS/scroll-state.js"></script>
     <script src="JS/navigation.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="JS/about-prof.js"></script>
     <script src="JS/about-team.js"></script>
     <a class="back-to-top" href="#" aria-label="Back to top"

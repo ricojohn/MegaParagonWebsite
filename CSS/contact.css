@@ -27,6 +27,13 @@
 .profile-nav-page .login-link::after {
   display: none;
 }
+.profile-nav-page .login-link {
+  font-weight: 700;
+  gap: 8px;
+}
+.profile-nav-page .login-link i {
+  font-size: 0.95rem;
+}
 .profile-nav-page .login-link:hover,
 .profile-nav-page .login-link:focus-visible {
   background: #fff;

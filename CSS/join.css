@@ -2,7 +2,7 @@
 .join-page *,
 .join-page *::before,
 .join-page *::after{box-sizing: inherit;}
-.join-page{margin: 0; font-family: Manrope, system-ui, Segoe UI, Arial, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6;}
+.join-page{margin: 0; font-family: Roboto, system-ui, Segoe UI, Arial, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6;}
 .join-page .wrap{max-width: 1160px; margin: 0 auto; padding: 0 24px;}
 .join-page .eyebrow{display: flex; align-items: center; gap: 12px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-d); margin-bottom: 14px;}
 .join-page .eyebrow::before{content: ""; width: 34px; height: 2px; background: var(--gold);}
@@ -14,7 +14,7 @@
 .join-page .center .sub{margin-inline: auto;}
 .join-page section{padding: 96px 0;}
 .join-page .soft{background: var(--soft);}
-.join-page .btn{display: inline-block; font: 800 15px Manrope, sans-serif; padding: 15px 28px; border-radius: 999px; border: 2px solid var(--gold); background: var(--gold); color: var(--navy); text-decoration: none; cursor: pointer; transition: transform 0.2s, background 0.2s, box-shadow 0.2s;}
+.join-page .btn{display: inline-block; font: 800 15px Roboto, sans-serif; padding: 15px 28px; border-radius: 999px; border: 2px solid var(--gold); background: var(--gold); color: var(--navy); text-decoration: none; cursor: pointer; transition: transform 0.2s, background 0.2s, box-shadow 0.2s;}
 .join-page .btn:hover{transform: translateY(-2px); background: var(--gold2); box-shadow: 0 10px 24px rgba(212, 168, 90, 0.4);}
 .join-page .cta-row{text-align: center; margin-top: 48px;}
 .join-page :focus-visible{outline: 3px solid var(--gold); outline-offset: 3px;}
@@ -46,14 +46,14 @@
 .join-page .card .s2{margin: 0 0 20px; color: #5b6b7f; font-size: 0.88rem;}
 .join-page .card label{display: block; font-size: 0.74rem; font-weight: 800; margin: 0 0 6px;}
 .join-page .card input,
-.join-page .card textarea{width: 100%; font: 500 15px Manrope, sans-serif; padding: 13px 14px; border: 1.5px solid #e1e5ea; border-radius: 10px; margin-bottom: 16px; background: #f6f7f9; color: #0a2240; transition: border-color 0.2s, box-shadow 0.2s;}
+.join-page .card textarea{width: 100%; font: 500 15px Roboto, sans-serif; padding: 13px 14px; border: 1.5px solid #e1e5ea; border-radius: 10px; margin-bottom: 16px; background: #f6f7f9; color: #0a2240; transition: border-color 0.2s, box-shadow 0.2s;}
 .join-page .card textarea{min-height: 110px; resize: vertical;}
 .join-page .card input:focus,
 .join-page .card textarea:focus{outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212, 168, 90, 0.3); background: #fff;}
 .join-page .card input.bad{border-color: #c0392b;}
 .join-page .card .hint{margin: -10px 0 16px; font-size: 0.72rem; color: #5b6b7f;}
 .join-page .card .row{display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px;}
-.join-page .card .submit{width: 100%; border-radius: 10px; border: 0; background: #dba843; color: #0a2240; font: 800 15px Manrope, sans-serif; padding: 15px; cursor: pointer; transition: background 0.2s, transform 0.2s;}
+.join-page .card .submit{width: 100%; border-radius: 10px; border: 0; background: #dba843; color: #0a2240; font: 800 15px Roboto, sans-serif; padding: 15px; cursor: pointer; transition: background 0.2s, transform 0.2s;}
 .join-page .card .submit:hover{background: var(--gold2); transform: translateY(-1px);}
 .join-page .ok{text-align: center; padding: 40px 0;}
 .join-page .tick{width: 64px; height: 64px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; font-size: 30px; margin: 0 auto 14px;}
@@ -97,7 +97,7 @@
 .join-page .team-carousel-track{display: flex; transition: transform 0.35s ease;}
 .join-page .team-slide{position: relative; flex: 0 0 100%; aspect-ratio: 16 / 9; margin: 0; overflow: hidden;}
 .join-page .team-slide img{display: block; width: 100%; height: 100%; object-fit: cover;}
-.join-page .team-slide figcaption{position: absolute; right: 16px; bottom: 14px; padding: 6px 12px; border: 1px solid var(--gold); border-radius: 999px; background: rgba(7, 27, 51, 0.82); color: var(--gold2); font: 800 0.72rem Manrope, sans-serif; letter-spacing: 0.12em; text-transform: uppercase;}
+.join-page .team-slide figcaption{position: absolute; right: 16px; bottom: 14px; padding: 6px 12px; border: 1px solid var(--gold); border-radius: 999px; background: rgba(7, 27, 51, 0.82); color: var(--gold2); font: 800 0.72rem Roboto, sans-serif; letter-spacing: 0.12em; text-transform: uppercase;}
 .join-page .team-carousel-control{display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--gold); border-radius: 50%; background: var(--navy); color: var(--gold2); cursor: pointer; font-size: 1rem; transition: transform 0.2s ease, background 0.2s ease;}
 .join-page .team-carousel-control:hover,.join-page .team-carousel-control:focus-visible{transform: scale(1.08); background: var(--gold); color: var(--navy);}
 .join-page .two{display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start;}
