@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="CSS/styles.css?v=2" />
 
     <!-- Home-page styles control the video hero and announcements section. -->
-    <link rel="stylesheet" href="CSS/home.css?v=2" />
+    <link rel="stylesheet" href="CSS/home.css?v=4" />
 
     <!-- External icon library used by the social links and video controls. -->
     <link
@@ -26,6 +26,10 @@
     <!-- Browser tab icon and font-loading optimization. -->
     <link rel="icon" type="image/png" href="assets/mainlogo/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:ital,wght@0,500;0,700;0,800;1,700;1,800&display=swap"
+    />
   </head>
 
   <!-- Home page: the home-page class enables home-specific CSS overrides. -->
@@ -62,7 +66,8 @@
 
         <!-- External link to the Mega Paragon portal login page. -->
         <a class="login-link" href="https://portal.themegaparagon.net/">
-          Login
+          <i class="fa-regular fa-user" aria-hidden="true"></i>
+          Log In
         </a>
       </nav>
     </header>
@@ -81,135 +86,304 @@
         </div>
         <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
 
-        <!-- Centered hero stage. The first screen shows only the video (sized to
-             the device); the messaging, calls to action, and trust indicators
-             sit below it and appear as the visitor scrolls. -->
-        <div class="stage">
-          <!-- Framed hero YouTube video card. -->
-          <div class="hero-first">
-          <div class="hero-video-column">
-            <div class="vwrap in">
-              <div class="vcard">
-                        <div class="hero-media">
-                          <iframe
-                            id="heroYoutubePlayer"
-                            class="hero-youtube-video"
-                            src="https://www.youtube.com/embed/-AVa4GpS-BM?autoplay=1&mute=1&loop=1&playlist=-AVa4GpS-BM&controls=1&rel=0&enablejsapi=1"
-                            title="The Mega Paragon"
-                            allow="autoplay; encrypted-media; picture-in-picture"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen
-                          ></iframe>
-                        </div>
+        <!-- Hero carousel: video first, followed by the Take control message. -->
+        <div class="stage hero-carousel" id="heroCarousel">
+          <div class="hero-viewport">
+          <div class="hero-slides" id="heroSlides">
+            <!-- Video slide. -->
+            <div class="hero-slide hero-slide-video is-active" data-slide="0">
+              <div class="hero-first">
+                <div class="hero-video-column">
+                  <p class="hero-video-eyebrow" data-reveal="up">Welcome to The Mega Paragon</p>
+                  <h2 class="hero-video-title" data-reveal="up" data-delay="60">
+                    Our story. <span>Our purpose.</span>
+                  </h2>
+                  <p class="hero-video-subtitle" data-reveal="up" data-delay="120">
+                    Discover the people and purpose behind The Mega Paragon.
+                  </p>
+                  <div class="vwrap in">
+                    <div class="vcard">
+                      <div class="hero-media">
+                        <iframe
+                          id="heroYoutubePlayer"
+                          class="hero-youtube-video"
+                          src="https://www.youtube.com/embed/-AVa4GpS-BM?autoplay=1&mute=1&loop=1&playlist=-AVa4GpS-BM&controls=1&rel=0&enablejsapi=1"
+                          title="The Mega Paragon"
+                          allow="autoplay; encrypted-media; picture-in-picture"
+                          referrerpolicy="strict-origin-when-cross-origin"
+                          allowfullscreen
+                        ></iframe>
                       </div>
-
-            </div>
-            <div class="hero-video-meta">
-              <p class="hint in">
-                Playing muted. Use the YouTube controls to enable sound, pause,
-                or skip ahead.
-              </p>
-            </div>
-          </div>
-          </div>
-
-          <div class="hero-copy" id="heroCopy">
-            <!-- Primary home-page message and supporting description. -->
-            <h1 class="hero-title" data-reveal="up">
-              Take control.
-              <span>Build what's next.</span>
-            </h1>
-            <p class="hero-lead" data-reveal="up" data-delay="120">
-              Guidance from licensed advisors to protect your family and grow
-              your future, backed by Pru Life UK.
-            </p>
-
-            <!-- Primary visitor actions: consultation and recruitment. -->
-            <div class="cta" data-reveal="up" data-delay="240">
-              <a class="btn btn-gold" href="prod-serv.html"
-                >Book a free consultation</a
-              >
-              <a class="btn btn-line" href="join.html">Join our team</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <!-- Scrolls to the announcements section on this page. -->
-            <a
-              class="news-cta"
-              data-reveal="up"
-              data-delay="360"
-              href="#announcements"
-              ><span class="dot" aria-hidden="true"></span>See what's
-              happening<span class="arr" aria-hidden="true">&darr;</span></a
-            >
+                    <!-- Take control slide. -->
+                    <div class="hero-slide hero-slide-take" data-slide="1">
+                      <div class="hero-slide-grid">
+                        <div class="hero-copy" id="heroCopy">
+                          <h1 class="hero-title" data-reveal="up">
+                            Take control.
+                            <span>Build what's next.</span>
+                          </h1>
+                          <p class="hero-lead" data-reveal="up" data-delay="120">
+                            Guidance from licensed advisors to protect your family and
+                            grow your future, backed by Pru Life UK.
+                          </p>
+                          <div class="cta" data-reveal="up" data-delay="240">
+                            <a class="btn btn-gold" href="prod-serv.html"
+                              >Book a free consultation</a
+                            >
+                            <a class="btn btn-line" href="join.html">Join our team</a>
+                          </div>
+                          <a
+                            class="news-cta"
+                            data-reveal="up"
+                            data-delay="360"
+                            href="#announcements"
+                            ><span class="dot" aria-hidden="true"></span>See what's
+                            happening<span class="arr" aria-hidden="true"
+                              >&darr;</span
+                            ></a
+                          >
+                          <ul class="trust" data-reveal="up" data-delay="480">
+                            <li>Licensed advisors who listen first</li>
+                            <li>Plans built around your family</li>
+                            <li>Free first consultation, no pressure</li>
+                          </ul>
+                          <span class="badge" data-reveal="up" data-delay="600"
+                            >In partnership with <em>&nbsp; Pru Life UK</em></span
+                          >
+                        </div>
+                        <img
+                          class="hero-slide-photo"
+                          src="assets/home/hero-carousel/slide-1.png"
+                          alt="A smiling family relaxing together on a sofa as the sun sets over the city"
+                          width="1448"
+                          height="1086"
+                          loading="lazy"
+                          data-reveal="up"
+                          data-delay="200"
+                        />
+                      </div>
+                    </div>
 
-            <!-- Trust indicators supporting the hero message. -->
-            <ul class="trust" data-reveal="up" data-delay="480">
-              <li>Licensed advisors who listen first</li>
-              <li>Plans built around your family</li>
-              <li>Free first consultation, no pressure</li>
-            </ul>
+                    <!-- Protection slide. -->
+                    <div class="hero-slide hero-slide-message" data-slide="2">
+                      <div class="hero-slide-grid">
+                        <div class="hero-copy">
+                          <p class="hero-slide-eyebrow" data-reveal="up">Your future, our commitment</p>
+                          <h1 class="hero-title" data-reveal="up">
+                            Every tomorrow begins with
+                            <span>what matters today.</span>
+                          </h1>
+                          <p class="hero-lead" data-reveal="up" data-delay="120">
+                            Your family. Your dreams. Your future. At The Mega Paragon, we
+                            help you take the next step with guidance built around what
+                            matters most to you.
+                          </p>
+                          <div class="cta" data-reveal="up" data-delay="240">
+                            <a class="btn btn-gold" href="prod-serv.html#inquire">Talk to an Advisor</a>
+                            <a class="btn btn-line" href="prod-serv.html">Explore Our Services</a>
+                          </div>
+                          <p class="hero-slide-note" data-reveal="up" data-delay="360">
+                            Thoughtful guidance. <strong>Personalized around your goals.</strong>
+                          </p>
+                        </div>
+                        <img
+                          class="hero-slide-photo"
+                          src="assets/home/hero-carousel/slide-2.png"
+                          alt="A licensed advisor walking a client through a plan on a laptop"
+                          width="1448"
+                          height="1086"
+                          loading="lazy"
+                          data-reveal="up"
+                          data-delay="200"
+                        />
+                      </div>
+                    </div>
 
-            <!-- Partnership badge centered below the trust indicators. -->
-            <span class="badge" data-reveal="up" data-delay="600"
-              >In partnership with <em>&nbsp; Pru Life UK</em></span
-            >
+                    <!-- Savings slide. -->
+                    <div class="hero-slide hero-slide-message" data-slide="3">
+                      <div class="hero-slide-grid">
+                        <div class="hero-copy">
+                          <p class="hero-slide-eyebrow" data-reveal="up">Protect what matters</p>
+                          <h1 class="hero-title" data-reveal="up">
+                            For the people who make
+                            <span>life worth living.</span>
+                          </h1>
+                          <p class="hero-lead" data-reveal="up" data-delay="120">
+                            Life is full of moments worth protecting. Prepare for life's
+                            uncertainties so you can focus on sharing more of them with the
+                            ones you love.
+                          </p>
+                          <div class="cta" data-reveal="up" data-delay="240">
+                            <a class="btn btn-gold" href="prod-serv.html">Explore Protection</a>
+                            <a class="btn btn-line" href="prod-serv.html#inquire">Talk to an Advisor</a>
+                          </div>
+                          <p class="hero-slide-note" data-reveal="up" data-delay="360">
+                            A stronger sense of security for <strong>every stage of life.</strong>
+                          </p>
+                        </div>
+                        <img
+                          class="hero-slide-photo hero-slide-photo--wide"
+                          src="assets/home/hero-carousel/slide-3.png"
+                          alt="A glass shield protecting a family and their home under a tree"
+                          width="1672"
+                          height="941"
+                          loading="lazy"
+                          data-reveal="up"
+                          data-delay="200"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Career slide. -->
+                    <div class="hero-slide hero-slide-message" data-slide="4">
+                      <div class="hero-slide-grid">
+                        <div class="hero-copy">
+                          <p class="hero-slide-eyebrow" data-reveal="up">Plan for possibilities</p>
+                          <h1 class="hero-title" data-reveal="up">
+                            The dreams you have today
+                            <span>deserve a tomorrow.</span>
+                          </h1>
+                          <p class="hero-lead" data-reveal="up" data-delay="120">
+                            A home of your own. An education for your children. A
+                            retirement you've worked hard for. Whatever your dreams may be,
+                            we're here to help you plan for them.
+                          </p>
+                          <div class="cta" data-reveal="up" data-delay="240">
+                            <a class="btn btn-gold" href="prod-serv.html">Plan Your Future</a>
+                            <a class="btn btn-line" href="about.html">Meet Our Team</a>
+                          </div>
+                          <p class="hero-slide-note" data-reveal="up" data-delay="360">
+                            Your dreams deserve <strong>a thoughtful plan.</strong>
+                          </p>
+                        </div>
+                        <img
+                          class="hero-slide-photo hero-slide-photo--wide"
+                          src="assets/home/hero-carousel/slide-4.png"
+                          alt="An hourglass, keepsakes and a compass beside a shield and family house"
+                          width="1672"
+                          height="941"
+                          loading="lazy"
+                          data-reveal="up"
+                          data-delay="200"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Grow with purpose slide. -->
+                    <div class="hero-slide hero-slide-message" data-slide="5">
+                      <div class="hero-slide-grid">
+                        <div class="hero-copy">
+                          <p class="hero-slide-eyebrow" data-reveal="up">Grow with purpose</p>
+                          <h1 class="hero-title" data-reveal="up">
+                            Your purpose could change
+                            <span>someone's tomorrow.</span>
+                          </h1>
+                          <p class="hero-lead" data-reveal="up" data-delay="120">
+                            Discover a career where growth goes beyond personal success.
+                            Learn, lead, and make a meaningful difference in the lives of
+                            Filipino families.
+                          </p>
+                          <div class="cta" data-reveal="up" data-delay="240">
+                            <a class="btn btn-gold" href="join.html">Grow With Us</a>
+                            <a class="btn btn-line" href="about.html">Discover Our Story</a>
+                          </div>
+                          <p class="hero-slide-note" data-reveal="up" data-delay="360">
+                            Real mentorship. <strong>Meaningful opportunities.</strong>
+                          </p>
+                        </div>
+                        <img
+                          class="hero-slide-photo"
+                          src="assets/home/hero-carousel/slide-5.png"
+                          alt="A group of colleagues smiling together around a laptop"
+                          width="1448"
+                          height="1086"
+                          loading="lazy"
+                          data-reveal="up"
+                          data-delay="200"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
+                  <div class="hero-controls">
+                    <button
+                      class="hero-nav hero-prev"
+                      type="button"
+                      aria-label="Previous slide"
+                    >
+                      <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <div class="hero-dots" role="tablist" aria-label="Hero slides">
+                      <button
+                        class="hero-dot is-active"
+                        type="button"
+                        role="tab"
+                        aria-selected="true"
+                        aria-label="Show video slide"
+                        data-go="0"
+                      ></button>
+                      <button
+                        class="hero-dot"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-label="Show Take control slide"
+                        data-go="1"
+                      ></button>
+                      <button
+                        class="hero-dot"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-label="Show protection slide"
+                        data-go="2"
+                      ></button>
+                      <button
+                        class="hero-dot"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-label="Show savings slide"
+                        data-go="3"
+                      ></button>
+                      <button
+                        class="hero-dot"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-label="Show career slide"
+                        data-go="4"
+                      ></button>
+                      <button
+                        class="hero-dot"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-label="Show grow with purpose slide"
+                        data-go="5"
+                      ></button>
+                    </div>
+                    <button
+                      class="hero-nav hero-next"
+                      type="button"
+                      aria-label="Next slide"
+                    >
+                      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                  </div>
           </div>
         </div>
 
-        <!-- Curved transition from the navy hero into the white announcements
-             section below. -->
-        <svg
-          class="curve"
-          viewBox="0 0 1440 90"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0 90V40C240 -10 560 -10 860 28C1100 58 1280 60 1440 30V90Z"
-          ></path>
-          <path
-            class="gold-edge"
-            d="M0 40C240 -10 560 -10 860 28C1100 58 1280 60 1440 30"
-          ></path>
-        </svg>
+        <!-- Straight gold line along the bottom edge of the hero. -->
+        <span class="hero-gold-line" aria-hidden="true"></span>
       </section>
-
-      <!-- Announcements preview section. JS/announcements.js loads the latest
-           announcements into the news grid below. -->
-      <section class="news-section page-content" id="announcements">
-        <div class="announcements-arcs" aria-hidden="true">
-          <span class="announcement-ring announcement-ring-top"></span>
-          <span class="announcement-ring announcement-ring-bottom"></span>
-        </div>
-        <div class="section-heading">
-          <div data-reveal="up">
-            <p class="page-kicker">WHAT'S HAPPENING</p>
-            <h2>Stay Informed. <em>Stay Connected.</em></h2>
-          </div>
-          <p data-reveal="up" data-delay="150">
-            Get the latest updates on our announcements, upcoming events, and
-            company news. Be part of our journey.
-          </p>
-        </div>
-        <div class="news-container">
-          <!-- Announcement cards are inserted here from the announcements API. -->
-          <div class="news-grid" aria-live="polite" aria-busy="true">
-            <!-- Loading placeholders. JS/home.js removes them as soon as the
-                 real announcement cards are inserted. -->
-            <div class="news-skeleton" aria-hidden="true"><i class="sk-img"></i><i class="sk-chip"></i><i class="sk-line w70"></i><i class="sk-line"></i><i class="sk-line w85"></i></div>
-            <div class="news-skeleton" aria-hidden="true"><i class="sk-img"></i><i class="sk-chip"></i><i class="sk-line w70"></i><i class="sk-line"></i><i class="sk-line w85"></i></div>
-            <div class="news-skeleton" aria-hidden="true"><i class="sk-img"></i><i class="sk-chip"></i><i class="sk-line w70"></i><i class="sk-line"></i><i class="sk-line w85"></i></div>
-          </div>
-        </div>
-        <div class="news-footer">
-          <!-- Takes visitors to the full announcements page. -->
-          <a href="announcements" class="view-all-btn" data-reveal="zoom"
-            >View All Updates
-            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i
-          ></a>
-        </div>
-      </section>
-    </main>
 
     <!-- Announcement detail modal. Its contents are filled dynamically when a
          visitor selects an announcement card. -->
@@ -232,7 +406,7 @@
           type="button"
           aria-label="Close announcement"
         >
-          <span aria-hidden="true">&times;</span>
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
 
         <!-- Dynamic announcement metadata and content targets. -->
@@ -242,6 +416,210 @@
         <p id="homeAnnouncementModalBody"></p>
       </article>
     </div>
+
+    <!-- Entry points: three paths into the site. -->
+    <section class="hp-section hp-tiles" aria-label="Get started">
+      <div class="hp-wrap">
+        <div class="hp-tgrid">
+          <a class="hp-tile" href="prod-serv.html" data-reveal="up" style="--c: #d4a85a">
+            <div class="hp-ic"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i></div>
+            <h3>Get a free quote</h3>
+            <p>Tell us what you need and we'll find the right plan for your family.</p>
+            <span class="hp-go">Get started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="hp-tile" href="#find" data-reveal="up" data-delay="90" style="--c: #2f6fb3">
+            <div class="hp-ic"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i></div>
+            <h3>Explore our products</h3>
+            <p>Life, health, education, retirement, business and investment plans.</p>
+            <span class="hp-go">See what's covered <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="hp-tile" href="join.html" data-reveal="up" data-delay="180" style="--c: #a87a22">
+            <div class="hp-ic"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
+            <h3>Join our team</h3>
+            <p>Build a rewarding career helping Filipino families protect their future.</p>
+            <span class="hp-go">Start your journey <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product finder: tabs switch the product details shown below. -->
+    <section class="hp-section" id="find">
+      <div class="hp-wrap">
+        <div class="hp-center" data-reveal="up">
+          <p class="hp-kick">Our insurance solutions</p>
+          <h2>What do you want <em>to protect?</em></h2>
+          <p class="hp-mut">
+            We offer a comprehensive range of life insurance products designed
+            specifically for Filipino families and individuals.
+          </p>
+        </div>
+        <div class="hp-tabs" id="hpTabs" role="tablist" data-reveal="up">
+          <span class="hp-ind" id="hpInd"></span>
+        </div>
+        <div id="hpPanel" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- How it works: tap a step to see its details; the panel fades in. -->
+
+    <section class="hp-section hp-journey-dark" id="steps-section">
+      <div class="hp-wrap">
+        <div class="hp-center" data-reveal="up">
+          <p class="eyebrow">How it works</p>
+          <h2>Three simple <span class="g">steps</span></h2>
+          <p class="hp-mut">From your first message to a plan that fits, we stay with you.</p>
+        </div>
+        <div class="hp-journey" data-reveal="up" data-delay="140">
+          <div class="hp-jr" id="hpJr" role="tablist" aria-label="How it works steps">
+            <button class="hp-js on" type="button" role="tab" id="hpJt-0" aria-controls="hpJp-0" aria-selected="true">
+              <span class="hp-n">1</span><b>Tell us what matters</b>
+            </button>
+            <button class="hp-js" type="button" role="tab" id="hpJt-1" aria-controls="hpJp-1" aria-selected="false" tabindex="-1">
+              <span class="hp-n">2</span><b>Get a plan built around you</b>
+            </button>
+            <button class="hp-js" type="button" role="tab" id="hpJt-2" aria-controls="hpJp-2" aria-selected="false" tabindex="-1">
+              <span class="hp-n">3</span><b>We stay with you</b>
+            </button>
+          </div>
+          <div class="hp-jp" id="hpJp-0" role="tabpanel" aria-labelledby="hpJt-0">
+            <div>
+              <h3>Step 1: Tell us what matters</h3>
+              <p>Share your goals and worries in a short message or a free consultation.</p>
+            </div>
+            <a class="btn btn-gold" href="prod-serv.html#inquire">Book a free consultation</a>
+          </div>
+          <div class="hp-jp" id="hpJp-1" role="tabpanel" aria-labelledby="hpJt-1" hidden>
+            <div>
+              <h3>Step 2: Get a plan built around you</h3>
+              <p>A licensed advisor listens first, then recommends options for your family.</p>
+            </div>
+            <a class="btn btn-gold" href="prod-serv.html#inquire">Book a free consultation</a>
+          </div>
+          <div class="hp-jp" id="hpJp-2" role="tabpanel" aria-labelledby="hpJt-2" hidden>
+            <div>
+              <h3>Step 3: We stay with you</h3>
+              <p>Reviews, questions and support, as your life changes.</p>
+            </div>
+            <a class="btn btn-gold" href="prod-serv.html#inquire">Book a free consultation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Announcements preview section. JS/announcements.js loads the latest
+         announcements into the news grid below. -->
+    <section class="news-section page-content" id="announcements">
+      <div class="announcements-arcs" aria-hidden="true">
+        <span class="announcement-ring announcement-ring-top"></span>
+        <span class="announcement-ring announcement-ring-bottom"></span>
+      </div>
+      <div class="section-heading">
+        <div data-reveal="up">
+          <p class="page-kicker">WHAT'S HAPPENING</p>
+          <h2>Stay Informed. <em>Stay Connected.</em></h2>
+        </div>
+        <p data-reveal="up" data-delay="150">
+          Get the latest updates on our announcements, upcoming events, and
+          company news. Be part of our journey.
+        </p>
+      </div>
+      <div class="bn" id="newsBanner" aria-roledescription="carousel" aria-label="Latest announcements" data-reveal="up" hidden>
+        <div class="ct" id="newsBannerDots"></div>
+        <div class="ar">
+          <button type="button" id="newsBannerPrev" aria-label="Previous update"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button><button type="button" id="newsBannerNext" aria-label="Next update"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="news-filters" id="newsFilters" role="group" aria-label="Filter announcements" hidden></div>
+      <div class="news-container">
+        <!-- Announcement cards are inserted here from the announcements API. -->
+        <div class="news-grid" aria-live="polite" aria-busy="true">
+          <!-- Loading placeholders. JS/home.js removes them as soon as the
+               real announcement cards are inserted. -->
+          <div class="news-skeleton" aria-hidden="true">
+            <i class="sk-img"></i><i class="sk-chip"></i
+            ><i class="sk-line w70"></i><i class="sk-line"></i
+            ><i class="sk-line w85"></i>
+          </div>
+          <div class="news-skeleton" aria-hidden="true">
+            <i class="sk-img"></i><i class="sk-chip"></i
+            ><i class="sk-line w70"></i><i class="sk-line"></i
+            ><i class="sk-line w85"></i>
+          </div>
+          <div class="news-skeleton" aria-hidden="true">
+            <i class="sk-img"></i><i class="sk-chip"></i
+            ><i class="sk-line w70"></i><i class="sk-line"></i
+            ><i class="sk-line w85"></i>
+          </div>
+        </div>
+      </div>
+      <div class="news-footer">
+        <!-- Takes visitors to the full announcements page. -->
+        <a href="announcements" class="view-all-btn" data-reveal="zoom"
+          >View All Updates
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- About our team: team photo on the left, story text and CTA on the right. -->
+    <section class="hp-section hp-career" id="career">
+      <div class="hp-wrap hp-cgrid">
+        <div class="hp-career-photo" data-reveal="left">
+          <img src="assets/home/home-about-section.jpg" alt="A figure walking toward the light at the end of a corridor" loading="lazy" />
+        </div>
+        <div data-reveal="right">
+          <p class="hp-kick">Built on People. Driven by Purpose.</p>
+          <h2>Behind every future worth building, there are people who believe in it.</h2>
+          <p class="hp-mut">
+            Every family has a dream worth protecting. A home to build, children to provide for, and a future to look forward to. At The Mega Paragon, we believe these dreams deserve more than good intentions — they deserve guidance, preparation, and people who genuinely care.
+          </p>
+          <p class="hp-mut">
+            That belief brings our community of life and wealth coaches together. Through mentorship, meaningful relationships, and a shared commitment to growth, we help Filipinos take thoughtful steps toward financial security while empowering our people to build careers that make a difference. Because when we help others move closer to the future they envision, we build something greater than success. We build a legacy that reaches beyond ourselves.
+          </p>
+          <div class="hp-cpts">
+            <span>Purposeful mentorship</span><span>Personal growth</span><span>Meaningful recognition</span><span>Lasting impact</span>
+          </div>
+          <a class="hp-btn" href="about.html">Know more about us <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="hp-section" id="faq">
+      <div class="hp-wrap">
+        <div class="hp-center" data-reveal="up">
+          <p class="hp-kick">Questions</p>
+          <h2>Good to <em>know</em></h2>
+          <p class="hp-mut">Quick answers before you get in touch.</p>
+        </div>
+        <div class="hp-faq" data-reveal="up">
+          <details open>
+            <summary>How do I get a free consultation?</summary>
+            <p>
+              <a href="contact.html">Send us a short message</a>. A member of our team
+              will get back to you as soon as possible.
+            </p>
+          </details>
+          <details>
+            <summary>Are your advisors licensed?</summary>
+            <p>Yes. We work with licensed advisors who listen first, then build plans around your family.</p>
+          </details>
+          <details>
+            <summary>What can I get coverage for?</summary>
+            <p>
+              Family protection, education, health, retirement, business, and investment-linked plans.
+              Tell us your situation and we'll point you to a good starting point.
+            </p>
+          </details>
+          <details>
+            <summary>Does a consultation oblige me to buy?</summary>
+            <p>No. The first conversation is free, with no pressure.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+    </main>
 
     <!-- Shared site footer containing brand information, social links,
          navigation categories, partner branding, and legal links. -->
@@ -258,16 +636,16 @@
           </p>
           <h4>Follow Us</h4>
           <div class="social-links">
-            <a href="#" aria-label="Facebook"
+            <a href="https://www.facebook.com/TheMegaParagon" target="_blank" rel="noopener" aria-label="Facebook"
               ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
             ></a>
-            <a href="#" aria-label="Instagram"
+            <a href="https://www.instagram.com/themegaparagon/" target="_blank" rel="noopener" aria-label="Instagram"
               ><i class="fa-brands fa-instagram" aria-hidden="true"></i
             ></a>
-            <a href="#" aria-label="YouTube"
+            <a href="https://www.youtube.com/channel/UCFPcQxvugIlFvo3R4CVbzFA/about" target="_blank" rel="noopener" aria-label="YouTube"
               ><i class="fa-brands fa-youtube" aria-hidden="true"></i
             ></a>
-            <a href="#" aria-label="TikTok"
+            <a href="https://www.tiktok.com/@themegaparagon" target="_blank" rel="noopener" aria-label="TikTok"
               ><i class="fa-brands fa-tiktok" aria-hidden="true"></i
             ></a>
           </div>
@@ -314,9 +692,7 @@
 
     <!-- Floating control that returns visitors to the top of the home page. -->
     <a class="back-to-top" href="#hero" aria-label="Back to top">
-      <span aria-hidden="true"
-        ><i class="fa-solid fa-angles-up"></i
-      ></span>
+      <span aria-hidden="true"><i class="fa-solid fa-angles-up"></i></span>
       <span class="back-to-top-label">Back to top</span>
     </a>
 
@@ -324,8 +700,14 @@
          home video controls. -->
     <script src="JS/scroll-state.js"></script>
     <script src="JS/announcements.js?v=hostinger-php-1"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.9.1/tsparticles.slim.bundle.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.9.1/tsparticles.slim.bundle.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"
+    ></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="JS/navigation.js?v=hostinger-php-1"></script>
     <script src="JS/home.js?v=hostinger-php-1"></script>

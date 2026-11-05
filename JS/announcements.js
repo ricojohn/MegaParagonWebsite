@@ -114,6 +114,27 @@ function populateAnnouncementFilters(announcements) {
   }
 }
 
+const FALLBACK_ANNOUNCEMENT_IMAGE = "assets/mainlogo/TMP Logo with Outline.png";
+
+function createAnnouncementImage(announcement, className = "") {
+  const image = document.createElement("img");
+  if (className) image.className = className;
+  image.src = announcement.featured_image_url || FALLBACK_ANNOUNCEMENT_IMAGE;
+  image.alt = announcement.title || "Announcement image";
+  image.loading = "lazy";
+  if (!announcement.featured_image_url) image.classList.add("is-fallback");
+  // If a real photo fails to load, show the fallback logo instead.
+  image.addEventListener(
+    "error",
+    () => {
+      image.src = FALLBACK_ANNOUNCEMENT_IMAGE;
+      image.classList.add("is-fallback");
+    },
+    { once: true },
+  );
+  return image;
+}
+
 function createAnnouncementCard(announcement, compact = false) {
   const category = getAnnouncementCategory(announcement);
   const card = document.createElement("article");
@@ -133,14 +154,8 @@ function createAnnouncementCard(announcement, compact = false) {
   date.className = "event-date";
   date.textContent = formatAnnouncementDate(announcement.published_at);
 
-  if (announcement.featured_image_url) {
-    const image = document.createElement("img");
-    image.className = "announcement-featured-image";
-    image.src = announcement.featured_image_url;
-    image.alt = announcement.title || "Announcement image";
-    image.loading = "lazy";
-    card.append(image);
-  }
+  const image = createAnnouncementImage(announcement, "announcement-featured-image");
+  card.append(image);
 
   const title = document.createElement("h3");
   title.textContent = announcement.title || "Untitled announcement";
@@ -150,10 +165,13 @@ function createAnnouncementCard(announcement, compact = false) {
 
   const action = document.createElement(compact ? "a" : "button");
   action.className = "read-more";
-  action.textContent = compact ? "Read More ->" : "Read More ";
+  action.append(document.createTextNode("Read More"));
+  const actionIcon = document.createElement("i");
+  actionIcon.className = "fa-solid fa-arrow-right";
+  actionIcon.setAttribute("aria-hidden", "true");
+  action.append(actionIcon);
   if (!compact) {
     action.type = "button";
-    action.append("->");
   } else {
     action.href = "#";
   }
@@ -182,9 +200,120 @@ function renderAnnouncements(announcements) {
         .map((announcement) => createAnnouncementCard(announcement, true)),
     );
   }
+
+  renderHomeBanner(announcements);
 }
 
 let activeAnnouncementTrigger = null;
+
+const homeBannerDelay = 6000;
+let homeBannerTimer = null;
+let homeBannerIndex = 0;
+
+function scheduleHomeBanner() {
+  clearTimeout(homeBannerTimer);
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  homeBannerTimer = setTimeout(
+    () => showHomeBannerSlide(homeBannerIndex + 1),
+    homeBannerDelay,
+  );
+}
+
+function showHomeBannerSlide(index) {
+  const banner = document.getElementById("newsBanner");
+  if (!banner) return;
+  const slides = banner.querySelectorAll(".sl");
+  if (!slides.length) return;
+  homeBannerIndex = (index + slides.length) % slides.length;
+  slides.forEach((slide, i) =>
+    slide.classList.toggle("on", i === homeBannerIndex),
+  );
+  document
+    .querySelectorAll("#newsBannerDots button")
+    .forEach((dot, i) =>
+      dot.setAttribute("aria-current", String(i === homeBannerIndex)),
+    );
+  scheduleHomeBanner();
+}
+
+function initHomeBannerControls(banner) {
+  if (banner.dataset.ready) return;
+  banner.dataset.ready = "true";
+  document
+    .getElementById("newsBannerPrev")
+    ?.addEventListener("click", () => showHomeBannerSlide(homeBannerIndex - 1));
+  document
+    .getElementById("newsBannerNext")
+    ?.addEventListener("click", () => showHomeBannerSlide(homeBannerIndex + 1));
+  banner.addEventListener("pointerenter", () => clearTimeout(homeBannerTimer));
+  banner.addEventListener("pointerleave", scheduleHomeBanner);
+}
+
+function createBannerSlide(announcement, index) {
+  const category = getAnnouncementCategory(announcement);
+  const slide = document.createElement("div");
+  slide.className = `sl s${(index % 3) + 1}`;
+
+  const media = document.createElement("div");
+  media.className = "im";
+  media.append(createAnnouncementImage(announcement));
+
+  const text = document.createElement("div");
+  text.className = "tx";
+
+  const chip = document.createElement("span");
+  chip.className = "chip";
+  chip.textContent = category;
+
+  const title = document.createElement("h3");
+  title.textContent = announcement.title || "Untitled announcement";
+
+  const body = document.createElement("p");
+  body.textContent = announcement.body || "";
+
+  const link = document.createElement("a");
+  link.className = "banner-link";
+  link.href = "announcements";
+  link.append(document.createTextNode("Read more"));
+  const linkIcon = document.createElement("i");
+  linkIcon.className = "fa-solid fa-arrow-right";
+  linkIcon.setAttribute("aria-hidden", "true");
+  link.append(linkIcon);
+
+  text.append(chip, title, body, link);
+  slide.append(text, media);
+  return slide;
+}
+
+// Home banner: one slide per published announcement, newest first.
+function renderHomeBanner(announcements) {
+  const banner = document.getElementById("newsBanner");
+  if (!banner) return;
+  const dots = document.getElementById("newsBannerDots");
+  banner.querySelectorAll(".sl").forEach((slide) => slide.remove());
+  dots.replaceChildren();
+  if (!announcements.length) {
+    banner.hidden = true;
+    return;
+  }
+
+  dots.before(
+    ...announcements.map((announcement, index) =>
+      createBannerSlide(announcement, index),
+    ),
+  );
+  announcements.forEach((_, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Show update ${index + 1}`);
+    dot.addEventListener("click", () => showHomeBannerSlide(index));
+    dots.append(dot);
+  });
+
+  banner.hidden = false;
+  initHomeBannerControls(banner);
+  showHomeBannerSlide(0);
+}
 
 function showAnnouncementModal(card, prefix) {
   const modalId = prefix ? `${prefix}AnnouncementModal` : "announcementModal";

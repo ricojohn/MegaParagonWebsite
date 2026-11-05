@@ -201,6 +201,11 @@
   object-position: center;
   width: 100%;
 }
+.announcement-featured-image.is-fallback {
+  background: #fff;
+  object-fit: contain;
+  padding: 16px;
+}
 .announcement-card .event-date {
   color: var(--muted);
   display: block;
