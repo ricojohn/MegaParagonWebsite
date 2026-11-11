@@ -53,5 +53,14 @@
   window.addEventListener("pagehide", saveScrollPosition);
   window.addEventListener("scroll", updateBackToTop, { passive: true });
   window.addEventListener("pageshow", restoreScrollPosition);
+  document.addEventListener("click", (event) => {
+    const backToTop = event.target.closest(".back-to-top");
+    if (!backToTop) {
+      return;
+    }
+
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
   updateBackToTop();
 })();

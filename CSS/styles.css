@@ -1,34 +1,4 @@
-/* Shared typography: loads the Roboto weights used across navigation, headings,
-   buttons, page copy, and footer text. */
-@font-face {
-  /* Regular body copy and standard navigation text. */
-  font-family: "Roboto";
-  src: url("../../assets/Mega%20Paragon%20Team%20Logos/TMP%20Official%20Logo%202024/Fonts/roboto.regular.ttf")
-    format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  /* Medium-weight labels, links, and navigation items. */
-  font-family: "Roboto";
-  src: url("../../assets/Mega%20Paragon%20Team%20Logos/TMP%20Official%20Logo%202024/Fonts/roboto.medium%20(1).ttf")
-    format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  /* Bold headings, buttons, and emphasized footer labels. */
-  font-family: "Roboto";
-  src: url("../../assets/Mega%20Paragon%20Team%20Logos/TMP%20Official%20Logo%202024/Fonts/roboto.bold.ttf")
-    format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-/* Google Fonts fallback for environments where the local font files are unavailable. */
+/* Shared typography: Roboto weights are loaded by each page's HTML. */
 
 /* Shared design tokens: colors and gradients reused by the header, buttons,
    highlighted text, borders, and footer. Change these values to recolor the
@@ -1123,4 +1093,23 @@ em {
     /* Preserves the small hamburger bars on short landscape displays. */
     width: 14px;
   }
+}
+
+/* Smooth scrolling (Lenis): stops the browser's own smooth scrolling from
+   fighting the library, and keeps modals scrollable. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
