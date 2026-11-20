@@ -102,3 +102,42 @@ if (teamVideoFrame && "IntersectionObserver" in window) {
   ).observe(teamVideoFrame);
 }
 
+(() => {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) return;
+
+  let smoothScroller = null;
+
+  const startSmoothScroll = () => {
+    if (
+      smoothScroller ||
+      !window.Lenis ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    ) {
+      return;
+    }
+    smoothScroller = new window.Lenis({ lerp: 0.1 });
+    const frame = (time) => {
+      if (!smoothScroller) return;
+      smoothScroller.raf(time);
+      window.requestAnimationFrame(frame);
+    };
+    window.requestAnimationFrame(frame);
+  };
+
+  window.addEventListener("load", startSmoothScroll);
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || !smoothScroller) return;
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) return;
+    event.preventDefault();
+    const offset =
+      Number.parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+    smoothScroller.scrollTo(
+      target.getBoundingClientRect().top + window.scrollY - offset,
+    );
+  });
+})();
+

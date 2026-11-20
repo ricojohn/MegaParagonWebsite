@@ -1,3 +1,46 @@
+## 2026-11-10 — Announcements page redesign and shared back-to-top behavior
+
+**Announcements page — `announcements.html`, `CSS/announcements.css`, `JS/announcements.js`**
+
+- Restyled the hero, search bar, category chips, and cards to the new design.
+- Removed the entry counts and the "Latest updates / TMP Insights" heading.
+- Updated the modal, close icon, tags, and Read More hover to match the Home page.
+- Locked page scrolling while the announcement modal is open.
+- Switched the page font to Roboto and updated the script version to `hostinger-php-3.1`.
+
+**Back-to-top button — `CSS/styles.css`, `JS/scroll-state.js`**
+
+- Made the back-to-top button shared across all pages.
+- Fixed the button so Back returns to the previous page in one press.
+
+**Home page — `CSS/home.css`**
+
+- Changed the FAQ "Send us a short message" link color to match the hero yellow.
+- Added a 3px gold border to the hero photos on slides that have an image, on desktop and mobile.
+- Replaced the inline tile colors with `hp-tile--quote`, `hp-tile--explore`, and `hp-tile--join` classes.
+- Removed the stray `/>` in the head that broke the header.
+
+**Site-wide — `home.html`, `about.html`, `contact.html`, `announcements.html`, `CSS/styles.css`**
+
+- Set all asset links to `?v=3.1` so the CDN fetches current files.
+- Replaced Manrope with Roboto and removed the extra fallback fonts. Added Roboto links where missing.
+- Removed three broken `@font-face` rules and the ignored `@import` from `CSS/styles.css`. This stops the 404s.
+- Added Lenis smooth scrolling and its CSS rules.
+
+**About page — `about.html`, `CSS/about-prof.css`, `CSS/about-team.css`, `JS/about-prof.js`**
+
+- Replaced the inline reveal delays with `rv-delay-*` classes. Only the About page uses them.
+- Added Lenis smooth scrolling and removed the fallback fonts.
+
+**Contact page — `contact.html`, `CSS/contact.css`, `JS/contact.js` (new)**
+
+- Moved the inline script into `JS/contact.js` and the inline wave timings into `:nth-child` rules.
+- Added Lenis smooth scrolling and replaced Manrope with Roboto.
+
+**Announcements page — `announcements.html`, `JS/announcements.js`**
+
+- Added Lenis smooth scrolling and a Roboto link.
+
 ## 2026-10-16 — Final media integration and deployment-readiness verification
 
 > Completed the requested media replacements and verified the affected Home, Join, and Products & Services pages locally.

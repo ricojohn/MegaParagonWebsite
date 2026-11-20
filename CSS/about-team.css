@@ -2,7 +2,7 @@
 .profile-page {
   --gold: #d4a85a;
   --gold2: #f0cf8e;
-  font-family: Roboto, system-ui, Segoe UI, Arial, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 body.profile-nav-page {
   font-family: "Roboto", sans-serif;

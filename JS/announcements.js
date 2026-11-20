@@ -421,3 +421,176 @@ async function loadAnnouncements() {
 
 setupAnnouncementInteractions();
 loadAnnouncements();
+
+(() => {
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  if (reducedMotion) return;
+
+  let smoothScroller = null;
+
+  const startSmoothScroll = () => {
+    if (
+      smoothScroller ||
+      !window.Lenis ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    ) {
+      return;
+    }
+    smoothScroller = new window.Lenis({ lerp: 0.1 });
+    const frame = (time) => {
+      if (!smoothScroller) return;
+      smoothScroller.raf(time);
+      window.requestAnimationFrame(frame);
+    };
+    window.requestAnimationFrame(frame);
+  };
+
+  const stopSmoothScroll = () => {
+    if (!smoothScroller) return;
+    smoothScroller.destroy();
+    smoothScroller = null;
+  };
+
+  window.addEventListener("load", startSmoothScroll);
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || !smoothScroller) return;
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) return;
+    event.preventDefault();
+    const offset =
+      Number.parseFloat(window.getComputedStyle(target).scrollMarginTop) || 0;
+    smoothScroller.scrollTo(
+      target.getBoundingClientRect().top + window.scrollY - offset,
+    );
+  });
+
+  new MutationObserver(() => {
+    if (document.body.classList.contains("announcement-modal-open")) {
+      stopSmoothScroll();
+    } else {
+      startSmoothScroll();
+    }
+  }).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+})();
+
+/* ----Announcements Revamp ----
+   Elements: #announcementsCats (quick category chips),
+   .announcement-card (spotlight + reveal),
+   .announcements-toolbar / #announcementsCats (reveal on scroll).
+   Chips only drive the existing #filterCategory control; the existing filter code does the filtering. */
+(() => {
+  const grid = document.getElementById("announcementsGrid");
+  const categorySelect = document.getElementById("filterCategory");
+  const chipsHost = document.getElementById("announcementsCats");
+  if (!grid) return;
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const finePointer = window.matchMedia(
+    "(hover: hover) and (pointer: fine)",
+  ).matches;
+  const cards = () => grid.querySelectorAll(".announcement-card");
+
+  function syncChips() {
+    if (!chipsHost || !categorySelect) return;
+    chipsHost.querySelectorAll(".announcements-chip").forEach((chip) => {
+      chip.setAttribute(
+        "aria-pressed",
+        String(chip.dataset.value === categorySelect.value),
+      );
+    });
+  }
+
+  function renderChips() {
+    if (!chipsHost || !categorySelect) return;
+    chipsHost.replaceChildren(
+      ...[...categorySelect.options].map((option) => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "announcements-chip";
+        chip.dataset.value = option.value;
+        chip.textContent = option.value === "all" ? "All" : option.textContent;
+        chip.addEventListener("click", () => {
+          categorySelect.value = option.value;
+          categorySelect.dispatchEvent(new Event("input", { bubbles: true }));
+          syncChips();
+        });
+        return chip;
+      }),
+    );
+    syncChips();
+  }
+
+  const revealObserver =
+    reduceMotion || !("IntersectionObserver" in window)
+      ? null
+      : new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target;
+              el.classList.add("revealed");
+              revealObserver.unobserve(el);
+              setTimeout(
+                () => el.removeAttribute("data-reveal"),
+                1400 + Number(el.dataset.delay || 0),
+              );
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -5% 0px" },
+        );
+
+  function setupReveal(el, delay = 0) {
+    if (!revealObserver || !el) return;
+    el.setAttribute("data-reveal", "up");
+    el.dataset.delay = String(delay);
+    el.style.setProperty("--rd", `${delay / 1000}s`);
+    revealObserver.observe(el);
+  }
+
+  if (revealObserver) {
+    document.documentElement.classList.add("announcements-rv");
+    setupReveal(document.querySelector(".announcements-toolbar"));
+    setupReveal(chipsHost);
+  }
+
+  if (finePointer) {
+    grid.addEventListener("pointermove", (event) => {
+      const card = event.target.closest(".announcement-card");
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+      card.style.setProperty("--my", `${event.clientY - rect.top}px`);
+    });
+  }
+
+  if (categorySelect) {
+    categorySelect.addEventListener("input", syncChips);
+    categorySelect.addEventListener("change", syncChips);
+    new MutationObserver(renderChips).observe(categorySelect, {
+      childList: true,
+    });
+  }
+
+  new MutationObserver((records) => {
+    records.forEach((record) => {
+      record.addedNodes.forEach((node) => {
+        if (
+          node.nodeType === 1 &&
+          node.classList.contains("announcement-card")
+        ) {
+          const index = [...cards()].indexOf(node);
+          setupReveal(node, (Math.max(index, 0) % 3) * 90);
+        }
+      });
+    });
+  }).observe(grid, { childList: true, subtree: true });
+
+  renderChips();
+  cards().forEach((card, index) => setupReveal(card, (index % 3) * 90));
+})();

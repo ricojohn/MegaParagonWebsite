@@ -1860,7 +1860,7 @@ html.lenis body {
   background: rgba(255, 255, 255, 0.16);
   border-radius: 999px;
   display: inline-block;
-  font: 800 0.7rem Manrope, sans-serif;
+  font: 800 0.7rem Roboto, sans-serif;
   letter-spacing: 0.14em;
   padding: 5px 12px;
   text-transform: uppercase;
@@ -2004,7 +2004,7 @@ html.lenis body {
   border-radius: 999px;
   color: #0a2240;
   font:
-    800 15px Manrope,
+    800 15px Roboto,
     sans-serif;
   padding: 14px 26px;
 }
@@ -2099,6 +2099,15 @@ html.lenis body {
   box-shadow: 0 16px 40px rgba(10, 34, 64, 0.12);
   outline: none;
   transform: translateY(-4px);
+}
+.hp-tile--quote {
+  --c: #d4a85a;
+}
+.hp-tile--explore {
+  --c: #2f6fb3;
+}
+.hp-tile--join {
+  --c: #a87a22;
 }
 .hp-tile::before {
   background: var(--c, #d4a85a);
@@ -2304,7 +2313,7 @@ html.lenis body {
   margin: 12px 0 0;
 }
 .hp-faq details p a {
-  color: #a87a22;
+  color: #f0cf8e;
   font-weight: 700;
 }
 
@@ -2929,12 +2938,12 @@ html.lenis body {
 }
 
 .home-page #find {
-  font-family: Manrope, system-ui, "Segoe UI", Arial, sans-serif;
+  font-family: Roboto, sans-serif;
   padding: 92px 0;
 }
 .home-page #find h2 {
   font-size: clamp(1.9rem, 3.6vw, 2.9rem);
-  font-family: Manrope, system-ui, "Segoe UI", Arial, sans-serif;
+  font-family: Roboto, sans-serif;
   margin-bottom: 12px;
 }
 .home-page #find h2 em {
@@ -2994,7 +3003,7 @@ html.lenis body {
 }
 .home-page #find .hp-tabs button {
   border-radius: 999px;
-  font: 800 0.9rem Manrope, sans-serif;
+  font: 800 0.9rem Roboto, sans-serif;
   padding: 12px 22px;
   position: relative;
   z-index: 1;
@@ -3012,7 +3021,7 @@ html.lenis body {
 .home-page #find .hp-panel h3 {
   color: var(--home-ink);
   font-size: 2rem;
-  font-family: Manrope, system-ui, "Segoe UI", Arial, sans-serif;
+  font-family: Roboto, sans-serif;
   letter-spacing: -0.03em;
   line-height: 1.1;
   margin: 16px 0 12px;
@@ -3132,11 +3141,11 @@ html.lenis body {
 }
 .home-page .hero .hero-slide-take,
 .home-page .hero .hero-slide-message {
-  font-family: Roboto, system-ui, Segoe UI, Arial, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 .home-page .hero .hero-slide-take .hero-title,
 .home-page .hero .hero-slide-message .hero-title {
-  font-family: Roboto, system-ui, Segoe UI, Arial, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 .home-page .hero .hero-slide-take .hero-slide-grid,
 .home-page .hero .hero-slide-message .hero-slide-grid {
@@ -3224,7 +3233,7 @@ html.lenis body {
 }
 
 .home-page .hero .hero-slide-photo {
-  border: 0;
+  border: 3px solid #d4a85a;
   display: block;
   object-fit: contain;
 }
@@ -3300,7 +3309,7 @@ html.lenis body {
     width: calc(100% - 48px);
   }
   .home-page .hero .hero-slide-photo {
-    border: 0;
+    border: 3px solid #d4a85a;
     object-position: center;
   }
 }

@@ -8,7 +8,11 @@
       content="The latest announcements, events, and news from The Mega Paragon."
     />
     <title>The Mega Paragon | Announcements</title>
-    <link rel="stylesheet" href="CSS/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+    />
+    <link rel="stylesheet" href="CSS/styles.css?v=3.1" />
     <link rel="stylesheet" href="CSS/announcements.css" />
     <link
       rel="stylesheet"
@@ -24,17 +28,10 @@
     <main>
       <section class="announcements-hero">
         <div class="announcements-hero-inner">
-          <a
-            class="announcements-back-link"
-            href="home"
-            aria-label="Back to homepage"
-            title="Back to homepage"
-          >
-            <span aria-hidden="true"
-              ><i class="fa-solid fa-arrow-left"></i
-            ></span>
-            Back
-          </a>
+          <nav class="announcements-crumb" aria-label="Breadcrumb">
+            <a href="home">Home</a><i aria-hidden="true">/</i
+            ><span aria-current="page">Announcements</span>
+          </nav>
           <p class="page-kicker">What's happening</p>
           <h1>Stay informed.<br /><em>Stay connected.</em></h1>
           <p>
@@ -43,12 +40,8 @@
           </p>
         </div>
       </section>
-      <section class="announcements-list-section">
+      <section class="announcements-list-section dotwrap">
         <div class="announcements-section-inner">
-          <div class="announcements-section-heading">
-            <p class="page-kicker">Latest updates</p>
-            <h2>TMP <em>Insights</em></h2>
-          </div>
           <div class="announcements-toolbar">
             <div class="announcements-search">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -160,6 +153,12 @@
               </div>
             </div>
           </div>
+          <div
+            class="announcements-cats"
+            id="announcementsCats"
+            role="group"
+            aria-label="Quick categories"
+          ></div>
           <div class="announcements-grid" id="announcementsGrid"></div>
           <p class="announcements-empty" id="announcementsEmpty" hidden>
             No announcements match your search or filters.
@@ -180,7 +179,7 @@
           type="button"
           aria-label="Close announcement"
         >
-          <span aria-hidden="true">&times;</span>
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
         <span class="news-tag" id="announcementModalTag"></span>
         <span class="event-date" id="announcementModalDate"></span>
@@ -250,7 +249,8 @@
       </div>
     </footer>
     <script src="JS/scroll-state.js"></script>
-    <script src="JS/announcements.js?v=hostinger-php-1"></script>
+    <script src="JS/announcements.js?v=hostinger-php-3.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
     <a class="back-to-top" href="#" aria-label="Back to top"
       ><span aria-hidden="true"><i class="fa-solid fa-angles-up"></i></span
       ><span class="back-to-top-label">Back to top</span></a
